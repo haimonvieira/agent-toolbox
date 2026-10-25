@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Setup de agente de IA documentado: skills instaladas, servidores MCP e recomendações.",
   "repository": "https://github.com/haimonvieira/agent-toolbox",
-  "generated_at": "2026-10-25T11:03:54Z",
+  "generated_at": "2026-10-25T11:16:43Z",
   "counts": {
     "skills": 36,
     "mcps": 10,

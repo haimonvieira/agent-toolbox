@@ -517,6 +517,17 @@ cabeçalho o servidor espera.
 
 ---
 
+## Mapear um stack
+
+Este repositório nasceu de um mapeamento do meu ambiente. Para fazer o seu, há um
+prompt pronto em [`prompts/map-ai-stack.md`](prompts/map-ai-stack.md):
+
+Ele separa o que está **instalado** do que é **realmente usado**, exigindo a fonte de
+cada contagem, e termina com um JSON no formato de `data/`. Roda em omp, Claude Code
+ou OpenCode — precisa de acesso ao sistema de arquivos, porque a evidência está lá.
+
+---
+
 ## Aplicar a configuração
 
 O catálogo é a fonte. Este script traduz para o formato do seu agente:
