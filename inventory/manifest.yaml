@@ -70,6 +70,8 @@ documents:
   phase3_report: audit/phase3-remediation-report.md
   skill_full_tree: audit/skill-full-tree-comparison.md
   self_audit: docs/self-audit.md
+  profiles: docs/profiles.md
+  profile_reproducibility: audit/profile-reproducibility.md
 safety:
   secrets_committed: none found (see scripts/verify.sh secret scan)
   third_party_code_vendored: none
@@ -121,3 +123,20 @@ phase4:
     links: ./scripts/check-links.sh
   commit: cb94203
   pull_request: '#2'
+phase5:
+  date: '2026-10-25'
+  profiles:
+  - base
+  - opencode-go
+  - omp
+  - codex
+  - claude-code
+  - minimal
+  - full
+  profile_schema: schemas/profile.schema.json
+  commands:
+    list: ./scripts/audit.sh --list-profiles
+    validate: ./scripts/audit.sh --profile <id>
+    compare: ./scripts/audit.sh --compare-profiles <a> <b>
+    ownership: ./scripts/audit.sh --who-uses <component>
+    report: ./scripts/audit.sh --profiles-report

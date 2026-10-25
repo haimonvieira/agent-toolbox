@@ -99,3 +99,21 @@ allows it. If the push or PR fails, the branch remains local and the failure is 
 
 Exit-code policy: medium findings do not fail the audit; high/critical do. The two medium findings are
 advisory (`envsitter-guard@latest`, `opencode-mem@latest`).
+
+## Phase 5 profile validation
+
+| Check | Result |
+| --- | --- |
+| Profile schema (`schemas/profile.schema.json`) | Pass — 7 profiles validate |
+| Stable references resolve to the inventory | Pass — 0 unresolved references |
+| Inheritance depth and cycles | Pass — only `base` is inherited, depth 1 |
+| Duplicate profile ids | Pass |
+| Environment variables are names only | Pass — no values, all `^[A-Z][A-Z0-9_]*$` |
+| Private names / private URLs | Pass — none in `profiles/` or `docs/profiles/` |
+| Generated artifacts are reproducible | Pass — regeneration produces no diff |
+| Repository validator | Pass, 0 warnings |
+| Tests | Pass, 33/33 |
+| Local profile validation | Pass for all 7 profiles against this machine |
+
+Profile drift is informational here: 6 `PROFILE_COMPONENT_EXTRA`, 3 `PROFILE_OPTIONAL_MISSING`
+(info) and 2 floating-version findings (medium). No required component is missing.

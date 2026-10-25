@@ -26,6 +26,11 @@ validates only committed, sanitized data.
 ./scripts/audit.sh --check-upstreams # optional public registry check
 ./scripts/verify.sh                 # repository-only checks (fast, no local scan)
 ./scripts/check-links.sh            # public external links (network)
+./scripts/audit.sh --list-profiles              # profiles and reproducibility status
+./scripts/audit.sh --profile opencode-go        # validate one profile against this machine
+./scripts/audit.sh --compare-profiles a b       # compare two profiles
+./scripts/audit.sh --who-uses graphify          # which profiles own a component
+./scripts/audit.sh --profiles-report            # regenerate profile documents and reports
 ```
 
 Exit codes:

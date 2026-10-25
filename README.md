@@ -603,3 +603,31 @@ produce deterministic drift reports.
 
 > The audit is read-only by default and never installs, removes, updates, or executes unknown agent
 > tooling.
+
+## Environment profiles
+
+Profiles describe complete, reproducible AI-agent setups. They are **declarative**: loading a
+profile installs nothing, changes no configuration and starts no server.
+
+| Profile | Purpose | Reproducibility |
+| --- | --- | --- |
+| `base` | shared runtime + canonical skill store | fully reproducible |
+| `opencode-go` | OpenCode with the `opencode-go` preset, its plugins and injected MCPs | mostly reproducible |
+| `omp` | OMP with marketplace plugins, extensions and managed skills | mostly reproducible |
+| `codex` | Codex CLI with built-in skills and project hooks | mostly reproducible |
+| `claude-code` | Claude Code with the symlinked canonical store | mostly reproducible |
+| `minimal` | smallest useful setup: one harness, canonical skills, no integrations | mostly reproducible |
+| `full` | every component with a verified upstream | partially reproducible |
+
+```bash
+./scripts/audit.sh --list-profiles                  # profiles and reproducibility status
+./scripts/audit.sh --profile opencode-go            # validate one profile against this machine
+./scripts/audit.sh --compare-profiles opencode-go omp
+./scripts/audit.sh --who-uses graphify              # who owns a component
+./scripts/audit.sh --profiles-report                # regenerate profile docs and reports
+```
+
+Profiles reference inventory ids (`mcp-pencil`, `plugin-ponytail`, `harness-opencode`); the
+inventory stays the only source of truth. Environment variables are recorded by **name only**.
+
+See [docs/profiles.md](docs/profiles.md) and [profiles/](profiles/README.md).

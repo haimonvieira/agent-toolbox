@@ -3,6 +3,7 @@ baseline: local-state/baseline.yaml
 current: local-state/current.yaml
 summary:
   medium: 2
+  info: 9
 findings:
 - id: plugin-opencode-envsitter-guard-latest-unknown
   category: plugin
@@ -18,3 +19,78 @@ findings:
   item: opencode:opencode-mem@latest
   detail: floating plugin version
   status: open
+- id: profile-claude-code-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: claude-code
+  detail: 9 component(s) installed but not part of the profile (harness=7, mcp=1, plugin=1)
+  status: open
+  profile: claude-code
+- id: profile-codex-profile-optional-missing
+  category: profile
+  type: PROFILE_OPTIONAL_MISSING
+  severity: info
+  item: codex
+  detail: '5 optional component(s) not installed: hook-codex-project-hooks-team-lead, skill-imagegen, skill-openai-docs, skill-review-agent,
+    skill-skill-installer'
+  status: open
+  profile: codex
+- id: profile-codex-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: codex
+  detail: 9 component(s) installed but not part of the profile (harness=7, mcp=1, plugin=1)
+  status: open
+  profile: codex
+- id: profile-full-profile-optional-missing
+  category: profile
+  type: PROFILE_OPTIONAL_MISSING
+  severity: info
+  item: full
+  detail: '9 optional component(s) not installed: hook-codex-project-hooks-team-lead, hook-lethe-refresh-index, hook-orca-agent-status-extension,
+    hook-orca-prefill-extension, hook-pr-template-guard-extension, skill-imagegen, skill-openai-docs, skill-review-agent...'
+  status: open
+  profile: full
+- id: profile-full-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: full
+  detail: 6 component(s) installed but not part of the profile (harness=4, mcp=1, plugin=1)
+  status: open
+  profile: full
+- id: profile-minimal-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: minimal
+  detail: 8 component(s) installed but not part of the profile (harness=6, mcp=1, plugin=1)
+  status: open
+  profile: minimal
+- id: profile-omp-profile-optional-missing
+  category: profile
+  type: PROFILE_OPTIONAL_MISSING
+  severity: info
+  item: omp
+  detail: '8 optional component(s) not installed: hook-lethe-refresh-index, hook-orca-agent-status-extension, hook-orca-prefill-extension,
+    hook-pr-template-guard-extension, plugin-orca-agent-status, plugin-orca-prefill, plugin-orca-titlebar-spinner, plugin-pr-template-guard'
+  status: open
+  profile: omp
+- id: profile-omp-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: omp
+  detail: 9 component(s) installed but not part of the profile (harness=7, mcp=1, plugin=1)
+  status: open
+  profile: omp
+- id: profile-opencode-go-profile-component-extra
+  category: profile
+  type: PROFILE_COMPONENT_EXTRA
+  severity: info
+  item: opencode-go
+  detail: 8 component(s) installed but not part of the profile (harness=6, mcp=1, plugin=1)
+  status: open
+  profile: opencode-go

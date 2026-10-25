@@ -1,48 +1,59 @@
 schema_version: 1
-# Open items that require human judgment or upstream evidence.
-# Closed items must be removed from this list.
 items:
-  - title: Identify the intended upstream for the codegraph MCP
-    severity: high
-    status: open
-    detail: npm codegraph@1.0.0 is unrelated; entry is disabled and preserved.
-  - title: Identify the intended upstream for the openagents MCP
-    severity: high
-    status: open
-    detail: npm agn@0.1.2 is unrelated; entry is disabled and preserved.
-  - title: Review code-review skill variants
-    severity: medium
-    status: open
-    detail: Shared copy is newer than the Claude copy; different references.
-  - title: Review graphify skill variants
-    severity: medium
-    status: open
-    detail: Claude copy uses Agent/CLAUDE.md; shared copy uses Task/AGENTS.md.
-  - title: Review find-docs skill variants
-    severity: low
-    status: open
-    detail: Shared copy adds a Codex-specific sandbox note; Claude copy is tailored.
-  - title: Establish provenance for the GSD skill cluster
-    severity: medium
-    status: open
-    detail: Exact upstream/version unproven; original project is archived.
-  - title: Identify the writer/consumer of the Kiro config
-    severity: medium
-    status: open
-    detail: Config is modified but no executable was found.
-  - title: Confirm whether Gemini/Antigravity and Copilot configs are active
-    severity: low
-    status: open
-    detail: Preserve until an owner/consumer is identified.
-  - title: Pin the security-guidance failure-path dependency
-    severity: medium
-    status: open
-    detail: Healthy venv is pinned; failed import triggers an unpinned install.
-  - title: Confirm pinning support for oh-my-opencode-slim
-    severity: low
-    status: open
-    detail: Resolved 3.0.6 but left managed by OpenCode.
-  - title: Decide whether to decouple the global skill symlink from the external volume
-    severity: low
-    status: open
-    detail: Symlink breaks when the volume is unmounted.
+- title: Identify the intended upstream for the codegraph MCP
+  severity: high
+  status: open
+  detail: npm codegraph@1.0.0 is unrelated; entry is disabled and preserved.
+- title: Identify the intended upstream for the openagents MCP
+  severity: high
+  status: open
+  detail: npm agn@0.1.2 is unrelated; entry is disabled and preserved.
+- title: Review code-review skill variants
+  severity: medium
+  status: open
+  detail: Shared copy is newer than the Claude copy; different references.
+- title: Review graphify skill variants
+  severity: medium
+  status: open
+  detail: Claude copy uses Agent/CLAUDE.md; shared copy uses Task/AGENTS.md.
+- title: Review find-docs skill variants
+  severity: low
+  status: open
+  detail: Shared copy adds a Codex-specific sandbox note; Claude copy is tailored.
+- title: Establish provenance for the GSD skill cluster
+  severity: medium
+  status: open
+  detail: Exact upstream/version unproven; original project is archived.
+- title: Identify the writer/consumer of the Kiro config
+  severity: medium
+  status: open
+  detail: Config is modified but no executable was found.
+- title: Confirm whether Gemini/Antigravity and Copilot configs are active
+  severity: low
+  status: open
+  detail: Preserve until an owner/consumer is identified.
+- title: Pin the security-guidance failure-path dependency
+  severity: medium
+  status: open
+  detail: Healthy venv is pinned; failed import triggers an unpinned install.
+- title: Confirm pinning support for oh-my-opencode-slim
+  severity: low
+  status: open
+  detail: Resolved 3.0.6 but left managed by OpenCode.
+- title: Decide whether to decouple the global skill symlink from the external volume
+  severity: low
+  status: open
+  detail: Symlink breaks when the volume is unmounted.
+- title: Decide how divergent skill variants are represented per profile
+  severity: medium
+  status: open
+  detail: code-review, graphify and find-docs have harness-specific variants; profiles currently reference
+    the canonical copy.
+- title: Decide whether plugin-managed versions may float in profiles
+  severity: low
+  status: open
+  detail: oh-my-opencode-slim and the OpenCode npm plugins resolve their own versions.
+- title: Add an editor-only profile if the Zed/VS Code setup stays supported
+  severity: low
+  status: open
+  detail: Only the full profile currently covers editor harnesses.

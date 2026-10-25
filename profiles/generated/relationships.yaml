@@ -1,0 +1,276 @@
+profiles:
+  base:
+    external_dependencies: []
+  claude-code:
+    harness:
+    - harness-claude-code
+    plugin:
+    - plugin-ponytail
+    mcp:
+    - mcp-pencil
+    - mcp-browseros-neo
+    skill:
+    - skill-code-review
+    hook:
+    - hook-ponytail-sessionstart-claude-code
+    - hook-ponytail-subagentstart-claude-code
+    - hook-ponytail-userpromptsubmit-claude-code
+    external_dependencies: []
+  codex:
+    harness:
+    - harness-codex-cli
+    plugin:
+    - plugin-ponytail
+    mcp:
+    - mcp-browseros-neo
+    - mcp-pencil
+    - mcp-graphify
+    skill:
+    - skill-imagegen
+    - skill-openai-docs
+    - skill-review-agent
+    - skill-skill-creator-built-in
+    - skill-skill-installer
+    - skill-code-review
+    hook:
+    - hook-ponytail-hooks-codex
+    - hook-codex-project-hooks-team-lead
+    external_dependencies:
+    - external-nvme
+  full:
+    harness:
+    - harness-opencode
+    - harness-claude-code
+    - harness-codex-cli
+    - harness-oh-my-pi-omp
+    - harness-freebuff
+    - harness-zed
+    - harness-vs-code-chatgpt-extension
+    - harness-delta
+    plugin:
+    - plugin-ponytail
+    - plugin-superpowers
+    - plugin-security-guidance
+    - plugin-sonarqube
+    - plugin-coderabbit
+    - plugin-lethe
+    - plugin-best-of
+    - plugin-feature-dev
+    - plugin-context7
+    - plugin-42crunch-api-security-testing
+    - plugin-oh-my-opencode-slim
+    - plugin-envsitter-guard
+    - plugin-opencode-mem
+    - plugin-github
+    mcp:
+    - mcp-pencil
+    - mcp-browseros-neo
+    - mcp-cloudflare-api
+    - mcp-figma
+    - mcp-insomnia
+    - mcp-teams-mcp
+    - mcp-aas-core
+    - mcp-codebase-memory
+    - mcp-hostinger-api
+    - mcp-gemini-notebook-mcp
+    - mcp-obsidian-mcp-connector
+    - mcp-graphify
+    - mcp-context7
+    - mcp-gh-grep
+    - mcp-omgskills
+    - mcp-codegraph
+    - mcp-openagents
+    - mcp-doop
+    - mcp-starry
+    skill:
+    - skill-code-review
+    - skill-autofix
+    - skill-graphify
+    - skill-find-docs
+    - skill-code-review-plugin
+    - skill-autofix-plugin
+    - skill-imagegen
+    - skill-openai-docs
+    - skill-review-agent
+    - skill-skill-creator-built-in
+    - skill-skill-installer
+    hook:
+    - hook-ponytail-sessionstart-claude-code
+    - hook-ponytail-subagentstart-claude-code
+    - hook-ponytail-userpromptsubmit-claude-code
+    - hook-ponytail-hooks-codex
+    - hook-security-guidance-sessionstart
+    - hook-security-guidance-userpromptsubmit
+    - hook-security-guidance-posttooluse
+    - hook-security-guidance-stop
+    - hook-sonarqube-sessionstart
+    - hook-superpowers-sessionstart
+    - hook-lethe-refresh-index
+    - hook-orca-agent-status-extension
+    - hook-orca-prefill-extension
+    - hook-pr-template-guard-extension
+    - hook-codex-project-hooks-team-lead
+    external_dependencies:
+    - external-nvme
+  minimal:
+    harness:
+    - harness-opencode
+    skill:
+    - skill-code-review
+    external_dependencies: []
+  omp:
+    harness:
+    - harness-oh-my-pi-omp
+    plugin:
+    - plugin-ponytail
+    - plugin-superpowers
+    - plugin-security-guidance
+    - plugin-sonarqube
+    - plugin-coderabbit
+    - plugin-lethe
+    - plugin-best-of
+    - plugin-feature-dev
+    - plugin-context7
+    - plugin-42crunch-api-security-testing
+    - plugin-github
+    - plugin-orca-agent-status
+    - plugin-orca-prefill
+    - plugin-orca-titlebar-spinner
+    - plugin-pr-template-guard
+    mcp:
+    - mcp-pencil
+    - mcp-browseros-neo
+    - mcp-cloudflare-api
+    - mcp-figma
+    - mcp-insomnia
+    - mcp-teams-mcp
+    - mcp-aas-core
+    - mcp-codebase-memory
+    - mcp-hostinger-api
+    - mcp-gemini-notebook-mcp
+    - mcp-obsidian-mcp-connector
+    - mcp-graphify
+    - mcp-codegraph
+    - mcp-openagents
+    - mcp-doop
+    skill:
+    - skill-code-review-plugin
+    hook:
+    - hook-security-guidance-sessionstart
+    - hook-security-guidance-userpromptsubmit
+    - hook-security-guidance-posttooluse
+    - hook-security-guidance-stop
+    - hook-sonarqube-sessionstart
+    - hook-superpowers-sessionstart
+    - hook-lethe-refresh-index
+    - hook-orca-agent-status-extension
+    - hook-orca-prefill-extension
+    - hook-pr-template-guard-extension
+    external_dependencies: []
+  opencode-go:
+    harness:
+    - harness-opencode
+    plugin:
+    - plugin-oh-my-opencode-slim
+    - plugin-envsitter-guard
+    - plugin-opencode-mem
+    mcp:
+    - mcp-pencil
+    - mcp-browseros-neo
+    - mcp-cloudflare-api
+    - mcp-figma
+    - mcp-insomnia
+    - mcp-teams-mcp
+    - mcp-aas-core
+    - mcp-obsidian-mcp-connector
+    - mcp-graphify
+    - mcp-context7
+    - mcp-gh-grep
+    - mcp-omgskills
+    - mcp-codegraph
+    - mcp-openagents
+    skill:
+    - skill-code-review
+    external_dependencies: []
+plugins:
+  oh-my-opencode-slim:
+    injects_mcp:
+    - mcp-context7
+    - mcp-gh-grep
+    - mcp-omgskills
+  claude-plugins-official@42crunch-api-security-testing@1.5.5:
+    provides_skills:
+    - skill-42crunch-api-security-testing
+    - skill-42crunch-audit
+    - skill-42crunch-scan
+    - skill-42crunch-setup
+    - skill-code-to-oas
+  claude-plugins-official@coderabbit@1.1.1:
+    provides_skills:
+    - skill-autofix-plugin
+    - skill-code-review-plugin
+  superpowers-marketplace@superpowers@6.3.0:
+    provides_skills:
+    - skill-brainstorming-plugin
+    - skill-dispatching-parallel-agents-plugin
+    - skill-executing-plans-plugin
+    - skill-finishing-a-development-branch-plugin
+    - skill-receiving-code-review-plugin
+    - skill-requesting-code-review-plugin
+    - skill-subagent-driven-development-plugin
+    - skill-systematic-debugging-plugin
+    - skill-test-driven-development-plugin
+    - skill-using-git-worktrees-plugin
+    - skill-using-superpowers-plugin
+    - skill-verification-before-completion-plugin
+    - skill-writing-plans-plugin
+    - skill-writing-skills-plugin
+  superpowers-marketplace@superpowers@7.0.0:
+    provides_skills:
+    - skill-brainstorming-plugin-2
+    - skill-diagnosing-superpowers
+    - skill-dispatching-parallel-agents-plugin-2
+    - skill-executing-plans-plugin-2
+    - skill-finishing-a-development-branch-plugin-2
+    - skill-receiving-code-review-plugin-2
+    - skill-requesting-code-review-plugin-2
+    - skill-subagent-driven-development-plugin-2
+    - skill-systematic-debugging-plugin-2
+    - skill-test-driven-development-plugin-2
+    - skill-using-git-worktrees-plugin-2
+    - skill-using-superpowers-plugin-2
+    - skill-verification-before-completion-plugin-2
+    - skill-writing-plans-plugin-2
+    - skill-writing-skills-plugin-2
+  ponytail@ponytail@5.3.2:
+    provides_skills:
+    - skill-ponytail
+    - skill-ponytail-audit
+    - skill-ponytail-debt
+    - skill-ponytail-gain
+    - skill-ponytail-help
+    - skill-ponytail-review
+  teimurjan@lethe@0.19.0:
+    provides_skills:
+    - skill-recall
+    - skill-recall-global
+  claude-plugins-official@sonarqube@2.6.0:
+    provides_skills:
+    - skill-sonar-analyze
+    - skill-sonar-coverage
+    - skill-sonar-dependency-risks
+    - skill-sonar-duplication
+    - skill-sonar-fix-issue
+    - skill-sonar-integrate
+    - skill-sonar-list-issues
+    - skill-sonar-list-projects
+    - skill-sonar-quality-gate
+    - skill-sonar-triage-dependency-risks
+harnesses:
+  codex:
+    built_in_skills:
+    - skill-imagegen
+    - skill-openai-docs
+    - skill-review-agent
+    - skill-skill-creator-built-in
+    - skill-skill-installer
