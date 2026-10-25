@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Setup de agente de IA documentado: skills instaladas, servidores MCP e recomendações.",
   "repository": "https://github.com/haimonvieira/agent-toolbox",
-  "generated_at": "2026-10-25T10:40:58Z",
+  "generated_at": "2026-10-25T10:44:23Z",
   "counts": {
     "skills": 41,
     "mcps": 10,
     "recommended": 12,
-    "origins_known": 6
+    "origins_known": 7
   },
   "skills": [
     {
@@ -103,7 +103,12 @@
       "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill. Searches the omgskills public catalog (55k+ skills) via MCP, checks the skills.sh leaderboard, and evaluates quality before recommending.",
       "resources": {},
       "origin": {
-        "confidence": "nao_declarada"
+        "repo": "https://github.com/vercel-labs/skills",
+        "path": "skills/find-skills/SKILL.md",
+        "license": "MIT",
+        "install": "npx skills add vercel-labs/skills@find-skills",
+        "confidence": "confirmado",
+        "note": "Confirmado pelo diretório skills.sh, onde aparece em 1º na auditoria de segurança. A versão local foi estendida para consultar o omgskills via MCP."
       },
       "page": "skills/find-skills.md"
     },
@@ -683,19 +688,19 @@
       "name": "find-skills",
       "category": "discovery",
       "verdict": "essencial",
-      "why": "Pesquisa catálogos de skills por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. Neste ambiente foi estendida para consultar o omgskills via MCP como fonte primária.",
+      "why": "Pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. A versão local foi estendida para consultar o omgskills via MCP como fonte primária.",
       "tags": [
         "descoberta",
         "instalacao",
         "catalogo"
       ],
-      "repo": "local",
-      "path": "skills/find-skills/",
-      "commit": "",
+      "repo": "https://github.com/vercel-labs/skills",
+      "path": "skills/find-skills/SKILL.md",
+      "commit": "a80e4c9d12d607631249d4d7d059f835d4b2f13a",
       "license": "MIT",
-      "stars": null,
-      "last_push": null,
-      "install": null,
+      "stars": 36458,
+      "last_push": "2026-10-19",
+      "install": "npx skills add vercel-labs/skills@find-skills",
       "page": "recommended/find-skills.md"
     },
     {
@@ -712,7 +717,7 @@
       "path": "skills/writing-skills/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304714,
+      "stars": 304780,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@writing-skills",
       "page": "recommended/obra-superpowers-writing-skills.md"
@@ -731,7 +736,7 @@
       "path": "skills/productivity/writing-for-agents/SKILL.md",
       "commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
       "license": "MIT",
-      "stars": 302654,
+      "stars": 302801,
       "last_push": "2026-10-22",
       "install": "npx skills add mattpocock/skills@writing-for-agents",
       "page": "recommended/mattpocock-writing-for-agents.md"
@@ -750,7 +755,7 @@
       "path": "skills/ponytail/SKILL.md",
       "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
       "license": "MIT",
-      "stars": 175650,
+      "stars": 175781,
       "last_push": "2026-10-18",
       "install": "npx skills add DietrichGebert/ponytail@ponytail",
       "page": "recommended/dietrichgebert-ponytail.md"
@@ -768,7 +773,7 @@
       "path": "skills/systematic-debugging/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304714,
+      "stars": 304780,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@systematic-debugging",
       "page": "recommended/obra-superpowers-systematic-debugging.md"
@@ -787,7 +792,7 @@
       "path": "skills/test-driven-development/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304715,
+      "stars": 304780,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@test-driven-development",
       "page": "recommended/obra-superpowers-test-driven-development.md"
@@ -805,7 +810,7 @@
       "path": "skills/engineering/pr/SKILL.md",
       "commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
       "license": "MIT",
-      "stars": 302654,
+      "stars": 302801,
       "last_push": "2026-10-22",
       "install": "npx skills add mattpocock/skills@pr",
       "page": "recommended/mattpocock-pr.md"
@@ -823,7 +828,7 @@
       "path": "skills/writing-plans/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304714,
+      "stars": 304780,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@writing-plans",
       "page": "recommended/obra-superpowers-writing-plans.md"
@@ -841,7 +846,7 @@
       "path": "skills/verification-before-completion/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304714,
+      "stars": 304780,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@verification-before-completion",
       "page": "recommended/obra-superpowers-verification-before-completion.md"
@@ -860,7 +865,7 @@
       "path": "skills/acquire-codebase-knowledge/SKILL.md",
       "commit": "d85f762d6e521abf5fe16703946e9b38adc42da7",
       "license": "MIT",
-      "stars": 40379,
+      "stars": 40385,
       "last_push": "2026-10-23",
       "install": "npx skills add github/awesome-copilot@acquire-codebase-knowledge",
       "page": "recommended/github-awesome-copilot-acquire-codebase-knowledge.md"
@@ -879,7 +884,7 @@
       "path": "skills/devops-engineer/SKILL.md",
       "commit": "9e7dbd688015cbd1f440374f8671028bb67c608f",
       "license": "MIT",
-      "stars": 12043,
+      "stars": 12050,
       "last_push": "2026-10-24",
       "install": "npx skills add jeffallan/claude-skills@devops-engineer",
       "page": "recommended/jeffallan-devops-engineer.md"

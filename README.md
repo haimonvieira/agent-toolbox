@@ -19,16 +19,16 @@ Para consumir por agente: [`catalog.json`](catalog.json).
 
 ## Como descobrir skills
 
-O ecossistema tem dezenas de milhares de skills. Estes são os três caminhos que eu uso para encontrar uma skill quando não sei que ela existe.
+O ecossistema tem mais de 1,5 milhão de skills. Estes são os caminhos que eu uso para encontrar uma skill quando não sei que ela existe.
 
 ### find-skills
 
-Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill pra X', é ela que roda.
+Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill para X', é ela que roda.
 
-- Como usar: Está instalada aqui. Para instalar em outro ambiente: copie de mine/ ou escreva a sua.
-- Onde: https://skills.sh/
+- Como usar: npx skills add vercel-labs/skills@find-skills
+- Onde: https://github.com/vercel-labs/skills
 - Escopo: agrega os catálogos abaixo · Autenticação: nenhuma
-- Ressalva: O arquivo local foi estendido para consultar o omgskills via MCP como fonte primária. A origem original não é confirmável: circulam cópias do mesmo texto em vários repositórios.
+- Ressalva: A versão local foi estendida para consultar o omgskills via MCP como fonte primária. A versão do repositório de origem não faz isso.
 
 ### omgskills
 
@@ -41,12 +41,12 @@ Catálogo público com cerca de 55 mil skills. Exposto como servidor MCP read-on
 
 ### skills.sh (npx skills)
 
-CLI do ecossistema de skills e leaderboard público ordenado por número de instalações. É o caminho mais rápido para instalar uma skill que você já sabe qual é.
+O maior diretório: cerca de 1,5 milhão de skills. Feito pela Vercel, código aberto em vercel-labs/skills. Tem leaderboard (all time, trending 24h, hot), packs, topics, uma seção Official e auditoria de segurança combinando Gen Agent Trust Hub, Socket e Snyk.
 
-- Como usar: `npx skills find <consulta>  ·  npx skills add <owner/repo@skill>  ·  npx skills update`
+- Como usar: `npx skills find <consulta>  ·  npx skills add <owner/repo>  ·  npx skills use <owner/repo@skill>  ·  npx skills list  ·  npx skills update`
 - Onde: https://skills.sh/
-- Escopo: leaderboard público · Autenticação: nenhuma
-- Ressalva: Sem pin por padrão: instala do branch, então o que você instala hoje pode não ser o que está amanhã.
+- Escopo: ≈1.500.000 skills · Autenticação: nenhuma
+- Ressalva: Não expõe API nem llms.txt para agentes: /llms.txt, /agents.md e /api/skills respondem 404. O acesso por agente é pelo CLI. O add instala o estado atual do branch, mas grava skills-lock.json, e `npx skills experimental_install` restaura as versões registradas nele.
 
 ### AAS — Agentic Awesome Skills
 
@@ -55,7 +55,7 @@ Catálogo de 2.750 skills com servidor MCP local (stdio) e CLI. O diferencial é
 - Como usar: `git clone https://github.com/sickn33/agentic-awesome-skills   # MIT no código, CC BY 4.0 no conteúdo`
 - Onde: https://aaskills.tech/
 - Escopo: ≈2.750 skills · Autenticação: nenhuma
-- Ressalva: O Core não rankeia nem recomenda — ele só registra e valida a escolha do agente. Útil quando o problema é cobertura, não descoberta.
+- Ressalva: O Core não rankeia nem recomenda: registra e valida a escolha do agente. Útil quando o problema é cobertura de capacidades, não descoberta.
 
 ---
 
@@ -68,16 +68,19 @@ indicado e a licença foi conferida. Cada uma tem uma ficha com o commit exato.
 
 #### [find-skills](recommended/find-skills.md) · essencial
 
-Pesquisa catálogos de skills por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. Neste ambiente foi estendida para consultar o omgskills via MCP como fonte primária.
+Pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. A versão local foi estendida para consultar o omgskills via MCP como fonte primária.
 
-- Origem: instalada neste ambiente (sem upstream confirmável)
-- Caminho: `skills/find-skills/`
+- Repositório: [vercel-labs/skills](https://github.com/vercel-labs/skills) — 36,458 stars, último push 2026-10-19
+- Caminho: `skills/find-skills/SKILL.md`
+- Commit: `a80e4c9d12d6`
+- Licença: MIT
+- Instalar: `npx skills add vercel-labs/skills@find-skills`
 
 #### [writing-for-agents](recommended/mattpocock-writing-for-agents.md) · recomendada
 
 Cobre o que o agente lê fora das skills: AGENTS.md, CLAUDE.md e documentação de projeto. Esses arquivos costumam ser escritos uma vez e nunca revisados.
 
-- Repositório: [mattpocock/skills](https://github.com/mattpocock/skills) — 302,654 stars, último push 2026-10-22
+- Repositório: [mattpocock/skills](https://github.com/mattpocock/skills) — 302,801 stars, último push 2026-10-22
 - Caminho: `skills/productivity/writing-for-agents/SKILL.md`
 - Commit: `5beb35b040e3`
 - Licença: MIT
@@ -87,7 +90,7 @@ Cobre o que o agente lê fora das skills: AGENTS.md, CLAUDE.md e documentação 
 
 Instruções para escrever uma skill: frontmatter, seções, casos de teste e iteração. É o mesmo problema que o harness de avaliação da Anthropic resolve por ferramenta, aqui como texto que o agente lê.
 
-- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,714 stars, último push 2026-10-23
+- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,780 stars, último push 2026-10-23
 - Caminho: `skills/writing-skills/SKILL.md`
 - Commit: `2ce8aa15d05b`
 - Licença: MIT
@@ -99,7 +102,7 @@ Instruções para escrever uma skill: frontmatter, seções, casos de teste e it
 
 Restringe a mudança ao mínimo que resolve a tarefa e pede respostas de uma leitura. Três níveis: lite, full (padrão) e ultra. O repositório traz ainda variantes para auditoria, dívida técnica e revisão.
 
-- Repositório: [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — 175,650 stars, último push 2026-10-18
+- Repositório: [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — 175,781 stars, último push 2026-10-18
 - Caminho: `skills/ponytail/SKILL.md`
 - Commit: `09c434ab73ca`
 - Licença: MIT
@@ -109,7 +112,7 @@ Restringe a mudança ao mínimo que resolve a tarefa e pede respostas de uma lei
 
 Escreve o corpo de um pull request com o contexto que a revisão precisa: o que mudou, por quê, e como foi verificado.
 
-- Repositório: [mattpocock/skills](https://github.com/mattpocock/skills) — 302,654 stars, último push 2026-10-22
+- Repositório: [mattpocock/skills](https://github.com/mattpocock/skills) — 302,801 stars, último push 2026-10-22
 - Caminho: `skills/engineering/pr/SKILL.md`
 - Commit: `5beb35b040e3`
 - Licença: MIT
@@ -119,7 +122,7 @@ Escreve o corpo de um pull request com o contexto que a revisão precisa: o que 
 
 Impede propor correção antes de identificar a causa. Define a ordem: reproduzir, isolar, só então corrigir.
 
-- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,714 stars, último push 2026-10-23
+- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,780 stars, último push 2026-10-23
 - Caminho: `skills/systematic-debugging/SKILL.md`
 - Commit: `2ce8aa15d05b`
 - Licença: MIT
@@ -129,7 +132,7 @@ Impede propor correção antes de identificar a causa. Define a ordem: reproduzi
 
 Exige o teste antes do código de produção, com o teste falhando primeiro. Faz o agente produzir código verificável em vez de código plausível.
 
-- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,715 stars, último push 2026-10-23
+- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,780 stars, último push 2026-10-23
 - Caminho: `skills/test-driven-development/SKILL.md`
 - Commit: `2ce8aa15d05b`
 - Licença: MIT
@@ -141,7 +144,7 @@ Exige o teste antes do código de produção, com o teste falhando primeiro. Faz
 
 Exige rodar o comando de verificação e mostrar a saída antes de afirmar que algo funciona. Evita o agente declarar concluído o que não testou.
 
-- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,714 stars, último push 2026-10-23
+- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,780 stars, último push 2026-10-23
 - Caminho: `skills/verification-before-completion/SKILL.md`
 - Commit: `2ce8aa15d05b`
 - Licença: MIT
@@ -151,7 +154,7 @@ Exige rodar o comando de verificação e mostrar a saída antes de afirmar que a
 
 Produz o plano antes de tocar no código. Corrigir um plano custa minutos; corrigir uma implementação custa horas.
 
-- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,714 stars, último push 2026-10-23
+- Repositório: [obra/superpowers](https://github.com/obra/superpowers) — 304,780 stars, último push 2026-10-23
 - Caminho: `skills/writing-plans/SKILL.md`
 - Commit: `2ce8aa15d05b`
 - Licença: MIT
@@ -163,7 +166,7 @@ Produz o plano antes de tocar no código. Corrigir um plano custa minutos; corri
 
 Mapeia um código desconhecido: pontos de entrada, arquitetura, convenções e um CLAUDE.md inicial. Mantido pelo GitHub no repositório awesome-copilot.
 
-- Repositório: [github/awesome-copilot](https://github.com/github/awesome-copilot) — 40,379 stars, último push 2026-10-23
+- Repositório: [github/awesome-copilot](https://github.com/github/awesome-copilot) — 40,385 stars, último push 2026-10-23
 - Caminho: `skills/acquire-codebase-knowledge/SKILL.md`
 - Commit: `d85f762d6e52`
 - Licença: MIT
@@ -175,7 +178,7 @@ Mapeia um código desconhecido: pontos de entrada, arquitetura, convenções e u
 
 Operações de infraestrutura e CI/CD sem exigir uma stack específica. Licença MIT e repositório ativo. Obs.: o catálogo do omgskills mostra 8.810 stars; o repositório tem 12.043 — o catálogo está desatualizado.
 
-- Repositório: [jeffallan/claude-skills](https://github.com/jeffallan/claude-skills) — 12,043 stars, último push 2026-10-24
+- Repositório: [jeffallan/claude-skills](https://github.com/jeffallan/claude-skills) — 12,050 stars, último push 2026-10-24
 - Caminho: `skills/devops-engineer/SKILL.md`
 - Commit: `9e7dbd688015`
 - Licença: MIT
@@ -195,7 +198,7 @@ Cobre Cloudflare, Docker, GCP, Kubernetes e GitOps. Consta aqui apenas como refe
 
 ## Inventário
 
-Skills instaladas no meu ambiente. 6 têm origem confirmada, 35 não. As
+Skills instaladas no meu ambiente. 7 têm origem confirmada, 34 não. As
 sem origem aparecem marcadas como não documentadas, e não com uma origem suposta.
 
 | Categoria | Skills |
@@ -212,7 +215,7 @@ sem origem aparecem marcadas como não documentadas, e não com uma origem supos
 
 | Skill | O que faz | Origem |
 |---|---|---|
-| [`find-skills`](skills/find-skills.md) | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a … | não documentada |
+| [`find-skills`](skills/find-skills.md) | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a … | [vercel-labs/skills](https://github.com/vercel-labs/skills) |
 | [`mcp-connector`](skills/mcp-connector.md) | Connect to and interact with Model Context Protocol (MCP) servers: discover tools, initialize sessio… | não documentada |
 | [`production-agent-public`](skills/production-agent-public.md) | 生产级 ReAct Agent 技能。当用户说"生产级方案"、"可部署代码"、"Production Agent"、 "ReAct格式"、"帮我写一个能跑的"、"长期稳定运行"、"生产环境"、"直接部… | não documentada |
 | [`saa-orchestrator`](skills/saa-orchestrator.md) | Sistema Agente Autônomo que orquestra o ciclo Executor→Crítico→Otimizador e delega para Multi-Agente… | não documentada |

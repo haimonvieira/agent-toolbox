@@ -14,7 +14,7 @@ Restringe a mudança ao mínimo que resolve a tarefa e pede respostas de uma lei
 | Caminho | `skills/ponytail/SKILL.md` |
 | Commit | `09c434ab73ca43761c5d8b0c5d341926c2fba710` |
 | Licença | MIT |
-| Stars | 175,650 |
+| Stars | 175,781 |
 | Último push | 2026-10-18 |
 | Tags | `simplicidade`, `yagni` |
 

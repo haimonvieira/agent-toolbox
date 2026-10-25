@@ -1,16 +1,16 @@
 {
   "_comment": "A camada de descoberta: como encontrar skill antes de instalar. Documentada porque foi o que motivou o repositório.",
-  "intro": "O ecossistema tem dezenas de milhares de skills. Estes são os três caminhos que eu uso para encontrar uma skill quando não sei que ela existe.",
+  "intro": "O ecossistema tem mais de 1,5 milhão de skills. Estes são os caminhos que eu uso para encontrar uma skill quando não sei que ela existe.",
   "entries": [
     {
       "name": "find-skills",
       "kind": "skill",
-      "what": "Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill pra X', é ela que roda.",
-      "how": "Está instalada aqui. Para instalar em outro ambiente: copie de mine/ ou escreva a sua.",
-      "url": "https://skills.sh/",
+      "what": "Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill para X', é ela que roda.",
+      "how": "npx skills add vercel-labs/skills@find-skills",
+      "url": "https://github.com/vercel-labs/skills",
       "auth": "nenhuma",
       "scope": "agrega os catálogos abaixo",
-      "caveat": "O arquivo local foi estendido para consultar o omgskills via MCP como fonte primária. A origem original não é confirmável: circulam cópias do mesmo texto em vários repositórios."
+      "caveat": "A versão local foi estendida para consultar o omgskills via MCP como fonte primária. A versão do repositório de origem não faz isso."
     },
     {
       "name": "omgskills",
@@ -25,12 +25,12 @@
     {
       "name": "skills.sh (npx skills)",
       "kind": "cli",
-      "what": "CLI do ecossistema de skills e leaderboard público ordenado por número de instalações. É o caminho mais rápido para instalar uma skill que você já sabe qual é.",
-      "how": "npx skills find <consulta>  ·  npx skills add <owner/repo@skill>  ·  npx skills update",
+      "what": "O maior diretório: cerca de 1,5 milhão de skills. Feito pela Vercel, código aberto em vercel-labs/skills. Tem leaderboard (all time, trending 24h, hot), packs, topics, uma seção Official e auditoria de segurança combinando Gen Agent Trust Hub, Socket e Snyk.",
+      "how": "npx skills find <consulta>  ·  npx skills add <owner/repo>  ·  npx skills use <owner/repo@skill>  ·  npx skills list  ·  npx skills update",
       "url": "https://skills.sh/",
       "auth": "nenhuma",
-      "scope": "leaderboard público",
-      "caveat": "Sem pin por padrão: instala do branch, então o que você instala hoje pode não ser o que está amanhã."
+      "scope": "≈1.500.000 skills",
+      "caveat": "Não expõe API nem llms.txt para agentes: /llms.txt, /agents.md e /api/skills respondem 404. O acesso por agente é pelo CLI. O add instala o estado atual do branch, mas grava skills-lock.json, e `npx skills experimental_install` restaura as versões registradas nele."
     },
     {
       "name": "AAS — Agentic Awesome Skills",
@@ -40,7 +40,7 @@
       "url": "https://aaskills.tech/",
       "auth": "nenhuma",
       "scope": "≈2.750 skills",
-      "caveat": "O Core não rankeia nem recomenda — ele só registra e valida a escolha do agente. Útil quando o problema é cobertura, não descoberta."
+      "caveat": "O Core não rankeia nem recomenda: registra e valida a escolha do agente. Útil quando o problema é cobertura de capacidades, não descoberta."
     }
   ]
 }

@@ -26,6 +26,7 @@ import urllib.request
 # (repo, nome da skill) — a lista curada
 CANDIDATES = [
     # descoberta & meta (o tema que interessa neste chat)
+    ("vercel-labs/skills", "find-skills"),
     ("obra/superpowers", "writing-skills"),
     ("mattpocock/skills", "writing-for-agents"),
     # engenharia / coding

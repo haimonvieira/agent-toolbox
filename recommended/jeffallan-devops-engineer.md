@@ -14,7 +14,7 @@ Operações de infraestrutura e CI/CD sem exigir uma stack específica. Licença
 | Caminho | `skills/devops-engineer/SKILL.md` |
 | Commit | `9e7dbd688015cbd1f440374f8671028bb67c608f` |
 | Licença | MIT |
-| Stars | 12,043 |
+| Stars | 12,050 |
 | Último push | 2026-10-24 |
 | Tags | `infra`, `ci-cd` |
 

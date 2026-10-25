@@ -6,8 +6,18 @@ Helps users discover and install agent skills when they ask questions like "how 
 
 ## Origem
 
-Não documentada. A skill está instalada, mas o arquivo não cita repositório
-nem autor. Para completar, edite `data/provenance.json`.
+| Campo | Valor |
+|---|---|
+| Repositório | https://github.com/vercel-labs/skills |
+| Caminho | `skills/find-skills/SKILL.md` |
+| Licença | MIT |
+| Confiança | confirmado |
+
+```bash
+npx skills add vercel-labs/skills@find-skills
+```
+
+Confirmado pelo diretório skills.sh, onde aparece em 1º na auditoria de segurança. A versão local foi estendida para consultar o omgskills via MCP.
 
 ## Tamanho
 

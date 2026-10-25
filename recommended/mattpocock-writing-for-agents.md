@@ -14,7 +14,7 @@ Cobre o que o agente lê fora das skills: AGENTS.md, CLAUDE.md e documentação 
 | Caminho | `skills/productivity/writing-for-agents/SKILL.md` |
 | Commit | `5beb35b040e3de97e54fa9e386d7e42d15c295c2` |
 | Licença | MIT |
-| Stars | 302,654 |
+| Stars | 302,801 |
 | Último push | 2026-10-22 |
 | Tags | `agents-md`, `documentacao` |
 

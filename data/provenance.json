@@ -45,6 +45,14 @@
       "install": "incluso neste repositório em mine/incident-response/",
       "confidence": "confirmado",
       "note": "Autoral."
+    },
+    "find-skills": {
+      "repo": "https://github.com/vercel-labs/skills",
+      "path": "skills/find-skills/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add vercel-labs/skills@find-skills",
+      "confidence": "confirmado",
+      "note": "Confirmado pelo diretório skills.sh, onde aparece em 1º na auditoria de segurança. A versão local foi estendida para consultar o omgskills via MCP."
     }
   },
   "unknown": [
@@ -54,7 +62,6 @@
     "browser-batch",
     "context-map",
     "exa-search",
-    "find-skills",
     "firecrawl",
     "free-tts",
     "gh-cli",

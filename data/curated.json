@@ -25,15 +25,18 @@
   "entries": [
     {
       "slug": "find-skills",
-      "local": true,
       "category": "discovery",
       "tags": [
         "descoberta",
         "instalacao",
         "catalogo"
       ],
-      "why": "Pesquisa catálogos de skills por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. Neste ambiente foi estendida para consultar o omgskills via MCP como fonte primária.",
-      "verdict": "essencial"
+      "why": "Pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. A versão local foi estendida para consultar o omgskills via MCP como fonte primária.",
+      "verdict": "essencial",
+      "slug_source": [
+        "vercel-labs/skills",
+        "find-skills"
+      ]
     },
     {
       "slug": "obra-superpowers-writing-skills",

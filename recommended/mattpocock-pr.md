@@ -14,7 +14,7 @@ Escreve o corpo de um pull request com o contexto que a revisão precisa: o que 
 | Caminho | `skills/engineering/pr/SKILL.md` |
 | Commit | `5beb35b040e3de97e54fa9e386d7e42d15c295c2` |
 | Licença | MIT |
-| Stars | 302,654 |
+| Stars | 302,801 |
 | Último push | 2026-10-22 |
 | Tags | `pull-request` |
 

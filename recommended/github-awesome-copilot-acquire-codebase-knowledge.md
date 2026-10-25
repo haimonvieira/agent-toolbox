@@ -14,7 +14,7 @@ Mapeia um código desconhecido: pontos de entrada, arquitetura, convenções e u
 | Caminho | `skills/acquire-codebase-knowledge/SKILL.md` |
 | Commit | `d85f762d6e521abf5fe16703946e9b38adc42da7` |
 | Licença | MIT |
-| Stars | 40,379 |
+| Stars | 40,385 |
 | Último push | 2026-10-23 |
 | Tags | `onboarding`, `arquitetura` |
 
