@@ -76,9 +76,12 @@ _none_
   - plugin-oh-my-opencode-slim: upstream not verified
   - plugin-oh-my-opencode-slim: version resolved by the plugin manager
   - mcp-pencil: upstream not verified
+  - mcp-pencil: needs a locally installed binary
   - mcp-browseros-neo: upstream not verified
   - mcp-cloudflare-api: upstream not verified
   - mcp-figma: upstream not verified
+  - mcp-insomnia: needs an installed binary
+  - mcp-teams-mcp: needs an installed binary
   - 2 floating version(s)
 
 ## Notes

@@ -75,6 +75,7 @@ _none_
   - harness-claude-code: upstream not verified
   - plugin-ponytail: upstream not verified
   - mcp-pencil: upstream not verified
+  - mcp-pencil: needs a locally installed binary
   - mcp-browseros-neo: upstream not verified
 
 ## Notes

@@ -84,12 +84,19 @@ _none_
   - plugin-context7: upstream not verified
   - plugin-42crunch-api-security-testing: upstream not verified
   - mcp-pencil: upstream not verified
+  - mcp-pencil: needs a locally installed binary
   - mcp-browseros-neo: upstream not verified
   - mcp-cloudflare-api: upstream not verified
   - mcp-figma: upstream not verified
+  - mcp-insomnia: needs an installed binary
+  - mcp-teams-mcp: needs an installed binary
+  - mcp-aas-core: needs an installed binary
   - mcp-codebase-memory: upstream not verified
+  - mcp-codebase-memory: needs an installed binary
   - mcp-hostinger-api: upstream not verified
+  - mcp-hostinger-api: needs an installed binary
   - mcp-gemini-notebook-mcp: upstream not verified
+  - mcp-gemini-notebook-mcp: needs a locally installed binary
 
 ## Notes
 

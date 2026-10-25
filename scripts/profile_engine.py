@@ -303,25 +303,31 @@ def _component_facts(record: dict, snapshot: dict | None) -> dict:
         "pinned_version": bool(record.get("version")),
     }
     if record.get("category") == "mcp":
-        facts["executable_present"] = _mcp_executable_present(record)
+        facts["provisioning"] = _mcp_provisioning(record)
     if record.get("category") == "skill":
         facts["provenance_known"] = record.get("provenance") not in {"unknown", None}
     return facts
 
 
-def _mcp_executable_present(record: dict) -> bool | None:
+def _mcp_provisioning(record: dict) -> str:
+    """Describe how an MCP is provided, using inventory data only.
+
+    Never inspects the local filesystem so that generated reports stay
+    identical on every machine.
+    """
     entry = record.get("entry") or {}
     command = entry.get("command")
-    if isinstance(command, list) and command:
-        exe = str(command[0])
-        if exe.startswith("/") or exe.startswith("~"):
-            return Path(os.path.expanduser(exe)).exists()
-        return None
-    if isinstance(command, str):
-        if command.startswith("/") or command.startswith("~"):
-            return Path(os.path.expanduser(command)).exists()
-        return None
-    return None
+    parts = command if isinstance(command, list) else ([command] if command else [])
+    first = str(parts[0]) if parts else ""
+    if first.startswith("/") or first.startswith("~"):
+        return "local-binary"
+    if first in {"npx", "bunx", "uvx", "pnpm", "yarn"}:
+        return "package"
+    if entry.get("url"):
+        return "remote"
+    if first:
+        return "binary"
+    return "unknown"
 
 
 def compute_reproducibility(profile: dict, profiles: dict[str, dict], catalog: Catalog) -> dict:
@@ -352,8 +358,14 @@ def compute_reproducibility(profile: dict, profiles: dict[str, dict], catalog: C
                         minor.append(f"{ref}: upstream not verified")
                     if not facts["install_method_known"]:
                         minor.append(f"{ref}: install method not documented")
-                if category == "mcp" and facts.get("executable_present") is False:
-                    blockers.append(f"{ref}: configured executable is missing")
+                if category == "mcp":
+                    provisioning = facts.get("provisioning")
+                    if provisioning == "local-binary":
+                        minor.append(f"{ref}: needs a locally installed binary")
+                    elif provisioning == "package":
+                        minor.append(f"{ref}: package resolved at runtime")
+                    elif provisioning == "binary":
+                        minor.append(f"{ref}: needs an installed binary")
                 if category == "plugin" and record.get("source_type") == "npm-plugin":
                     minor.append(f"{ref}: version resolved by the plugin manager")
             if category == "skill":

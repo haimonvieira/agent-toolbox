@@ -76,6 +76,7 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
   - plugin-ponytail: upstream not verified
   - mcp-browseros-neo: upstream not verified
   - mcp-pencil: upstream not verified
+  - mcp-pencil: needs a locally installed binary
 
 ## Notes
 
