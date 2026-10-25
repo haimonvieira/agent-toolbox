@@ -1,4 +1,4 @@
-# MCP inventory — Phase 3. Verified repairs applied; unknown upstreams preserved.
+# MCP inventory — Phase 6. One entry (openagents) removed; codegraph preserved and disabled.
 mcps:
 - name: pencil
   purpose: Create and manipulate .pen design files through the pen.dev desktop app.
@@ -430,40 +430,6 @@ mcps:
   recommended_pin: codebase-memory-mcp@0.12.1
   last_verified: '2026-10-25'
   local_executable_exists: true
-- name: openagents
-  purpose: OpenAgents workspace integration.
-  status: Disabled/preserved pending identification
-  transport: stdio
-  harnesses:
-  - opencode (disabled)
-  - omp
-  config_paths:
-  - ~/.config/opencode/opencode.json
-  - ~/.omp/agent/mcp.json
-  command: agn mcp-server --workspace-id <workspace-id>
-  starts_locally: true
-  package_source: unknown
-  upstream_repository: null
-  official_docs: null
-  environment_variables:
-  - OA_WORKSPACE_TOKEN
-  auth_type: workspace token
-  update_method: unknown
-  remove_method: remove entry from harness config
-  notes: No `agn` executable on PATH; workspace id omitted from this inventory.
-  evidence_level: Verified locally
-  source_type: local-missing
-  provided_by: unknown
-  managed_by: harness config
-  directly_configured: true
-  dynamic: false
-  injected_by: null
-  generated: false
-  repair_class: Unknown upstream
-  failure_reason: No agn executable; npm agn@0.1.2 is an unrelated 2022 package. Upstream CLI unidentified.
-  pinned_version: null
-  recommended_pin: null
-  last_verified: '2026-10-25'
 - name: hostinger-api
   purpose: Hostinger API operations.
   status: Installed (package 3.8.1)
@@ -656,3 +622,13 @@ mcps:
   pinned_version: null
   recommended_pin: plugin-managed; pin the plugin instead
   last_verified: '2026-10-25'
+removed:
+- name: openagents
+  category: mcp
+  status: Removed from configuration
+  removed_on: '2026-10-25'
+  reason: CLI upstream never identified; npm 'agn' is an unrelated package. Entry deleted from both harness configs.
+  previous_status: Disabled/preserved pending identification
+  evidence_level: Verified locally
+  backup: ~/.agent-toolbox-backups/20261025-phase5/
+counts_note: 18 MCP entries are currently configured (one entry was removed on 2026-10-25).

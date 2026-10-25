@@ -29,7 +29,7 @@ profiles:
   full:
     status: partially_reproducible
     reasons:
-    - 7 component(s) excluded as unresolved
+    - 6 component(s) excluded as unresolved
     - 'harness-opencode: upstream not verified'
     - 'harness-claude-code: upstream not verified'
     - 'harness-codex-cli: upstream not verified'
@@ -65,11 +65,10 @@ profiles:
     - 'mcp-hostinger-api: needs an installed binary'
     - 'mcp-gemini-notebook-mcp: upstream not verified'
     - 'mcp-gemini-notebook-mcp: needs a locally installed binary'
-    - 2 floating version(s)
+    - 1 floating version(s)
     blockers: []
     floating_versions:
-    - plugin-envsitter-guard
-    - plugin-opencode-mem
+    - plugin-oh-my-opencode-slim
   minimal:
     status: mostly_reproducible
     reasons:
@@ -119,8 +118,7 @@ profiles:
     - 'mcp-figma: upstream not verified'
     - 'mcp-insomnia: needs an installed binary'
     - 'mcp-teams-mcp: needs an installed binary'
-    - 2 floating version(s)
+    - 1 floating version(s)
     blockers: []
     floating_versions:
-    - plugin-envsitter-guard
-    - plugin-opencode-mem
+    - plugin-oh-my-opencode-slim

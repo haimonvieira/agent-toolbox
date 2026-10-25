@@ -615,19 +615,6 @@ mcp-codegraph:
   ownership:
   - unresolved
   managed_by: []
-mcp-openagents:
-  category: mcp
-  name: openagents
-  evidence_level: Verified locally
-  canonical: false
-  divergent: false
-  profiles:
-  - full
-  - omp
-  - opencode-go
-  ownership:
-  - unresolved
-  managed_by: []
 mcp-doop:
   category: mcp
   name: doop

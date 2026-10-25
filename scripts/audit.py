@@ -495,33 +495,63 @@ def plugin_entries_from_installed(path: Path, harness: str) -> list[dict]:
         record = records[0] if isinstance(records, list) and records else records
         if not isinstance(record, dict):
             continue
+        base_name = name.split("@")[0] if "@" in name and not name.startswith("@") else name
         out.append({
-            "name": name,
+            "name": base_name,
+            "spec": name,
             "harness": harness,
             "version": record.get("version"),
             "scope": record.get("scope"),
             "install_path": norm_path(record.get("installPath", "")),
             "enabled": True,
             "managed_by": "plugin manager",
+            "floating": False,
         })
     return out
 
 
+VERSION_SUFFIX = re.compile(r"^(latest|next|beta|rc|\d[\w.+-]*|[\^~><=]\d.*)$")
+
+
+def split_plugin_spec(spec: str) -> tuple[str, str | None]:
+    """Split an npm spec into package name and optional version.
+
+    'envsitter-guard@latest' -> ('envsitter-guard', 'latest')
+    'envsitter-guard@0.1.0'  -> ('envsitter-guard', '0.1.0')
+    'ponytail@ponytail'       -> ('ponytail@ponytail', None)   # marketplace qualifier
+    '@scope/pkg@1.2.3'        -> ('@scope/pkg', '1.2.3')
+    """
+    if "@" not in spec:
+        return spec, None
+    head, _, tail = spec.rpartition("@")
+    if not head:
+        return spec, None
+    if not VERSION_SUFFIX.match(tail):
+        return spec, None
+    return head, tail
+
+
 def opencode_plugin_version(spec: str) -> str | None:
+    """Resolved version of an OpenCode npm plugin, from the local resolver cache."""
     base = HOME / ".cache" / "opencode" / "npm"
     if not base.is_dir():
         return None
-    base_pkg = spec.rsplit("@", 1)[0] if spec.endswith("@latest") else spec
-    pattern = spec if spec.endswith("@latest") else f"{spec}@*"
-    for wrapper in base.glob(f"{pattern}/*/package.json"):
-        try:
-            data = read_json(wrapper)
-        except (OSError, ValueError):
-            continue
-        deps = data.get("dependencies") or {}
-        if isinstance(deps, dict) and base_pkg in deps:
-            return str(deps[base_pkg])
-    return None
+    name, pinned = split_plugin_spec(spec)
+    patterns = []
+    if pinned and pinned != "latest":
+        patterns.append(f"{name}@{pinned}/*/package.json")
+    patterns.append(f"{name}@*/*/package.json")
+    patterns.append(f"{name}/*/package.json")
+    for pattern in patterns:
+        for wrapper in base.glob(pattern):
+            try:
+                data = read_json(wrapper)
+            except (OSError, ValueError):
+                continue
+            deps = data.get("dependencies") or {}
+            if isinstance(deps, dict) and name in deps:
+                return str(deps[name])
+    return pinned if pinned and pinned != "latest" else None
 
 
 def collect_plugins() -> list[dict]:
@@ -558,15 +588,19 @@ def collect_plugins() -> list[dict]:
             data = {}
         for spec in data.get("plugin") or []:
             if isinstance(spec, str):
+                name, pinned = split_plugin_spec(spec)
+                resolved = opencode_plugin_version(spec)
                 entries.append({
-                    "name": spec,
+                    "name": name,
+                    "spec": spec,
                     "harness": "opencode",
-                    "version": opencode_plugin_version(spec),
+                    "version": resolved,
+                    "pinned_version": pinned if pinned and pinned != "latest" else None,
                     "scope": "user",
                     "install_path": "~/.cache/opencode/npm",
                     "enabled": True,
                     "managed_by": "opencode bun resolver",
-                    "floating": spec.endswith("@latest") or not opencode_plugin_version(spec),
+                    "floating": pinned in (None, "latest"),
                 })
     # VS Code ChatGPT extension
     ext = HOME / ".vscode" / "extensions"

@@ -47,7 +47,7 @@ find ~/.agents/skills ~/.claude/skills -name SKILL.md -print0 | xargs -0 sha256s
 | `codegraph` | Identify the correct upstream first; the npm name is unverified. Leave disabled. |
 | `codebase-memory` | Fixed in Phase 3: installed `0.12.1`; binary present |
 | `hostinger-api` | Fixed in Phase 3: installed `3.8.1`; binary present |
-| `openagents` | The npm names `agn` and `openagents` are **not** the intended CLI. Do not install them; identify the real upstream or remove the entry. |
+| `openagents` | Resolved on 2026-10-25: the entry was removed from both harness configs (upstream never identified). |
 | `gemini-notebook-mcp` | Fixed in Phase 3: command replaced with `~/.local/bin/notebooklm-mcp` |
 
 ### Local HTTP MCP unreachable

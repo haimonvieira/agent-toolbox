@@ -1,4 +1,4 @@
-# Plugin inventory — Phase 4. Floating OpenCode plugins recorded.
+# Plugin inventory — Phase 6. OpenCode npm plugins pinned; orchestrator left manager-resolved.
 plugins:
 - name: ponytail
   version: 5.3.2
@@ -314,7 +314,7 @@ plugins:
   last_verified: '2026-10-25'
 - name: oh-my-opencode-slim
   version: 3.0.6
-  status: Installed (added during audit)
+  status: Installed (version resolved by the plugin manager)
   harnesses:
   - opencode
   scope: user
@@ -335,8 +335,8 @@ plugins:
   health: active in the running session
   update_method: OpenCode plugin resolution (@latest)
   remove_method: remove from the plugin array and clear the npm cache entry
-  notes: Added to config at 2026-10-25 11:07 while the audit was running; injected context7 and gh_grep MCPs and
-    12 skills into the session.
+  notes: Configured without a version spec; OpenCode resolves it through the npm resolver. Pinning was left as a
+    separate decision (backlog item).
   evidence_level: Verified locally
   source_type: npm-plugin
   managed_by: plugin manager
@@ -484,11 +484,11 @@ plugins:
   last_verified: '2026-10-25'
 - name: envsitter-guard
   version: 0.1.0
-  status: Installed (floating @latest)
+  status: Installed (pinned 0.1.0)
   harnesses:
   - opencode
   scope: user
-  install_method: OpenCode npm plugin resolver
+  install_method: OpenCode npm plugin resolver, version pinned in opencode.json
   local_paths:
   - ~/.cache/opencode/npm/envsitter-guard@latest
   config_paths:
@@ -501,15 +501,16 @@ plugins:
   health: static inspection only
   update_method: OpenCode plugin resolver
   remove_method: remove from plugin array
-  notes: Configured as envsitter-guard@latest; resolved 0.1.0. Pin when supported.
+  notes: Pinned as envsitter-guard@0.1.0 on 2026-10-25 (was @latest).
   evidence_level: Verified locally
+  floating: false
 - name: opencode-mem
   version: 2.34.0
-  status: Installed (floating @latest)
+  status: Installed (pinned 2.34.0)
   harnesses:
   - opencode
   scope: user
-  install_method: OpenCode npm plugin resolver
+  install_method: OpenCode npm plugin resolver, version pinned in opencode.json
   local_paths:
   - ~/.cache/opencode/npm/opencode-mem@latest
   config_paths:
@@ -522,8 +523,9 @@ plugins:
   health: static inspection only
   update_method: OpenCode plugin resolver
   remove_method: remove from plugin array
-  notes: Configured as opencode-mem@latest; resolved 2.34.0. Pin when supported.
+  notes: Pinned as opencode-mem@2.34.0 on 2026-10-25 (was @latest).
   evidence_level: Verified locally
+  floating: false
 orphaned_or_stale:
 - name: superpowers (old cache)
   version: 6.3.0

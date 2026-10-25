@@ -5,178 +5,169 @@ profile_version: 1
 status: active
 scope: public
 extends:
-  - base
-description: >-
-  OMP 18.12.6 with its marketplace plugins, local extensions, managed skills,
-  and the MCP servers configured in ~/.omp/agent/mcp.json.
+- base
+description: OMP 18.12.6 with its marketplace plugins, local extensions, managed skills, and the MCP servers
+  configured in ~/.omp/agent/mcp.json.
 harnesses:
   required:
-    - ref: harness-oh-my-pi-omp
-      ownership: directly_configured
-      version: "18.12.6"
+  - ref: harness-oh-my-pi-omp
+    ownership: directly_configured
+    version: 18.12.6
 plugins:
   required:
-    - ref: plugin-ponytail
-      ownership: directly_configured
-      version: "5.3.2"
-    - ref: plugin-superpowers
-      ownership: plugin_managed
-      version: "7.0.0"
-    - ref: plugin-security-guidance
-      ownership: plugin_managed
-      version: "2.0.15"
-      note: SessionStart hook installs claude-agent-sdk unless the venv is healthy.
-    - ref: plugin-sonarqube
-      ownership: plugin_managed
-      version: "2.6.0"
-      note: Sonar Source-Available License; not open source.
-    - ref: plugin-coderabbit
-      ownership: plugin_managed
-      version: "1.1.1"
-    - ref: plugin-lethe
-      ownership: plugin_managed
-      version: "0.19.0"
-    - ref: plugin-best-of
-      ownership: plugin_managed
-      version: "0.2.0"
-    - ref: plugin-feature-dev
-      ownership: plugin_managed
-      version: "0.0.0"
-    - ref: plugin-context7
-      ownership: plugin_managed
-      version: "0.0.0"
-    - ref: plugin-42crunch-api-security-testing
-      ownership: plugin_managed
-      version: "1.5.5"
+  - ref: plugin-ponytail
+    ownership: directly_configured
+    version: 5.3.2
+  - ref: plugin-superpowers
+    ownership: plugin_managed
+    version: 7.0.0
+  - ref: plugin-security-guidance
+    ownership: plugin_managed
+    version: 2.0.15
+    note: SessionStart hook installs claude-agent-sdk unless the venv is healthy.
+  - ref: plugin-sonarqube
+    ownership: plugin_managed
+    version: 2.6.0
+    note: Sonar Source-Available License; not open source.
+  - ref: plugin-coderabbit
+    ownership: plugin_managed
+    version: 1.1.1
+  - ref: plugin-lethe
+    ownership: plugin_managed
+    version: 0.19.0
+  - ref: plugin-best-of
+    ownership: plugin_managed
+    version: 0.2.0
+  - ref: plugin-feature-dev
+    ownership: plugin_managed
+    version: 0.0.0
+  - ref: plugin-context7
+    ownership: plugin_managed
+    version: 0.0.0
+  - ref: plugin-42crunch-api-security-testing
+    ownership: plugin_managed
+    version: 1.5.5
   optional:
-    - ref: plugin-github
-      ownership: plugin_managed
-      version: "0.0.0"
-      note: Install directory is empty; treat as not usable.
-    - ref: plugin-orca-agent-status
-      ownership: plugin_managed
-      reason: Orca-managed extension; presence depends on the Orca app.
-    - ref: plugin-orca-prefill
-      ownership: plugin_managed
-      reason: Orca-managed extension; presence depends on the Orca app.
-    - ref: plugin-orca-titlebar-spinner
-      ownership: plugin_managed
-      reason: Orca-managed extension; presence depends on the Orca app.
-    - ref: plugin-pr-template-guard
-      ownership: directly_configured
-      reason: Locally authored extension; contains a private organization reference.
+  - ref: plugin-github
+    ownership: plugin_managed
+    version: 0.0.0
+    note: Install directory is empty; treat as not usable.
+  - ref: plugin-orca-agent-status
+    ownership: plugin_managed
+    reason: Orca-managed extension; presence depends on the Orca app.
+  - ref: plugin-orca-prefill
+    ownership: plugin_managed
+    reason: Orca-managed extension; presence depends on the Orca app.
+  - ref: plugin-orca-titlebar-spinner
+    ownership: plugin_managed
+    reason: Orca-managed extension; presence depends on the Orca app.
+  - ref: plugin-pr-template-guard
+    ownership: directly_configured
+    reason: Locally authored extension; contains a private organization reference.
 mcps:
   required:
-    - ref: mcp-pencil
-      ownership: directly_configured
-    - ref: mcp-browseros-neo
-      ownership: directly_configured
-    - ref: mcp-cloudflare-api
-      ownership: directly_configured
-    - ref: mcp-figma
-      ownership: directly_configured
-    - ref: mcp-insomnia
-      ownership: directly_configured
-      version: "0.8.2"
-    - ref: mcp-teams-mcp
-      ownership: directly_configured
-      version: "1.0.1"
-    - ref: mcp-aas-core
-      ownership: directly_configured
-      version: "18.10.0"
-    - ref: mcp-codebase-memory
-      ownership: directly_configured
-      version: "0.12.1"
-    - ref: mcp-hostinger-api
-      ownership: directly_configured
-      version: "3.8.1"
-    - ref: mcp-gemini-notebook-mcp
-      ownership: directly_configured
-      version: "0.15.7"
+  - ref: mcp-pencil
+    ownership: directly_configured
+  - ref: mcp-browseros-neo
+    ownership: directly_configured
+  - ref: mcp-cloudflare-api
+    ownership: directly_configured
+  - ref: mcp-figma
+    ownership: directly_configured
+  - ref: mcp-insomnia
+    ownership: directly_configured
+    version: 0.8.2
+  - ref: mcp-teams-mcp
+    ownership: directly_configured
+    version: 1.0.1
+  - ref: mcp-aas-core
+    ownership: directly_configured
+    version: 18.10.0
+  - ref: mcp-codebase-memory
+    ownership: directly_configured
+    version: 0.12.1
+  - ref: mcp-hostinger-api
+    ownership: directly_configured
+    version: 3.8.1
+  - ref: mcp-gemini-notebook-mcp
+    ownership: directly_configured
+    version: 0.15.7
   optional:
-    - ref: mcp-obsidian-mcp-connector
-      ownership: directly_configured
-    - ref: mcp-graphify
-      ownership: directly_configured
-      note: Third-party remote endpoint; upstream not fully verified.
+  - ref: mcp-obsidian-mcp-connector
+    ownership: directly_configured
+  - ref: mcp-graphify
+    ownership: directly_configured
+    note: Third-party remote endpoint; upstream not fully verified.
   unresolved:
-    - ref: mcp-codegraph
-      ownership: unresolved
-      reason: Disabled in the OMP config; npm identity unrelated.
-    - ref: mcp-openagents
-      ownership: unresolved
-      reason: Disabled in the OMP config; CLI upstream unidentified.
-    - ref: mcp-doop
-      ownership: unresolved
-      reason: Third-party service with unknown purpose.
+  - ref: mcp-codegraph
+    ownership: unresolved
+    reason: Disabled in the OMP config; npm identity unrelated.
+  - ref: mcp-doop
+    ownership: unresolved
+    reason: Third-party service with unknown purpose.
 skills:
   plugin_managed:
-    - ref: skill-code-review-plugin
-      ownership: plugin_managed
-      reason: CodeRabbit plugin copy; overlaps the canonical skill of the same name.
+  - ref: skill-code-review-plugin
+    ownership: plugin_managed
+    reason: CodeRabbit plugin copy; overlaps the canonical skill of the same name.
 hooks:
   plugin_managed:
-    - ref: hook-security-guidance-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-userpromptsubmit
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-posttooluse
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-stop
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-sonarqube-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-sonarqube
-    - ref: hook-superpowers-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-superpowers
-    - ref: hook-lethe-refresh-index
-      ownership: plugin_managed
-      managed_by: plugin-lethe
-    - ref: hook-orca-agent-status-extension
-      ownership: plugin_managed
-      managed_by: plugin-orca-agent-status
-    - ref: hook-orca-prefill-extension
-      ownership: plugin_managed
-      managed_by: plugin-orca-prefill
-    - ref: hook-pr-template-guard-extension
-      ownership: directly_configured
-      managed_by: plugin-pr-template-guard
+  - ref: hook-security-guidance-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-userpromptsubmit
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-posttooluse
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-stop
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-sonarqube-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-sonarqube
+  - ref: hook-superpowers-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-superpowers
+  - ref: hook-lethe-refresh-index
+    ownership: plugin_managed
+    managed_by: plugin-lethe
+  - ref: hook-orca-agent-status-extension
+    ownership: plugin_managed
+    managed_by: plugin-orca-agent-status
+  - ref: hook-orca-prefill-extension
+    ownership: plugin_managed
+    managed_by: plugin-orca-prefill
+  - ref: hook-pr-template-guard-extension
+    ownership: directly_configured
+    managed_by: plugin-pr-template-guard
 environment_variables:
   optional:
-    - name: HOSTINGER_API_TOKEN
-      required_by:
-        - mcp-hostinger-api
-      reason: Token for the Hostinger API MCP.
-    - name: OA_WORKSPACE_TOKEN
-      required_by:
-        - mcp-openagents
-      reason: Only needed if the unresolved OpenAgents MCP is enabled.
-    - name: CONTEXT7_API_KEY
-      required_by:
-        - mcp-context7
-      reason: Optional higher Context7 quota.
+  - name: HOSTINGER_API_TOKEN
+    required_by:
+    - mcp-hostinger-api
+    reason: Token for the Hostinger API MCP.
+  - name: CONTEXT7_API_KEY
+    required_by:
+    - mcp-context7
+    reason: Optional higher Context7 quota.
 requirements:
   commands:
-    - omp
+  - omp
   files:
-    - ~/.omp/agent/config.yml
-    - ~/.omp/agent/mcp.json
-    - ~/.omp/plugins/installed_plugins.json
+  - ~/.omp/agent/config.yml
+  - ~/.omp/agent/mcp.json
+  - ~/.omp/plugins/installed_plugins.json
   directories:
-    - ~/.omp/agent/managed-skills
-    - ~/.omp/plugins
+  - ~/.omp/agent/managed-skills
+  - ~/.omp/plugins
 external_dependencies: []
 platforms:
-  - linux
-notes: >-
-  OMP discovers the canonical skill store through its "agents" provider
-  (skills.enableAgentsUser defaults to true) and adds 55 locally authored managed
-  skills. Five agent profiles exist locally: code-reviewer, qa, repo-researcher,
-  security-reviewer and team-lead.
+- linux
+notes: 'OMP discovers the canonical skill store through its "agents" provider (skills.enableAgentsUser
+  defaults to true) and adds 55 locally authored managed skills. Five agent profiles exist locally: code-reviewer,
+  qa, repo-researcher, security-reviewer and team-lead.'
 evidence_level: Verified locally
-last_verified: "2026-10-25"
+last_verified: '2026-10-25'
+floating_versions: []

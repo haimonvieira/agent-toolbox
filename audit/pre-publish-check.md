@@ -117,3 +117,16 @@ advisory (`envsitter-guard@latest`, `opencode-mem@latest`).
 
 Profile drift is informational here: 6 `PROFILE_COMPONENT_EXTRA`, 3 `PROFILE_OPTIONAL_MISSING`
 (info) and 2 floating-version findings (medium). No required component is missing.
+
+## Phase 6 — openagents removal and plugin pinning
+
+| Check | Result |
+| --- | --- |
+| `openagents` removed from both harness configs | Pass — backup in `~/.agent-toolbox-backups/20261025-phase5/` (mode 600) |
+| `codegraph` preserved and disabled | Pass — still `enabled: false` in OMP and `disabled` in OpenCode |
+| OpenCode plugins pinned | Pass — `envsitter-guard@0.1.0`, `opencode-mem@2.34.0` |
+| Pinning syntax evidence | Upstream `packages/util/src/npm.ts` marks exact versions immutable (`mutable: type !== "version"`) |
+| Config file modes | Pass — both remain `0600` |
+| Inventory / profiles / docs updated | Pass |
+| Secret scan | Pass — no values written |
+| Drift after baseline refresh | 10 findings: 9 informational, 1 medium (`oh-my-opencode-slim` unpinned by choice, already a backlog item) |

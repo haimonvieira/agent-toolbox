@@ -23,9 +23,9 @@ extension files (19 entries; `ponytail` is shared by three harnesses).
 | `security-guidance` | 2.0.15 (catalog 2.0.16) | OMP | official marketplace | Apache-2.0 | Enabled; startup hook installs a Python package |
 | `lethe` | 0.19.0 | OMP | `teimurjan/lethe` | unknown (no LICENSE) | Enabled; adds hooks |
 | `best-of` | 0.2.0 | OMP | `wolfiesch/omp-best-of` | MIT | Enabled |
-| `oh-my-opencode-slim` | 3.0.6 | OpenCode | `alvinunreal/oh-my-opencode-slim` | MIT | Enabled (added during audit) |
-| `envsitter-guard` | 0.1.0 resolved (`@latest`) | OpenCode | `boxpositron/envsitter-guard` | MIT | Enabled, floating |
-| `opencode-mem` | 2.34.0 resolved (`@latest`) | OpenCode | `tickernelz/opencode-mem` | MIT | Enabled, floating |
+| `oh-my-opencode-slim` | 3.0.6 (manager-resolved) | OpenCode | `alvinunreal/oh-my-opencode-slim` | MIT | Enabled, version resolved by the plugin manager |
+| `envsitter-guard` | 0.1.0 (pinned) | OpenCode | `boxpositron/envsitter-guard` | MIT | Enabled, exact version |
+| `opencode-mem` | 2.34.0 (pinned) | OpenCode | `tickernelz/opencode-mem` | MIT | Enabled, exact version |
 | `openai.chatgpt` (VS Code extension) | 26.1021.22027 | VS Code | Marketplace | unknown | Enabled; older 26.1007 moved to backup |
 | OMP extensions (4 files) | — | OMP | Orca-managed + locally authored | unknown | Loaded from `~/.omp/agent/extensions` |
 

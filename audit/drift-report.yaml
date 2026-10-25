@@ -2,21 +2,14 @@ schema_version: 1
 baseline: local-state/baseline.yaml
 current: local-state/current.yaml
 summary:
-  medium: 2
+  medium: 1
   info: 9
 findings:
-- id: plugin-opencode-envsitter-guard-latest-unknown
+- id: plugin-opencode-oh-my-opencode-slim-unknown
   category: plugin
   type: UNKNOWN
   severity: medium
-  item: opencode:envsitter-guard@latest
-  detail: floating plugin version
-  status: open
-- id: plugin-opencode-opencode-mem-latest-unknown
-  category: plugin
-  type: UNKNOWN
-  severity: medium
-  item: opencode:opencode-mem@latest
+  item: opencode:oh-my-opencode-slim
   detail: floating plugin version
   status: open
 - id: profile-claude-code-profile-component-extra

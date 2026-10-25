@@ -5,7 +5,6 @@ Unresolved items requiring human judgment. No automatic remediation.
 ## High
 
 - [ ] **Identify the intended upstream for the codegraph MCP** — npm codegraph@1.0.0 is unrelated; entry is disabled and preserved.
-- [ ] **Identify the intended upstream for the openagents MCP** — npm agn@0.1.2 is unrelated; entry is disabled and preserved.
 
 ## Medium
 
@@ -15,8 +14,7 @@ Unresolved items requiring human judgment. No automatic remediation.
 - [ ] **Identify the writer/consumer of the Kiro config** — Config is modified but no executable was found.
 - [ ] **Pin the security-guidance failure-path dependency** — Healthy venv is pinned; failed import triggers an unpinned install.
 - [ ] **Decide how divergent skill variants are represented per profile** — code-review, graphify and find-docs have harness-specific variants; profiles currently reference the canonical copy.
-- [ ] **UNKNOWN: opencode:envsitter-guard@latest** — floating plugin version (`drift`)
-- [ ] **UNKNOWN: opencode:opencode-mem@latest** — floating plugin version (`drift`)
+- [ ] **UNKNOWN: opencode:oh-my-opencode-slim** — floating plugin version (`drift`)
 
 ## Low
 

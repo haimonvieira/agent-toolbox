@@ -24,7 +24,7 @@ Full metadata: [inventory/mcps.yaml](../inventory/mcps.yaml). Sanitized examples
 | `teams-mcp` | stdio | OpenCode, OMP | `npx -y @floriscornel/teams-mcp@1.0.1` | Configured, pinned |
 | `codegraph` | stdio | OpenCode (disabled), OMP (disabled) | `codegraph serve --mcp` | Unknown upstream — preserved/disabled |
 | `codebase-memory` | stdio | OpenCode (disabled), OMP | `codebase-memory-mcp` | Installed 0.12.1 |
-| `openagents` | stdio | OpenCode (disabled), OMP (disabled) | `agn mcp-server …` | Unknown upstream — preserved/disabled |
+| `openagents` | — | — | — | **Removed** from both configs on 2026-10-25 (upstream never identified) |
 | `hostinger-api` | stdio | OpenCode (disabled), OMP | `hostinger-api-mcp` | Installed 3.8.1 |
 | `gemini-notebook-mcp` | stdio | OMP | `~/.local/bin/notebooklm-mcp` | Repaired (Linux path) |
 | `starry` | HTTP | Kiro | `http://127.0.0.1:7600/mcp` | Kiro not installed; service down |
@@ -38,7 +38,7 @@ Full metadata: [inventory/mcps.yaml](../inventory/mcps.yaml). Sanitized examples
 | --- | --- | --- | --- |
 | `codegraph` | **Unknown upstream** | No executable. npm `codegraph@1.0.0` is a 2024 package by an unrelated maintainer with no repository metadata. | **Applied:** disabled in OMP with `enabled: false`; OpenCode already disabled. Do not `npx codegraph`. |
 | `codebase-memory` | **Repairable** | npm `codebase-memory-mcp@0.12.1`, MIT, repo `DeusData/codebase-memory-mcp` verified. | **Applied:** installed globally at 0.12.1; binary present. Runtime not started. |
-| `openagents` | **Unknown upstream** | No `agn` executable. npm `agn@0.1.2` is an unrelated 2022 package; no OpenAgents CLI found. | **Applied:** disabled in OMP with `enabled: false`; preserved for identification. |
+| `openagents` | **Removed** | No `agn` executable; npm `agn@0.1.2` is unrelated. | Entry deleted from the OpenCode and OMP configs on 2026-10-25. Backup in `~/.agent-toolbox-backups/20261025-phase5/`. |
 | `hostinger-api` | **Repairable** | npm `hostinger-api-mcp@3.8.1`, MIT, repo `hostinger/api-mcp-server` verified. | **Applied:** installed globally at 3.8.1; binary present. Runtime not started. |
 | `gemini-notebook-mcp` | **Stale config** | Config pointed to a Windows `.EXE`; Linux binary exists at `~/.local/bin/notebooklm-mcp` (uv tool 0.15.7). | **Applied:** command replaced with the Linux path; args preserved. |
 | `browseros-neo` | **Requires manual service** | Port 9010 closed at audit time. | Start BrowserOS. |

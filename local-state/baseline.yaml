@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: '2026-10-25T17:43:18+00:00'
+generated_at: '2026-10-25T21:42:45+00:00'
 host:
   os: Linux
   arch: x86_64
@@ -5946,19 +5946,6 @@ mcps:
   enabled: true
   environment_variables: []
   dynamic: false
-- name: openagents
-  harness: omp
-  config_path: ~/.omp/agent/mcp.json
-  transport: stdio
-  command_display: agn
-  package: null
-  version_pin: null
-  url: null
-  url_has_credentials: false
-  enabled: false
-  environment_variables:
-  - OA_WORKSPACE_TOKEN
-  dynamic: false
 - name: pencil
   harness: omp
   config_path: ~/.omp/agent/mcp.json
@@ -6129,19 +6116,6 @@ mcps:
   enabled: true
   environment_variables: []
   dynamic: false
-- name: openagents
-  harness: opencode
-  config_path: ~/.config/opencode/opencode.json
-  transport: local
-  command_display: agn
-  package: null
-  version_pin: null
-  url: null
-  url_has_credentials: false
-  enabled: false
-  environment_variables:
-  - OA_WORKSPACE_TOKEN
-  dynamic: false
 - name: pencil
   harness: opencode
   config_path: ~/.config/opencode/opencode.json
@@ -6167,13 +6141,15 @@ mcps:
   environment_variables: []
   dynamic: false
 plugins:
-- name: ponytail@ponytail
+- name: ponytail
+  spec: ponytail@ponytail
   harness: claude
   version: 5.3.2
   scope: user
   install_path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2
   enabled: true
   managed_by: plugin manager
+  floating: false
 - name: ponytail@ponytail
   harness: codex
   version: null
@@ -6181,107 +6157,135 @@ plugins:
   install_path: null
   enabled: true
   managed_by: plugin manager
-- name: 42crunch-api-security-testing@claude-plugins-official
+- name: 42crunch-api-security-testing
+  spec: 42crunch-api-security-testing@claude-plugins-official
   harness: omp
   version: 1.5.5
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___42crunch-api-security-testing___1.5.5
   enabled: true
   managed_by: plugin manager
-- name: best-of@omp-best-of
+  floating: false
+- name: best-of
+  spec: best-of@omp-best-of
   harness: omp
   version: 0.2.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/omp-best-of___best-of___0.2.0
   enabled: true
   managed_by: plugin manager
-- name: coderabbit@claude-plugins-official
+  floating: false
+- name: coderabbit
+  spec: coderabbit@claude-plugins-official
   harness: omp
   version: 1.1.1
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___coderabbit___1.1.1
   enabled: true
   managed_by: plugin manager
-- name: context7@claude-plugins-official
+  floating: false
+- name: context7
+  spec: context7@claude-plugins-official
   harness: omp
   version: 0.0.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___context7___0.0.0
   enabled: true
   managed_by: plugin manager
-- name: feature-dev@claude-plugins-official
+  floating: false
+- name: feature-dev
+  spec: feature-dev@claude-plugins-official
   harness: omp
   version: 0.0.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___feature-dev___0.0.0
   enabled: true
   managed_by: plugin manager
-- name: github@claude-plugins-official
+  floating: false
+- name: github
+  spec: github@claude-plugins-official
   harness: omp
   version: 0.0.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___github___0.0.0
   enabled: true
   managed_by: plugin manager
-- name: lethe@teimurjan
+  floating: false
+- name: lethe
+  spec: lethe@teimurjan
   harness: omp
   version: 0.19.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/teimurjan___lethe___0.19.0
   enabled: true
   managed_by: plugin manager
-- name: ponytail@ponytail
+  floating: false
+- name: ponytail
+  spec: ponytail@ponytail
   harness: omp
   version: 5.3.2
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2
   enabled: true
   managed_by: plugin manager
-- name: security-guidance@claude-plugins-official
+  floating: false
+- name: security-guidance
+  spec: security-guidance@claude-plugins-official
   harness: omp
   version: 2.0.15
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___security-guidance___2.0.15
   enabled: true
   managed_by: plugin manager
-- name: sonarqube@claude-plugins-official
+  floating: false
+- name: sonarqube
+  spec: sonarqube@claude-plugins-official
   harness: omp
   version: 2.6.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/claude-plugins-official___sonarqube___2.6.0
   enabled: true
   managed_by: plugin manager
-- name: superpowers@superpowers-marketplace
+  floating: false
+- name: superpowers
+  spec: superpowers@superpowers-marketplace
   harness: omp
   version: 7.0.0
   scope: user
   install_path: ~/.omp/plugins/cache/plugins/superpowers-marketplace___superpowers___7.0.0
   enabled: true
   managed_by: plugin manager
-- name: envsitter-guard@latest
+  floating: false
+- name: envsitter-guard
+  spec: envsitter-guard@0.1.0
   harness: opencode
   version: 0.1.0
-  scope: user
-  install_path: ~/.cache/opencode/npm
-  enabled: true
-  managed_by: opencode bun resolver
-  floating: true
-- name: oh-my-opencode-slim
-  harness: opencode
-  version: 3.0.6
+  pinned_version: 0.1.0
   scope: user
   install_path: ~/.cache/opencode/npm
   enabled: true
   managed_by: opencode bun resolver
   floating: false
-- name: opencode-mem@latest
+- name: oh-my-opencode-slim
+  spec: oh-my-opencode-slim
   harness: opencode
-  version: 2.34.0
+  version: 3.0.6
+  pinned_version: null
   scope: user
   install_path: ~/.cache/opencode/npm
   enabled: true
   managed_by: opencode bun resolver
   floating: true
+- name: opencode-mem
+  spec: opencode-mem@2.34.0
+  harness: opencode
+  version: 2.34.0
+  pinned_version: 2.34.0
+  scope: user
+  install_path: ~/.cache/opencode/npm
+  enabled: true
+  managed_by: opencode bun resolver
+  floating: false
 - name: chatgpt
   harness: vscode
   version: 26.1021.22027
@@ -6537,7 +6541,6 @@ configs:
   credential_fields:
   - mcp.servers.hostinger-api.environment.HOSTINGER_API_TOKEN
   - mcp.servers.obsidian-mcp-connector.headers.Authorization
-  - mcp.servers.openagents.environment.OA_WORKSPACE_TOKEN
 - path: ~/.claude/settings.json
   exists: true
   symlink: false
@@ -6555,7 +6558,6 @@ configs:
   credential_fields:
   - mcpServers.hostinger-api.env.HOSTINGER_API_TOKEN
   - mcpServers.obsidian-mcp-connector.headers.Authorization
-  - mcpServers.openagents.env.OA_WORKSPACE_TOKEN
 - path: ~/.kiro/settings/mcp.json
   exists: true
   symlink: false

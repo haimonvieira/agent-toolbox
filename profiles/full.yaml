@@ -5,282 +5,272 @@ profile_version: 1
 status: active
 scope: public
 extends:
-  - base
-description: >-
-  Every component of the local environment that has a verified upstream and a
-  documented install path. Unknown upstreams, orphaned configurations and
-  private tools are excluded from "required" and listed as unresolved.
+- base
+description: Every component of the local environment that has a verified upstream and a documented install
+  path. Unknown upstreams, orphaned configurations and private tools are excluded from "required" and
+  listed as unresolved.
 harnesses:
   required:
-    - ref: harness-opencode
-      ownership: directly_configured
-      version: "2.1.4"
-    - ref: harness-claude-code
-      ownership: directly_configured
-      version: "2.1.309"
-    - ref: harness-codex-cli
-      ownership: directly_configured
-      version: "0.164.0"
-    - ref: harness-oh-my-pi-omp
-      ownership: directly_configured
-      version: "18.12.6"
-    - ref: harness-freebuff
-      ownership: directly_configured
-      version: "0.2.34"
-    - ref: harness-zed
-      ownership: directly_configured
-      version: "1.25.3"
-    - ref: harness-vs-code-chatgpt-extension
-      ownership: directly_configured
-      note: The executable reports the editor version; the extension version is tracked separately.
+  - ref: harness-opencode
+    ownership: directly_configured
+    version: 2.1.4
+  - ref: harness-claude-code
+    ownership: directly_configured
+    version: 2.1.309
+  - ref: harness-codex-cli
+    ownership: directly_configured
+    version: 0.164.0
+  - ref: harness-oh-my-pi-omp
+    ownership: directly_configured
+    version: 18.12.6
+  - ref: harness-freebuff
+    ownership: directly_configured
+    version: 0.2.34
+  - ref: harness-zed
+    ownership: directly_configured
+    version: 1.25.3
+  - ref: harness-vs-code-chatgpt-extension
+    ownership: directly_configured
+    note: The executable reports the editor version; the extension version is tracked separately.
   optional:
-    - ref: harness-delta
-      ownership: directly_configured
-      reason: Installed but upstream not verified.
+  - ref: harness-delta
+    ownership: directly_configured
+    reason: Installed but upstream not verified.
 plugins:
   required:
-    - ref: plugin-ponytail
-      ownership: directly_configured
-      version: "5.3.2"
-    - ref: plugin-superpowers
-      ownership: plugin_managed
-      version: "7.0.0"
-    - ref: plugin-security-guidance
-      ownership: plugin_managed
-      version: "2.0.15"
-    - ref: plugin-sonarqube
-      ownership: plugin_managed
-      version: "2.6.0"
-    - ref: plugin-coderabbit
-      ownership: plugin_managed
-      version: "1.1.1"
-    - ref: plugin-lethe
-      ownership: plugin_managed
-      version: "0.19.0"
-    - ref: plugin-best-of
-      ownership: plugin_managed
-      version: "0.2.0"
-    - ref: plugin-feature-dev
-      ownership: plugin_managed
-      version: "0.0.0"
-    - ref: plugin-context7
-      ownership: plugin_managed
-      version: "0.0.0"
-    - ref: plugin-42crunch-api-security-testing
-      ownership: plugin_managed
-      version: "1.5.5"
-    - ref: plugin-oh-my-opencode-slim
-      ownership: directly_configured
-      version: "3.0.6"
-    - ref: plugin-envsitter-guard
-      ownership: directly_configured
-      version: "0.1.0"
-    - ref: plugin-opencode-mem
-      ownership: directly_configured
-      version: "2.34.0"
-      note: The VS Code ChatGPT extension is covered by harness-vs-code-chatgpt-extension.
+  - ref: plugin-ponytail
+    ownership: directly_configured
+    version: 5.3.2
+  - ref: plugin-superpowers
+    ownership: plugin_managed
+    version: 7.0.0
+  - ref: plugin-security-guidance
+    ownership: plugin_managed
+    version: 2.0.15
+  - ref: plugin-sonarqube
+    ownership: plugin_managed
+    version: 2.6.0
+  - ref: plugin-coderabbit
+    ownership: plugin_managed
+    version: 1.1.1
+  - ref: plugin-lethe
+    ownership: plugin_managed
+    version: 0.19.0
+  - ref: plugin-best-of
+    ownership: plugin_managed
+    version: 0.2.0
+  - ref: plugin-feature-dev
+    ownership: plugin_managed
+    version: 0.0.0
+  - ref: plugin-context7
+    ownership: plugin_managed
+    version: 0.0.0
+  - ref: plugin-42crunch-api-security-testing
+    ownership: plugin_managed
+    version: 1.5.5
+  - ref: plugin-oh-my-opencode-slim
+    ownership: directly_configured
+    version: 3.0.6
+    note: Version is resolved by the OpenCode plugin manager; pinning was left as a separate decision.
+  - ref: plugin-envsitter-guard
+    ownership: directly_configured
+    version: 0.1.0
+  - ref: plugin-opencode-mem
+    ownership: directly_configured
+    version: 2.34.0
+    note: The VS Code ChatGPT extension is covered by harness-vs-code-chatgpt-extension.
   optional:
-    - ref: plugin-github
-      ownership: plugin_managed
-      version: "0.0.0"
-      reason: Install directory is empty; treat as not usable.
+  - ref: plugin-github
+    ownership: plugin_managed
+    version: 0.0.0
+    reason: Install directory is empty; treat as not usable.
 mcps:
   required:
-    - ref: mcp-pencil
-      ownership: directly_configured
-    - ref: mcp-browseros-neo
-      ownership: directly_configured
-    - ref: mcp-cloudflare-api
-      ownership: directly_configured
-    - ref: mcp-figma
-      ownership: directly_configured
-    - ref: mcp-insomnia
-      ownership: directly_configured
-      version: "0.8.2"
-    - ref: mcp-teams-mcp
-      ownership: directly_configured
-      version: "1.0.1"
-    - ref: mcp-aas-core
-      ownership: directly_configured
-      version: "19.15.0"
-    - ref: mcp-codebase-memory
-      ownership: directly_configured
-      version: "0.12.1"
-    - ref: mcp-hostinger-api
-      ownership: directly_configured
-      version: "3.8.1"
-    - ref: mcp-gemini-notebook-mcp
-      ownership: directly_configured
-      version: "0.15.7"
+  - ref: mcp-pencil
+    ownership: directly_configured
+  - ref: mcp-browseros-neo
+    ownership: directly_configured
+  - ref: mcp-cloudflare-api
+    ownership: directly_configured
+  - ref: mcp-figma
+    ownership: directly_configured
+  - ref: mcp-insomnia
+    ownership: directly_configured
+    version: 0.8.2
+  - ref: mcp-teams-mcp
+    ownership: directly_configured
+    version: 1.0.1
+  - ref: mcp-aas-core
+    ownership: directly_configured
+    version: 19.15.0
+  - ref: mcp-codebase-memory
+    ownership: directly_configured
+    version: 0.12.1
+  - ref: mcp-hostinger-api
+    ownership: directly_configured
+    version: 3.8.1
+  - ref: mcp-gemini-notebook-mcp
+    ownership: directly_configured
+    version: 0.15.7
   optional:
-    - ref: mcp-obsidian-mcp-connector
-      ownership: directly_configured
-    - ref: mcp-graphify
-      ownership: directly_configured
-      note: Third-party remote endpoint; upstream not fully verified.
+  - ref: mcp-obsidian-mcp-connector
+    ownership: directly_configured
+  - ref: mcp-graphify
+    ownership: directly_configured
+    note: Third-party remote endpoint; upstream not fully verified.
   dynamic:
-    - ref: mcp-context7
-      ownership: plugin_injected
-      managed_by: plugin-oh-my-opencode-slim
-    - ref: mcp-gh-grep
-      ownership: plugin_injected
-      managed_by: plugin-oh-my-opencode-slim
-    - ref: mcp-omgskills
-      ownership: plugin_injected
-      managed_by: plugin-oh-my-opencode-slim
+  - ref: mcp-context7
+    ownership: plugin_injected
+    managed_by: plugin-oh-my-opencode-slim
+  - ref: mcp-gh-grep
+    ownership: plugin_injected
+    managed_by: plugin-oh-my-opencode-slim
+  - ref: mcp-omgskills
+    ownership: plugin_injected
+    managed_by: plugin-oh-my-opencode-slim
   unresolved:
-    - ref: mcp-codegraph
-      ownership: unresolved
-      reason: npm package identity unrelated; disabled.
-    - ref: mcp-openagents
-      ownership: unresolved
-      reason: CLI upstream unidentified; disabled.
-    - ref: mcp-doop
-      ownership: unresolved
-      reason: Third-party service with unknown purpose.
-    - ref: mcp-starry
-      ownership: unresolved
-      reason: Kiro is not installed; no confirmed consumer.
-skills:
-  canonical_shared:
-    - ref: skill-code-review
-      ownership: canonical_shared
-    - ref: skill-autofix
-      ownership: canonical_shared
-    - ref: skill-graphify
-      ownership: canonical_shared
-      reason: Harness-specific variants exist; not merged.
-    - ref: skill-find-docs
-      ownership: canonical_shared
-      reason: Harness-specific variants exist; not merged.
-  plugin_managed:
-    - ref: skill-code-review-plugin
-      ownership: plugin_managed
-    - ref: skill-autofix-plugin
-      ownership: plugin_managed
-  built_in:
-    - ref: skill-imagegen
-      ownership: built_in
-      managed_by: harness-codex-cli
-    - ref: skill-openai-docs
-      ownership: built_in
-      managed_by: harness-codex-cli
-    - ref: skill-review-agent
-      ownership: built_in
-      managed_by: harness-codex-cli
-    - ref: skill-skill-creator-built-in
-      ownership: built_in
-      managed_by: harness-codex-cli
-    - ref: skill-skill-installer
-      ownership: built_in
-      managed_by: harness-codex-cli
-hooks:
-  plugin_managed:
-    - ref: hook-ponytail-sessionstart-claude-code
-      ownership: plugin_managed
-      managed_by: plugin-ponytail
-    - ref: hook-ponytail-subagentstart-claude-code
-      ownership: plugin_managed
-      managed_by: plugin-ponytail
-    - ref: hook-ponytail-userpromptsubmit-claude-code
-      ownership: plugin_managed
-      managed_by: plugin-ponytail
-    - ref: hook-ponytail-hooks-codex
-      ownership: plugin_managed
-      managed_by: plugin-ponytail
-    - ref: hook-security-guidance-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-userpromptsubmit
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-posttooluse
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-security-guidance-stop
-      ownership: plugin_managed
-      managed_by: plugin-security-guidance
-    - ref: hook-sonarqube-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-sonarqube
-    - ref: hook-superpowers-sessionstart
-      ownership: plugin_managed
-      managed_by: plugin-superpowers
-    - ref: hook-lethe-refresh-index
-      ownership: plugin_managed
-      managed_by: plugin-lethe
-    - ref: hook-orca-agent-status-extension
-      ownership: plugin_managed
-      managed_by: plugin-orca-agent-status
-    - ref: hook-orca-prefill-extension
-      ownership: plugin_managed
-      managed_by: plugin-orca-prefill
-    - ref: hook-pr-template-guard-extension
-      ownership: directly_configured
-      managed_by: plugin-pr-template-guard
-  project_local:
-    - ref: hook-codex-project-hooks-team-lead
-      ownership: project_local
-      reason: Private project on an external volume; inactive while unmounted.
-environment_variables:
-  optional:
-    - name: CONTEXT7_API_KEY
-      required_by:
-        - mcp-context7
-      reason: Optional higher Context7 quota.
-    - name: HOSTINGER_API_TOKEN
-      required_by:
-        - mcp-hostinger-api
-      reason: Token for the Hostinger API MCP.
-    - name: OA_WORKSPACE_TOKEN
-      required_by:
-        - mcp-openagents
-      reason: Only needed if the unresolved OpenAgents MCP is enabled.
-requirements:
-  commands:
-    - opencode
-    - claude
-    - codex
-    - omp
-    - freebuff
-    - zed
-  files:
-    - ~/.config/opencode/opencode.json
-    - ~/.claude/settings.json
-    - ~/.codex/config.toml
-    - ~/.omp/agent/mcp.json
-  directories:
-    - ~/.agents/skills
-    - ~/.claude/skills
-    - ~/.omp/agent/managed-skills
-external_dependencies:
-  - ref: external-nvme
-    required: false
-    reason: Project-local Codex hooks and trust entries only.
-    scope: private
-floating_versions:
-  - plugin-envsitter-guard
-  - plugin-opencode-mem
-platforms:
-  - linux
-unresolved:
   - ref: mcp-codegraph
-    reason: Unknown upstream; disabled and preserved.
-  - ref: mcp-openagents
-    reason: Unknown upstream; disabled and preserved.
+    ownership: unresolved
+    reason: npm package identity unrelated; disabled.
   - ref: mcp-doop
+    ownership: unresolved
     reason: Third-party service with unknown purpose.
   - ref: mcp-starry
+    ownership: unresolved
     reason: Kiro is not installed; no confirmed consumer.
-  - ref: harness-kiro
-    reason: Configuration exists without an executable.
-  - ref: harness-gemini-antigravity
-    reason: Configuration exists without an executable.
-  - ref: harness-github-copilot-cli
-    reason: VS Code shim only; the CLI is not installed.
-notes: >-
-  This profile intentionally excludes unknown-upstream MCPs, orphaned harness
-  configurations and unverified private tools from "required". The canonical skill
-  store, plugin caches and built-in skills remain separate locations.
+skills:
+  canonical_shared:
+  - ref: skill-code-review
+    ownership: canonical_shared
+  - ref: skill-autofix
+    ownership: canonical_shared
+  - ref: skill-graphify
+    ownership: canonical_shared
+    reason: Harness-specific variants exist; not merged.
+  - ref: skill-find-docs
+    ownership: canonical_shared
+    reason: Harness-specific variants exist; not merged.
+  plugin_managed:
+  - ref: skill-code-review-plugin
+    ownership: plugin_managed
+  - ref: skill-autofix-plugin
+    ownership: plugin_managed
+  built_in:
+  - ref: skill-imagegen
+    ownership: built_in
+    managed_by: harness-codex-cli
+  - ref: skill-openai-docs
+    ownership: built_in
+    managed_by: harness-codex-cli
+  - ref: skill-review-agent
+    ownership: built_in
+    managed_by: harness-codex-cli
+  - ref: skill-skill-creator-built-in
+    ownership: built_in
+    managed_by: harness-codex-cli
+  - ref: skill-skill-installer
+    ownership: built_in
+    managed_by: harness-codex-cli
+hooks:
+  plugin_managed:
+  - ref: hook-ponytail-sessionstart-claude-code
+    ownership: plugin_managed
+    managed_by: plugin-ponytail
+  - ref: hook-ponytail-subagentstart-claude-code
+    ownership: plugin_managed
+    managed_by: plugin-ponytail
+  - ref: hook-ponytail-userpromptsubmit-claude-code
+    ownership: plugin_managed
+    managed_by: plugin-ponytail
+  - ref: hook-ponytail-hooks-codex
+    ownership: plugin_managed
+    managed_by: plugin-ponytail
+  - ref: hook-security-guidance-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-userpromptsubmit
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-posttooluse
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-security-guidance-stop
+    ownership: plugin_managed
+    managed_by: plugin-security-guidance
+  - ref: hook-sonarqube-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-sonarqube
+  - ref: hook-superpowers-sessionstart
+    ownership: plugin_managed
+    managed_by: plugin-superpowers
+  - ref: hook-lethe-refresh-index
+    ownership: plugin_managed
+    managed_by: plugin-lethe
+  - ref: hook-orca-agent-status-extension
+    ownership: plugin_managed
+    managed_by: plugin-orca-agent-status
+  - ref: hook-orca-prefill-extension
+    ownership: plugin_managed
+    managed_by: plugin-orca-prefill
+  - ref: hook-pr-template-guard-extension
+    ownership: directly_configured
+    managed_by: plugin-pr-template-guard
+  project_local:
+  - ref: hook-codex-project-hooks-team-lead
+    ownership: project_local
+    reason: Private project on an external volume; inactive while unmounted.
+environment_variables:
+  optional:
+  - name: CONTEXT7_API_KEY
+    required_by:
+    - mcp-context7
+    reason: Optional higher Context7 quota.
+  - name: HOSTINGER_API_TOKEN
+    required_by:
+    - mcp-hostinger-api
+    reason: Token for the Hostinger API MCP.
+requirements:
+  commands:
+  - opencode
+  - claude
+  - codex
+  - omp
+  - freebuff
+  - zed
+  files:
+  - ~/.config/opencode/opencode.json
+  - ~/.claude/settings.json
+  - ~/.codex/config.toml
+  - ~/.omp/agent/mcp.json
+  directories:
+  - ~/.agents/skills
+  - ~/.claude/skills
+  - ~/.omp/agent/managed-skills
+external_dependencies:
+- ref: external-nvme
+  required: false
+  reason: Project-local Codex hooks and trust entries only.
+  scope: private
+floating_versions:
+- plugin-oh-my-opencode-slim
+platforms:
+- linux
+unresolved:
+- ref: mcp-codegraph
+  reason: Unknown upstream; disabled and preserved.
+- ref: mcp-doop
+  reason: Third-party service with unknown purpose.
+- ref: mcp-starry
+  reason: Kiro is not installed; no confirmed consumer.
+- ref: harness-kiro
+  reason: Configuration exists without an executable.
+- ref: harness-gemini-antigravity
+  reason: Configuration exists without an executable.
+- ref: harness-github-copilot-cli
+  reason: VS Code shim only; the CLI is not installed.
+notes: This profile intentionally excludes unknown-upstream MCPs, orphaned harness configurations and
+  unverified private tools from "required". The canonical skill store, plugin caches and built-in skills
+  remain separate locations. The openagents MCP entry was removed on 2026-10-25 and the OpenCode npm plugins
+  are pinned to exact versions.
 evidence_level: Verified locally
-last_verified: "2026-10-25"
+last_verified: '2026-10-25'

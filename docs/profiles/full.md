@@ -56,7 +56,7 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
 ## Environment variables (names only)
 
 - **Required:** _none_
-- **Optional:** `CONTEXT7_API_KEY`, `HOSTINGER_API_TOKEN`, `OA_WORKSPACE_TOKEN`
+- **Optional:** `CONTEXT7_API_KEY`, `HOSTINGER_API_TOKEN`
 
 ## Requirements
 
@@ -72,7 +72,7 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
 
 - **Status:** `partially_reproducible`
 - **Reasons:**
-  - 7 component(s) excluded as unresolved
+  - 6 component(s) excluded as unresolved
   - harness-opencode: upstream not verified
   - harness-claude-code: upstream not verified
   - harness-codex-cli: upstream not verified
@@ -108,11 +108,11 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
   - mcp-hostinger-api: needs an installed binary
   - mcp-gemini-notebook-mcp: upstream not verified
   - mcp-gemini-notebook-mcp: needs a locally installed binary
-  - 2 floating version(s)
+  - 1 floating version(s)
 
 ## Notes
 
-This profile intentionally excludes unknown-upstream MCPs, orphaned harness configurations and unverified private tools from "required". The canonical skill store, plugin caches and built-in skills remain separate locations.
+This profile intentionally excludes unknown-upstream MCPs, orphaned harness configurations and unverified private tools from "required". The canonical skill store, plugin caches and built-in skills remain separate locations. The openagents MCP entry was removed on 2026-10-25 and the OpenCode npm plugins are pinned to exact versions.
 
 ## Related documentation
 

@@ -8,6 +8,10 @@
 
 > Runtime verification of third-party components: **not performed for safety**.
 
+> **Phase 6 update (2026-10-25):** the `openagents` MCP entry was removed from both harness
+> configs (upstream never identified). `codegraph` was deliberately preserved and stays disabled.
+> The two floating OpenCode plugins were pinned to exact versions.
+
 > **Phase 2 update (2026-10-25):** the four credential configs reviewed in C1 are now mode `600`
 > (they were `644`/`777`/`664` in Phase 1). No rotation is indicated by current evidence. H1 entries
 > are classified in `docs/mcps.md` (two repairable, one stale path, two unknown upstream). Remote
