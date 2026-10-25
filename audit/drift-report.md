@@ -1,6 +1,5 @@
 # Drift report
 
-- Generated: 2026-10-25T17:11:46+00:00
 - Baseline: `local-state/baseline.yaml`
 - Current: `local-state/current.yaml`
 - Findings: 2

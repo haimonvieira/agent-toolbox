@@ -1270,7 +1270,6 @@ def write_reports(findings: list[dict], current: dict, policy: dict) -> None:
     # YAML
     write_yaml(REPORTS / "drift-report.yaml", {
         "schema_version": SCHEMA_VERSION,
-        "generated_at": current.get("generated_at"),
         "baseline": "local-state/baseline.yaml",
         "current": "local-state/current.yaml",
         "summary": dict(Counter(f["severity"] for f in findings)),
@@ -1287,7 +1286,6 @@ def write_reports(findings: list[dict], current: dict, policy: dict) -> None:
     lines = [
         "# Drift report",
         "",
-        f"- Generated: {current.get('generated_at')}",
         f"- Baseline: `local-state/baseline.yaml`",
         f"- Current: `local-state/current.yaml`",
         f"- Findings: {len(findings)}",
