@@ -119,3 +119,5 @@ phase4:
     quick: ./scripts/audit.sh --quick
     verify: ./scripts/verify.sh
     links: ./scripts/check-links.sh
+  commit: cb94203
+  pull_request: '#2'

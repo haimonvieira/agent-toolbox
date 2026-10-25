@@ -95,6 +95,7 @@ allows it. If the push or PR fails, the branch remains local and the failure is 
 | Local state sanitized | Pass; managed skill names redacted, no credential values |
 | Local machine modified by Phase 4 audit | No |
 | CI workflow | `.github/workflows/validate-toolbox.yml`; repository-only |
+| Phase 4 commit / PR | `cb94203` / PR #2 |
 
 Exit-code policy: medium findings do not fail the audit; high/critical do. The two medium findings are
 advisory (`envsitter-guard@latest`, `opencode-mem@latest`).
