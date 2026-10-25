@@ -136,3 +136,21 @@ This is a personal audit. Review these items before making it public:
 - Licenses of skills whose local copy declares none.
 
 These are marked `Runtime verification: not performed for safety` where relevant.
+
+
+## Automated repository checks
+
+`./scripts/verify.sh` runs repository-only checks: schema, YAML/JSON/TOML, internal links,
+duplicate inventory names, absolute home paths, secret patterns, and freshness warnings. Secret
+findings are masked:
+
+```text
+inventory/mcps.yaml:42: bearer-value [REDACTED]
+```
+
+`./scripts/audit.sh` adds a read-only local collection. It never starts MCPs, runs hooks, loads
+plugins, or executes skill scripts. CI runs only `verify.sh` and tests; it cannot inspect the local
+machine.
+
+The optional private-term scanner reads `.local-state/private-terms.txt` (gitignored). CI does not
+have that file and therefore cannot check private organization names.

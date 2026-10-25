@@ -1,0 +1,49 @@
+schema_version: 1
+# Drift policy for the read-only local audit.
+# Change policy here, not inside scripts.
+
+ignore:
+  - local-state/current.yaml:generated_at
+  - local-state/baseline.yaml:generated_at
+  - "*.cache"
+
+expected_dynamic:
+  - item: context7
+    managed_by: oh-my-opencode-slim
+  - item: gh_grep
+    managed_by: oh-my-opencode-slim
+  - item: omgskills
+    managed_by: oh-my-opencode-slim
+  - item: memory
+    managed_by: oh-my-opencode-slim
+    evidence_level: inferred
+
+severity:
+  critical: critical
+  high: high
+  medium: medium
+  low: low
+  info: info
+  new: low
+  removed: medium
+  version_changed: medium
+  path_changed: medium
+  config_changed: medium
+  enabled_changed: high
+  broken_reference: high
+  provenance_changed: medium
+  duplicate_changed: low
+  unknown: high
+  unknown_upstream: high
+  floating_version: medium
+  credential_mode: critical
+
+exit_on:
+  - critical
+  - high
+
+freshness_days: 90
+
+# Optional local-only file (gitignored) with one private term per line.
+# CI has no access to it and therefore cannot check private names.
+private_terms_file: .local-state/private-terms.txt

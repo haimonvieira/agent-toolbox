@@ -85,3 +85,9 @@ shell history, unrelated repositories, and any recursive scan of the home direct
 3. [skills.md](skills.md), [mcps.md](mcps.md), [plugins.md](plugins.md), [hooks.md](hooks.md).
 4. [installation.md](installation.md) and [updating.md](updating.md) — rebuild and maintain.
 5. [security.md](security.md) — secret handling and pre-publication checks.
+
+## Maintenance
+
+The inventory is not static. `./scripts/audit.sh` performs a read-only local collection and compares
+it with `local-state/baseline.yaml`; `./scripts/verify.sh` checks repository data only. Reports land
+in `audit/drift-report.*` and `audit/backlog.md`. See [self-audit.md](self-audit.md).

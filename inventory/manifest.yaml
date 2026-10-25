@@ -1,9 +1,9 @@
 repository:
   name: agent-toolbox
   purpose: Personal, reproducible map of the AI coding-agent tooling installed on this machine.
-  license: not specified
-  canonical_branch: docs/toolbox-audit (audit branch; no commit/push performed)
-  generated_by: read-only local audit + manual documentation
+  license: MIT (existing repository LICENSE)
+  canonical_branch: main
+  generated_by: read-only local audit + self-audit collector
 snapshot:
   started_at: '2026-10-25T10:55:00-03:00'
   finished_at: '2026-10-25T11:20:00-03:00'
@@ -26,8 +26,7 @@ snapshot:
 counts:
   harnesses_installed: 8
   harnesses_orphaned_config: 3
-  skills_global_agents_dir: 349
-  skills_claude_duplicate_dir: 14
+  skills_global_agents_dir: 356
   skills_omp_managed_local: 55
   skills_plugin_provided: 40
   skills_project_local: 19
@@ -35,9 +34,12 @@ counts:
   skills_with_executable_scripts: 62
   mcp_servers_distinct: 19
   mcp_servers_broken: 2
-  plugins_installed: 17
+  plugins_installed: 19
   hook_sites_documented: 17
   harnesses_shim_only: 1
+  skills_claude_entries: 347
+  skills_claude_symlinks: 333
+  skills_claude_real_dirs: 14
 inventories:
   harnesses: inventory/harnesses.yaml
   skills: inventory/skills.yaml
@@ -67,6 +69,7 @@ documents:
   phase3_start: audit/phase3-start.md
   phase3_report: audit/phase3-remediation-report.md
   skill_full_tree: audit/skill-full-tree-comparison.md
+  self_audit: docs/self-audit.md
 safety:
   secrets_committed: none found (see scripts/verify.sh secret scan)
   third_party_code_vendored: none
@@ -103,3 +106,18 @@ phase3:
   commit: 06504dd
   pull_request: '#1'
   push: docs/toolbox-audit (no force)
+schema_version: 1
+phase4:
+  date: '2026-10-25'
+  local_collector: scripts/audit.py
+  baseline: local-state/baseline.yaml
+  policy: config/drift-policy.yaml
+  ci: .github/workflows/validate-toolbox.yml
+  baseline_skills: 356
+  commands:
+    full: ./scripts/audit.sh
+    quick: ./scripts/audit.sh --quick
+    verify: ./scripts/verify.sh
+    links: ./scripts/check-links.sh
+  commit: cb94203
+  pull_request: '#2'

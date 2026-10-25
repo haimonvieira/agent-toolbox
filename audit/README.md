@@ -24,7 +24,7 @@ a generic list of tools.
 | [Harnesses](../docs/harnesses.md) | OpenCode, Claude Code, Codex CLI, OMP, freebuff, Zed, Delta, VS Code, plus orphaned Kiro/Gemini/Copilot config |
 | [Skills](../docs/skills.md) | Global `~/.agents/skills` layout, Claude duplicate copy, OMP managed skills, plugin skills |
 | [MCP servers](../docs/mcps.md) | 19 configured servers: transport, command, provenance, duplicates, broken executables |
-| [Plugins](../docs/plugins.md) | 17 plugin/extension entries across five harnesses, plus stale caches |
+| [Plugins](../docs/plugins.md) | 19 plugin/extension entries across five harnesses, plus stale caches |
 | [Hooks](../docs/hooks.md) | Plugin lifecycle hooks, OMP extensions, Git hook status, orphaned project hooks |
 | [Installation](../docs/installation.md) | Reproducible procedures by category, with verification and removal |
 | [Updating](../docs/updating.md) | Safe update matrix and pinning policy |
@@ -74,9 +74,9 @@ Orphaned configuration without a locally installed executable: **Kiro**, **Gemin
 
 ## Skills
 
-- `~/.agents/skills` is the primary global skill store: 351 entries at snapshot (352 at final check), 192 tracked by the
-  `skills` CLI lock file, 159 with unknown provenance at snapshot (161 at final check).
-- `~/.claude/skills` is a **byte-identical duplicate** of most of that tree (269 MB each).
+- `~/.agents/skills` is the primary global skill store: 356 directories at Phase 4, 192 tracked by the
+  `skills` CLI lock file, 161 with unknown provenance.
+- `~/.claude/skills` now holds **333 symlinks** to the canonical store plus 14 real directories.
 - `~/.omp/agent/managed-skills` holds 55 locally authored, project-specific skills.
 - Installed plugins provide another 40 skills, with overlap against the global store.
 
@@ -92,7 +92,7 @@ time (`browseros-neo`, `obsidian-mcp-connector`, `starry`). Details in
 
 ## Plugins
 
-13 plugin bundles plus 4 OMP extension files. `ponytail` is installed in Claude Code, Codex, and OMP.
+15 plugin bundles plus 4 OMP extension files. `ponytail` is installed in Claude Code, Codex, and OMP.
 OMP carries the largest set (11), including two superseded cache versions and a plugin with a
 source-available license. Details in [docs/plugins.md](../docs/plugins.md).
 
@@ -162,6 +162,7 @@ change was performed. Integration is **Gate F** and is blocked until private nam
 | Runtime verification of MCPs/hooks/plugins | **Not performed for safety** |
 | Repository license | Existing MIT `LICENSE` and Apache-2.0 `NOTICE` preserved |
 | Public-release review | **Complete** — private names sanitized; checks passed |
+| Self-audit | **Active** — `./scripts/audit.sh` (full) and `./scripts/verify.sh` (repo-only) |
 
 ## Disclaimer
 
