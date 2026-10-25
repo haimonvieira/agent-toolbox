@@ -578,3 +578,28 @@ runs. It is additive to the curated catalog above and does not replace it.
 - [Harness notes](docs/harnesses.md) · [Skills](docs/skills.md) · [MCPs](docs/mcps.md) · [Plugins](docs/plugins.md) · [Hooks](docs/hooks.md)
 
 No secrets, private project names, or local absolute paths are included.
+
+## Self-audit
+
+The repository can compare its documented inventory with the real local agent environment and
+produce deterministic drift reports.
+
+```bash
+./scripts/audit.sh                  # full read-only local audit
+./scripts/audit.sh --quick          # fast metadata/config check
+./scripts/verify.sh                 # repository-only validation (fast)
+./scripts/check-links.sh            # public external links
+```
+
+- Local audit reports: `audit/drift-report.md`, `audit/drift-report.yaml`, `audit/backlog.md`,
+  `audit/update-suggestions.md`.
+- Baseline: `local-state/baseline.yaml` (committed); current state is gitignored.
+- Policy: `config/drift-policy.yaml`.
+- CI validates repository data only; it cannot inspect the local machine.
+- Schemas: `schemas/inventory.schema.json`, `schemas/snapshot.schema.json`.
+- Policy: `config/drift-policy.yaml`; backlog seeds: `config/backlog.yaml`.
+- Tests: `tests/test_audit.py`; CI: `.github/workflows/validate-toolbox.yml`.
+- Full details: [docs/self-audit.md](docs/self-audit.md).
+
+> The audit is read-only by default and never installs, removes, updates, or executes unknown agent
+> tooling.

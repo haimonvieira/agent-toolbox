@@ -45,3 +45,12 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Self-audit local state (baseline is committed; current/raw cache is not)
+.local-state/
+local-state/current.yaml
+local-state/*.tmp
+
+# Python bytecode
+__pycache__/
+*.pyc

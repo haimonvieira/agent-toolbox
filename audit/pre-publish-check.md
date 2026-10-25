@@ -83,3 +83,18 @@ allows it. If the push or PR fails, the branch remains local and the failure is 
 | History integration | Pass (feature branch from `origin/main`) |
 | Final checks | Pass |
 | Blockers | **0** |
+
+## Phase 4 self-audit validation
+
+| Check | Result |
+| --- | --- |
+| Repository validator (`./scripts/verify.sh`) | Pass, 0 warnings |
+| Self-audit tests | Pass, 17/17 |
+| Full local audit | Pass; 2 medium findings (floating OpenCode plugins), 0 high/critical |
+| Baseline/current schema validation | Pass |
+| Local state sanitized | Pass; managed skill names redacted, no credential values |
+| Local machine modified by Phase 4 audit | No |
+| CI workflow | `.github/workflows/validate-toolbox.yml`; repository-only |
+
+Exit-code policy: medium findings do not fail the audit; high/critical do. The two medium findings are
+advisory (`envsitter-guard@latest`, `opencode-mem@latest`).

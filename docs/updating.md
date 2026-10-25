@@ -35,7 +35,7 @@
 
 ```bash
 # 0. Snapshot current state (read-only)
-bash scripts/audit.sh > /tmp/before.txt
+./scripts/audit.sh > /tmp/before.txt
 
 # 1. Read upstream release notes and license
 # 2. Update one component
@@ -43,7 +43,7 @@ bash scripts/audit.sh > /tmp/before.txt
 <component> --version
 
 # 4. Re-run the audit and diff
-bash scripts/audit.sh > /tmp/after.txt
+./scripts/audit.sh > /tmp/after.txt
 diff -u /tmp/before.txt /tmp/after.txt
 ```
 
@@ -84,8 +84,20 @@ diff -ru /tmp/skill-update/skills/<name> ~/.agents/skills/<name> | head -100
 ## After updating: documentation checklist
 
 - [ ] `inventory/harnesses.yaml` version + binary path
-- [ ] `inventory/skills.yaml` regenerated (`scripts/audit.sh` prints the generator hint)
+- [ ] `./scripts/audit.sh` run and drift reviewed; update curated inventory manually if needed
 - [ ] `inventory/mcps.yaml` package version
 - [ ] `inventory/plugins.yaml` version + stale caches
 - [ ] `inventory/hooks.yaml` if a plugin's hook manifest changed
 - [ ] `audit/CHANGELOG-AUDIT.md` entry
+
+
+## Self-audit baseline
+
+After an intentional environment change:
+
+1. Run `./scripts/audit.sh` and review `audit/drift-report.md`.
+2. Confirm no secrets or private identifiers were introduced.
+3. Run `./scripts/audit.sh --accept-baseline --yes`.
+4. Commit `local-state/baseline.yaml` and the regenerated reports.
+
+Never accept a baseline automatically after drift.

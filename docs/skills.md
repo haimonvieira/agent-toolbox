@@ -59,8 +59,7 @@ symlinks.** Plugin skills and built-ins remain separate. See
 | Claude real directories remaining | 14 |
 | Plugin skills overlapping a global name | 16 |
 
-Counts shift as the machine changes. Re-run `scripts/audit.sh` and the generator before relying on a
-number. Cluster-level provenance is in
+Counts shift as the machine changes. Re-run `./scripts/audit.sh` before relying on a number; the snapshot is generated, the inventory is curated. Cluster-level provenance is in
 [unknown-skills-triage.md](../audit/unknown-skills-triage.md).
 
 The lock file `~/.agents/.skill-lock.json` (version 3) is the best provenance source: it records

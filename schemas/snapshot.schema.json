@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/agent-toolbox/snapshot.schema.json",
+  "title": "Agent Toolbox local state snapshot",
+  "type": "object",
+  "required": [
+    "schema_version", "generated_at", "host", "harnesses", "skill_stores",
+    "mcps", "plugins", "hooks", "configs", "external_dependencies"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": "string" },
+    "mode": { "type": "string", "enum": ["quick", "full"] },
+    "host": {
+      "type": "object",
+      "required": ["os", "arch"],
+      "properties": { "os": { "type": "string" }, "arch": { "type": "string" } }
+    },
+    "harnesses": { "type": "array", "items": { "$ref": "#/$defs/harness" } },
+    "skill_stores": { "type": "array", "items": { "$ref": "#/$defs/skillStore" } },
+    "mcps": { "type": "array", "items": { "$ref": "#/$defs/mcp" } },
+    "plugins": { "type": "array", "items": { "$ref": "#/$defs/plugin" } },
+    "hooks": {
+      "type": "object",
+      "properties": {
+        "git_hooks_path_set": { "type": "boolean" },
+        "hook_files": { "type": "array", "items": { "$ref": "#/$defs/hook" } },
+        "extensions": { "type": "array", "items": { "$ref": "#/$defs/hook" } }
+      }
+    },
+    "configs": { "type": "array", "items": { "$ref": "#/$defs/config" } },
+    "external_dependencies": { "type": "array", "items": { "$ref": "#/$defs/external" } }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "harness": {
+      "type": "object", "required": ["name", "installed"],
+      "properties": {
+        "name": { "type": "string" }, "installed": { "type": "boolean" },
+        "binary_path": { "type": ["string", "null"] }, "version": { "type": ["string", "null"] }
+      }, "additionalProperties": true
+    },
+    "skillEntry": {
+      "type": "object", "required": ["name"],
+      "properties": {
+        "name": { "type": "string" }, "path": { "type": "string" },
+        "symlink": { "type": "boolean" }, "symlink_target": { "type": ["string", "null"] },
+        "target_exists": { "type": "boolean" }, "tree_hash": { "type": ["string", "null"] },
+        "file_count": { "type": "integer" }, "total_size": { "type": "integer" },
+        "top_level_skill_md": { "type": "boolean" }
+      }, "additionalProperties": true
+    },
+    "skillStore": {
+      "type": "object", "required": ["path", "kind", "exists"],
+      "properties": {
+        "path": { "type": "string" }, "kind": { "type": "string" },
+        "exists": { "type": "boolean" }, "redacted": { "type": "boolean" },
+        "entries": { "type": "array", "items": { "$ref": "#/$defs/skillEntry" } },
+        "count": { "type": "integer" }, "aggregate_hash": { "type": ["string", "null"] },
+        "system_skills": { "type": "array", "items": { "type": "string" } }
+      }, "additionalProperties": true
+    },
+    "mcp": {
+      "type": "object", "required": ["name", "harness", "enabled"],
+      "properties": {
+        "name": { "type": "string" }, "harness": { "type": "string" },
+        "config_path": { "type": "string" }, "transport": { "type": "string" },
+        "command_display": { "type": "string" }, "package": { "type": ["string", "null"] },
+        "version_pin": { "type": ["string", "null"] }, "url": { "type": ["string", "null"] },
+        "url_has_credentials": { "type": "boolean" }, "enabled": { "type": "boolean" },
+        "environment_variables": { "type": "array", "items": { "type": "string" } },
+        "dynamic": { "type": "boolean" }
+      }, "additionalProperties": true
+    },
+    "plugin": {
+      "type": "object", "required": ["name", "harness", "enabled"],
+      "properties": {
+        "name": { "type": "string" }, "harness": { "type": "string" },
+        "version": { "type": ["string", "null"] }, "scope": { "type": ["string", "null"] },
+        "install_path": { "type": ["string", "null"] }, "enabled": { "type": "boolean" },
+        "managed_by": { "type": ["string", "null"] }
+      }, "additionalProperties": true
+    },
+    "hook": {
+      "type": "object", "required": ["path", "exists"],
+      "properties": {
+        "path": { "type": "string" }, "owner": { "type": "string" },
+        "triggers": { "type": "array", "items": { "type": "string" } },
+        "exists": { "type": "boolean" }, "command_count": { "type": "integer" }
+      }, "additionalProperties": true
+    },
+    "config": {
+      "type": "object", "required": ["path", "exists"],
+      "properties": {
+        "path": { "type": "string" }, "exists": { "type": "boolean" },
+        "symlink": { "type": "boolean" }, "mode": { "type": ["string", "null"] },
+        "credential_fields": { "type": "array", "items": { "type": "string" } }
+      }, "additionalProperties": true
+    },
+    "external": {
+      "type": "object", "required": ["path", "kind", "target"],
+      "properties": {
+        "path": { "type": "string" }, "kind": { "type": "string" },
+        "target": { "type": "string" }, "target_exists": { "type": "boolean" }
+      }, "additionalProperties": true
+    }
+  }
+}

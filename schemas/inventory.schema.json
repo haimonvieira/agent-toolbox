@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/agent-toolbox/inventory.schema.json",
+  "title": "Agent Toolbox inventory",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "generated": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "total_entries": { "type": "integer", "minimum": 0 },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "mcps": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "harnesses": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "plugins": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "hooks": { "type": "array", "items": { "$ref": "#/$defs/item" } }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "item": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "category": { "type": "string" },
+        "status": { "type": "string" },
+        "scope": { "type": "string" },
+        "version": { "type": ["string", "number", "null"] },
+        "pinned_version": { "type": ["string", "number", "null"] },
+        "source": { "type": ["string", "null"] },
+        "source_type": { "type": "string" },
+        "upstream_repository": { "type": ["string", "null"] },
+        "official_docs": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] },
+        "local_path": { "type": "string" },
+        "local_paths": { "type": "array", "items": { "type": "string" } },
+        "config_paths": { "type": "array", "items": { "type": "string" } },
+        "managed_by": { "type": ["string", "null"] },
+        "provided_by": { "type": ["string", "null"] },
+        "injected_by": { "type": ["string", "null"] },
+        "directly_configured": { "type": "boolean" },
+        "dynamic": { "type": "boolean" },
+        "install_method": { "type": ["string", "null"] },
+        "package_manager": { "type": ["string", "null"] },
+        "package_name": { "type": ["string", "null"] },
+        "update_method": { "type": ["string", "null"] },
+        "remove_method": { "type": ["string", "null"] },
+        "environment_variables": { "type": "array", "items": { "type": "string" } },
+        "provenance": { "type": "string" },
+        "evidence_level": { "type": "string" },
+        "locally_modified": { "type": ["string", "boolean", "null"] },
+        "external_dependency": { "type": ["string", "boolean", "null"] },
+        "last_verified": { "type": "string" },
+        "repair_class": { "type": "string" },
+        "tree_hash": { "type": ["string", "null"] },
+        "file_count": { "type": "integer" },
+        "total_size": { "type": "integer" },
+        "symlink": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

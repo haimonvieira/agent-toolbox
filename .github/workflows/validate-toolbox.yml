@@ -1,0 +1,39 @@
+name: Validate toolbox
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"  # weekly, repository-only
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Repository validation (no local machine access)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip pyyaml
+      - name: Validate inventory, snapshots, links, secrets, privacy
+        run: python scripts/audit.py verify
+      - name: Run self-audit tests
+        run: python -m unittest discover -s tests -v
+      - name: Shell syntax
+        run: bash -n scripts/*.sh
+
+  external-links:
+    name: External documentation links (scheduled, non-blocking)
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public links
+        run: bash scripts/check-links.sh

@@ -1,0 +1,21 @@
+schema_version: 1
+generated_at: '2026-10-25T17:11:46+00:00'
+baseline: local-state/baseline.yaml
+current: local-state/current.yaml
+summary:
+  medium: 2
+findings:
+- id: plugin-opencode-envsitter-guard-latest-unknown
+  category: plugin
+  type: UNKNOWN
+  severity: medium
+  item: opencode:envsitter-guard@latest
+  detail: floating plugin version
+  status: open
+- id: plugin-opencode-opencode-mem-latest-unknown
+  category: plugin
+  type: UNKNOWN
+  severity: medium
+  item: opencode:opencode-mem@latest
+  detail: floating plugin version
+  status: open

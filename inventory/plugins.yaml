@@ -1,4 +1,4 @@
-# Plugin inventory — Phase 3. Stale caches moved to private backup.
+# Plugin inventory — Phase 4. Floating OpenCode plugins recorded.
 plugins:
 - name: ponytail
   version: 5.3.2
@@ -482,6 +482,48 @@ plugins:
   generated: false
   dynamic: false
   last_verified: '2026-10-25'
+- name: envsitter-guard
+  version: 0.1.0
+  status: Installed (floating @latest)
+  harnesses:
+  - opencode
+  scope: user
+  install_method: OpenCode npm plugin resolver
+  local_paths:
+  - ~/.cache/opencode/npm/envsitter-guard@latest
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  source: https://github.com/boxpositron/envsitter-guard
+  license: MIT
+  provides:
+  - sensitive file read/edit guard
+  enabled: true
+  health: static inspection only
+  update_method: OpenCode plugin resolver
+  remove_method: remove from plugin array
+  notes: Configured as envsitter-guard@latest; resolved 0.1.0. Pin when supported.
+  evidence_level: Verified locally
+- name: opencode-mem
+  version: 2.34.0
+  status: Installed (floating @latest)
+  harnesses:
+  - opencode
+  scope: user
+  install_method: OpenCode npm plugin resolver
+  local_paths:
+  - ~/.cache/opencode/npm/opencode-mem@latest
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  source: https://github.com/tickernelz/opencode-mem
+  license: MIT
+  provides:
+  - persistent memory (local Turso/libSQL)
+  enabled: true
+  health: static inspection only
+  update_method: OpenCode plugin resolver
+  remove_method: remove from plugin array
+  notes: Configured as opencode-mem@latest; resolved 2.34.0. Pin when supported.
+  evidence_level: Verified locally
 orphaned_or_stale:
 - name: superpowers (old cache)
   version: 6.3.0
@@ -508,6 +550,12 @@ orphaned_or_stale:
   local_path: ~/.claude/plugins/marketplaces/claude-plugins-official
   reason: Marketplace catalog only; no plugins from it are installed in Claude Code.
   recommended_action: None.
+  evidence_level: Verified locally
+- name: opencode-ponytail (cache only)
+  version: 4.7.3
+  local_path: ~/.cache/opencode/npm/opencode-ponytail@latest
+  reason: Cached but not referenced by the OpenCode plugin array.
+  recommended_action: Leave until cache cleanup is approved.
   evidence_level: Verified locally
 phase2_notes:
   security_guidance:

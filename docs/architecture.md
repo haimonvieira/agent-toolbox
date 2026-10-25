@@ -133,3 +133,24 @@ No credential values are stored in this repository, and no credential is copied 
 - Whether freebuff supports skills at all.
 - Whether `memory` is provided by the plugin or by the harness itself.
 - Runtime behaviour of every hook and MCP.
+
+
+## Self-audit data flow
+
+```text
+allowlisted local paths
+        │  scripts/audit.py collect (read-only)
+        ▼
+local-state/current.yaml  (sanitized, gitignored)
+        │
+        ├── compare with local-state/baseline.yaml (committed)
+        ▼
+audit/drift-report.yaml / .md, audit/backlog.md
+        │
+        └── repository validator (schemas, links, secrets, privacy)
+                │
+                └── GitHub Actions validates repository data only
+```
+
+The collector never reads environment values, credential values, or private content. Managed-skill
+names are redacted; external-volume paths collapse to `<external-volume>/<project>`.

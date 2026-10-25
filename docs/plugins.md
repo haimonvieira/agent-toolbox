@@ -5,8 +5,8 @@ are **not portable by copy**: each harness installs and enables them differently
 
 OMP records installed plugins without an explicit enabled flag; "Enabled" below means **installed and present in the active cache** (activation inferred, not runtime-verified).
 
-Full metadata: [inventory/plugins.yaml](../inventory/plugins.yaml): 13 plugin bundles plus 4 OMP
-extension files (17 entries; `ponytail` is shared by three harnesses).
+Full metadata: [inventory/plugins.yaml](../inventory/plugins.yaml): 15 plugin bundles plus 4 OMP
+extension files (19 entries; `ponytail` is shared by three harnesses).
 
 ## Installed
 
@@ -24,6 +24,8 @@ extension files (17 entries; `ponytail` is shared by three harnesses).
 | `lethe` | 0.19.0 | OMP | `teimurjan/lethe` | unknown (no LICENSE) | Enabled; adds hooks |
 | `best-of` | 0.2.0 | OMP | `wolfiesch/omp-best-of` | MIT | Enabled |
 | `oh-my-opencode-slim` | 3.0.6 | OpenCode | `alvinunreal/oh-my-opencode-slim` | MIT | Enabled (added during audit) |
+| `envsitter-guard` | 0.1.0 resolved (`@latest`) | OpenCode | `boxpositron/envsitter-guard` | MIT | Enabled, floating |
+| `opencode-mem` | 2.34.0 resolved (`@latest`) | OpenCode | `tickernelz/opencode-mem` | MIT | Enabled, floating |
 | `openai.chatgpt` (VS Code extension) | 26.1021.22027 | VS Code | Marketplace | unknown | Enabled; older 26.1007 moved to backup |
 | OMP extensions (4 files) | — | OMP | Orca-managed + locally authored | unknown | Loaded from `~/.omp/agent/extensions` |
 
