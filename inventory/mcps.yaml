@@ -1,0 +1,658 @@
+# MCP inventory — Phase 3. Verified repairs applied; unknown upstreams preserved.
+mcps:
+- name: pencil
+  purpose: Create and manipulate .pen design files through the pen.dev desktop app.
+  status: Configured
+  transport: stdio
+  harnesses:
+  - opencode
+  - claude
+  - omp
+  - kiro
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.claude.json
+  - ~/.omp/agent/mcp.json
+  - ~/.kiro/settings/mcp.json
+  command: ~/Applications/pen/resources/app.asar.unpacked/out/mcp-server-linux-x64
+  args:
+  - --app
+  - desktop
+  - --agent
+  - <harness>
+  local_executable_exists: true
+  starts_locally: true
+  package_source: pen.dev desktop app (bundled binary)
+  upstream_repository: null
+  official_docs: https://pen.dev
+  license: null
+  environment_variables: []
+  auth_type: none (local process)
+  version: null
+  update_method: update the pen.dev desktop app
+  remove_method: remove the server entry from each harness config
+  notes: UNLICENSED npm CLI (@pen.dev/cli 0.3.12) is installed globally; MCP binary is versionless.
+  evidence_level: Verified locally
+  source_type: local-binary
+  provided_by: pen.dev app
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: browseros-neo
+  purpose: Browser automation through a local BrowserOS relay.
+  status: Configured (service not listening at audit time)
+  transport: http
+  harnesses:
+  - opencode
+  - claude
+  - codex
+  - omp
+  - zed
+  - gemini
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.claude.json
+  - ~/.codex/config.toml
+  - ~/.omp/agent/mcp.json
+  - ~/.config/zed/settings.json
+  - ~/.gemini/config/mcp_config.json
+  url: http://127.0.0.1:9010/mcp
+  starts_locally: false (connects to local relay service)
+  package_source: BrowserOS app
+  upstream_repository: https://github.com/browseros-ai/browseros
+  official_docs: https://github.com/browseros-ai/browseros
+  environment_variables: []
+  auth_type: none observed
+  update_method: update BrowserOS
+  remove_method: remove entry from harness config
+  notes: Port 9010 had no listener during the audit; harness may report the MCP as unreachable.
+  evidence_level: Verified locally
+  source_type: remote-local-service
+  provided_by: BrowserOS
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Requires manual service
+  failure_reason: Local relay was not listening; start BrowserOS.
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: graphify
+  purpose: Build and query a code knowledge graph.
+  status: Configured
+  transport: http
+  harnesses:
+  - opencode
+  - codex
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.codex/config.toml
+  - ~/.omp/agent/mcp.json
+  url: https://api.graphify.com/mcp
+  starts_locally: false
+  package_source: PyPI package graphifyy 0.9.34 (local CLI)
+  upstream_repository: unknown
+  official_docs: https://graphify.com
+  environment_variables: []
+  auth_type: unknown (no auth block in config)
+  update_method: uv/pip upgrade of the local CLI (not verified)
+  remove_method: remove entry from harness config
+  notes: Remote endpoint is third-party; provenance of the service was not verified.
+  evidence_level: Locally detected, upstream not verified
+  source_type: remote-third-party
+  provided_by: null
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: cloudflare-api
+  purpose: Cloudflare API operations through Cloudflare's official remote MCP.
+  status: Configured
+  transport: http
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  url: https://mcp.cloudflare.com/mcp
+  starts_locally: false
+  package_source: Cloudflare hosted MCP
+  upstream_repository: https://github.com/cloudflare/mcp-server-cloudflare
+  official_docs: https://developers.cloudflare.com/agents/model-context-protocol/
+  environment_variables: []
+  auth_type: OAuth (handled by harness)
+  update_method: provider-managed
+  remove_method: remove entry from harness config
+  evidence_level: Verified locally
+  source_type: remote-official
+  provided_by: Cloudflare
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: figma
+  purpose: Read Figma designs and design context.
+  status: Configured
+  transport: http
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  url: https://mcp.figma.com/mcp
+  starts_locally: false
+  package_source: Figma hosted MCP
+  upstream_repository: null
+  official_docs: https://help.figma.com/hc/en-us/articles/32132100833559
+  environment_variables: []
+  auth_type: OAuth (handled by harness)
+  update_method: provider-managed
+  remove_method: remove entry from harness config
+  evidence_level: Verified locally
+  source_type: remote-official
+  provided_by: Figma
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: doop
+  purpose: Unknown; third-party design-related MCP at doop.design.
+  status: Configured
+  transport: http
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  url: https://doop.design/mcp
+  starts_locally: false
+  package_source: unknown
+  upstream_repository: null
+  official_docs: https://doop.design
+  environment_variables: []
+  auth_type: OAuth (public client_id stored in config)
+  update_method: provider-managed
+  remove_method: remove entry from harness config
+  notes: Purpose could not be established from local metadata. OAuth client_id is not a secret but is omitted here.
+  evidence_level: Unknown
+  source_type: remote-third-party
+  provided_by: null
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: obsidian-mcp-connector
+  purpose: Access an Obsidian vault over a local MCP connector.
+  status: Configured (service not listening at audit time)
+  transport: http
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  url: http://127.0.0.1:27200/mcp
+  starts_locally: false (connects to Obsidian plugin)
+  package_source: Obsidian community plugin (name inferred)
+  upstream_repository: unknown
+  official_docs: unknown
+  environment_variables:
+  - OBSIDIAN_MCP_TOKEN
+  auth_type: static bearer header (value redacted)
+  update_method: update the Obsidian plugin
+  remove_method: remove entry from harness config
+  notes: Config contains an Authorization header; value is not reproduced. Port 27200 had no listener.
+  evidence_level: Locally detected, upstream not verified
+  source_type: remote-local-service
+  provided_by: Obsidian plugin
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Requires manual service
+  failure_reason: Local connector was not listening; enable the Obsidian plugin.
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: insomnia
+  purpose: Interact with Insomnia API collections.
+  status: Configured (pinned to 0.8.2)
+  transport: stdio
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: npx -y mcp-insomnia
+  starts_locally: true
+  package_source: npm mcp-insomnia 0.8.2
+  upstream_repository: https://github.com/anggasct/mcp-insomnia
+  official_docs: https://github.com/anggasct/mcp-insomnia
+  license: MIT
+  environment_variables: []
+  auth_type: none
+  version: 0.8.2
+  update_method: package updates automatically because the config is unpinned
+  remove_method: remove entry from harness config
+  notes: Unpinned npx invocation; consider pinning mcp-insomnia@0.8.2.
+  evidence_level: Verified upstream
+  source_type: local-npx
+  provided_by: npm
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: 0.8.2
+  recommended_pin: applied
+  last_verified: '2026-10-25'
+- name: aas-core
+  purpose: Agentic Awesome Skills catalog and MCP installer workflow.
+  status: Configured (disabled in OpenCode; enabled in OMP)
+  transport: stdio
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: npx --yes --ignore-scripts --package=agentic-awesome-skills@<version> -- aas mcp
+  starts_locally: true
+  package_source: npm agentic-awesome-skills
+  upstream_repository: https://github.com/sickn33/agentic-awesome-skills
+  official_docs: https://aaskills.tech/
+  license: MIT
+  environment_variables: []
+  auth_type: none
+  version: 19.15.0 (OpenCode) / 18.10.0 (OMP)
+  update_method: bump the pinned version in each config
+  remove_method: remove entry from harness config
+  notes: Version conflict between harnesses; OpenCode entry is explicitly disabled.
+  evidence_level: Verified upstream
+  source_type: local-npx
+  provided_by: npm
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: 19.15.0 / 18.10.0 (conflict)
+  recommended_pin: align both configs to one version
+  last_verified: '2026-10-25'
+- name: teams-mcp
+  purpose: Microsoft Teams data through Microsoft Graph.
+  status: Configured (pinned to 1.0.1)
+  transport: stdio
+  harnesses:
+  - opencode
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: npx -y @floriscornel/teams-mcp@latest
+  starts_locally: true
+  package_source: npm @floriscornel/teams-mcp 1.0.1
+  upstream_repository: https://github.com/floriscornel/teams-mcp
+  official_docs: https://github.com/floriscornel/teams-mcp
+  license: MIT
+  environment_variables:
+  - AZURE_CLIENT_ID
+  - AZURE_TENANT_ID
+  - AZURE_CLIENT_SECRET
+  auth_type: Microsoft Graph OAuth / app credentials
+  version: 1.0.1
+  update_method: auto (unpinned @latest)
+  remove_method: remove entry from harness config
+  notes: Environment variable names are upstream-documented possibilities; none were present in the local config.
+  evidence_level: Verified upstream
+  source_type: local-npx
+  provided_by: npm
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: 1.0.1
+  recommended_pin: applied
+  last_verified: '2026-10-25'
+- name: codegraph
+  purpose: Code graph queries.
+  status: Disabled/preserved pending identification
+  transport: stdio
+  harnesses:
+  - opencode (disabled)
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: codegraph serve --mcp
+  starts_locally: true
+  package_source: npm "codegraph" 1.0.0 (no repository metadata)
+  upstream_repository: null
+  official_docs: null
+  environment_variables: []
+  auth_type: none
+  update_method: unknown
+  remove_method: remove entry from harness config
+  notes: No `codegraph` executable on PATH. The npm name is generic and has no upstream repository metadata, so
+    the intended package cannot be verified. Do not `npx codegraph`.
+  evidence_level: Verified locally
+  source_type: local-missing
+  provided_by: unknown
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Unknown upstream
+  failure_reason: No executable; npm codegraph@1.0.0 is an unrelated 2024 package with no repository metadata. Do
+    not install by name.
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: codebase-memory
+  purpose: Persistent codebase memory.
+  status: Installed (package 0.12.1)
+  transport: stdio
+  harnesses:
+  - opencode (disabled)
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: codebase-memory-mcp
+  starts_locally: true
+  package_source: npm codebase-memory-mcp 0.12.1
+  upstream_repository: https://github.com/DeusData/codebase-memory-mcp
+  official_docs: https://github.com/DeusData/codebase-memory-mcp
+  license: MIT
+  environment_variables: []
+  auth_type: none
+  update_method: install the package, then update normally
+  remove_method: remove entry from harness config
+  notes: No `codebase-memory-mcp` executable on PATH.
+  evidence_level: Verified locally
+  source_type: local-missing
+  provided_by: npm
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Repaired
+  failure_reason: null
+  pinned_version: 0.12.1
+  recommended_pin: codebase-memory-mcp@0.12.1
+  last_verified: '2026-10-25'
+  local_executable_exists: true
+- name: openagents
+  purpose: OpenAgents workspace integration.
+  status: Disabled/preserved pending identification
+  transport: stdio
+  harnesses:
+  - opencode (disabled)
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: agn mcp-server --workspace-id <workspace-id>
+  starts_locally: true
+  package_source: unknown
+  upstream_repository: null
+  official_docs: null
+  environment_variables:
+  - OA_WORKSPACE_TOKEN
+  auth_type: workspace token
+  update_method: unknown
+  remove_method: remove entry from harness config
+  notes: No `agn` executable on PATH; workspace id omitted from this inventory.
+  evidence_level: Verified locally
+  source_type: local-missing
+  provided_by: unknown
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Unknown upstream
+  failure_reason: No agn executable; npm agn@0.1.2 is an unrelated 2022 package. Upstream CLI unidentified.
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: hostinger-api
+  purpose: Hostinger API operations.
+  status: Installed (package 3.8.1)
+  transport: stdio
+  harnesses:
+  - opencode (disabled)
+  - omp
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.omp/agent/mcp.json
+  command: hostinger-api-mcp
+  starts_locally: true
+  package_source: npm hostinger-api-mcp 3.8.1
+  upstream_repository: https://github.com/hostinger/api-mcp-server
+  official_docs: https://github.com/hostinger/api-mcp-server
+  license: MIT
+  environment_variables:
+  - HOSTINGER_API_TOKEN
+  auth_type: API token (value redacted)
+  update_method: install/update the package
+  remove_method: remove entry from harness config
+  notes: No `hostinger-api-mcp` executable on PATH.
+  evidence_level: Verified locally
+  source_type: local-missing
+  provided_by: npm
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Repaired
+  failure_reason: null
+  pinned_version: 3.8.1
+  recommended_pin: hostinger-api-mcp@3.8.1
+  last_verified: '2026-10-25'
+  local_executable_exists: true
+- name: gemini-notebook-mcp
+  purpose: NotebookLM / Gemini Notebook access.
+  status: Repaired
+  transport: stdio
+  harnesses:
+  - omp
+  config_paths:
+  - ~/.omp/agent/mcp.json
+  command: ~/.local/bin/notebooklm-mcp
+  starts_locally: true
+  package_source: uv tool notebooklm-mcp-cli 0.15.7
+  upstream_repository: https://github.com/teng-lin/notebooklm-py
+  official_docs: https://github.com/teng-lin/notebooklm-py
+  environment_variables: []
+  auth_type: Google account (browser auth)
+  update_method: uv tool upgrade notebooklm-mcp-cli
+  remove_method: remove entry from harness config
+  notes: Config points to a Windows executable path that cannot exist on Linux. A working Linux binary is installed
+    at ~/.local/bin/notebooklm-mcp.
+  evidence_level: Verified locally
+  source_type: local-missing
+  provided_by: uv tool
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Repaired
+  failure_reason: Windows path replaced with the verified Linux binary (uv tool 0.15.7)
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: starry
+  purpose: Unknown; local Starry service.
+  status: Configured (service not listening at audit time)
+  transport: http
+  harnesses:
+  - kiro
+  config_paths:
+  - ~/.kiro/settings/mcp.json
+  url: http://127.0.0.1:7600/mcp
+  starts_locally: false
+  package_source: unknown
+  upstream_repository: null
+  official_docs: null
+  environment_variables:
+  - STARRY_TOKEN
+  auth_type: static bearer header (value redacted)
+  update_method: unknown
+  remove_method: remove entry from harness config
+  notes: Kiro itself is not installed; port 7600 had no listener. Provenance unknown.
+  evidence_level: Unknown
+  source_type: remote-local-service
+  provided_by: Starry app
+  managed_by: harness config
+  directly_configured: true
+  dynamic: false
+  injected_by: null
+  generated: false
+  repair_class: Requires manual service
+  failure_reason: Kiro is not installed and port 7600 was closed; Starry app exists but no consumer confirmed.
+  pinned_version: null
+  recommended_pin: null
+  last_verified: '2026-10-25'
+- name: context7
+  purpose: Fetch current library documentation (runtime MCP injected by the oh-my-opencode-slim plugin).
+  status: Configured (runtime injection, not present in opencode.json)
+  transport: unknown (plugin-managed)
+  harnesses:
+  - opencode
+  config_paths:
+  - ~/.cache/opencode/npm/oh-my-opencode-slim@latest
+  starts_locally: unknown
+  package_source: oh-my-opencode-slim plugin 3.0.6
+  upstream_repository: https://github.com/alvinunreal/oh-my-opencode-slim
+  official_docs: https://github.com/upstash/context7
+  environment_variables:
+  - CONTEXT7_API_KEY
+  auth_type: optional API key
+  update_method: update the plugin
+  remove_method: remove the plugin
+  notes: Appeared at 2026-10-25 11:07 while the audit was running; documented as observed drift.
+  evidence_level: Locally detected, upstream not verified
+  source_type: plugin-injected
+  provided_by: oh-my-opencode-slim
+  managed_by: plugin
+  directly_configured: false
+  dynamic: true
+  injected_by: oh-my-opencode-slim
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: plugin-managed; pin the plugin instead
+  last_verified: '2026-10-25'
+- name: gh_grep
+  purpose: Search public GitHub code (runtime MCP injected by the oh-my-opencode-slim plugin).
+  status: Configured (runtime injection, not present in opencode.json)
+  transport: unknown (plugin-managed)
+  harnesses:
+  - opencode
+  config_paths:
+  - ~/.cache/opencode/npm/oh-my-opencode-slim@latest
+  starts_locally: unknown
+  package_source: oh-my-opencode-slim plugin 3.0.6
+  upstream_repository: https://github.com/alvinunreal/oh-my-opencode-slim
+  official_docs: https://github.com/alvinunreal/oh-my-opencode-slim
+  environment_variables: []
+  auth_type: unknown
+  update_method: update the plugin
+  remove_method: remove the plugin
+  notes: Observed at runtime after the plugin was added during the audit.
+  evidence_level: Locally detected, upstream not verified
+  source_type: plugin-injected
+  provided_by: oh-my-opencode-slim
+  managed_by: plugin
+  directly_configured: false
+  dynamic: true
+  injected_by: oh-my-opencode-slim
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: plugin-managed; pin the plugin instead
+  last_verified: '2026-10-25'
+- name: omgskills
+  purpose: Read-only search of the public omgskills catalog, with pinned install metadata.
+  status: Configured (runtime injection, observed after 11:07)
+  transport: unknown (plugin-managed MCP)
+  harnesses:
+  - opencode
+  config_paths:
+  - ~/.cache/opencode/npm/oh-my-opencode-slim@latest
+  starts_locally: unknown
+  package_source: oh-my-opencode-slim plugin 3.0.6
+  upstream_repository: https://github.com/alvinunreal/oh-my-opencode-slim
+  official_docs: https://omgskills.com/
+  environment_variables: []
+  auth_type: none observed
+  update_method: update the plugin
+  remove_method: remove the plugin
+  notes: Catalog is read-only; installs must use pinned_install metadata. Records marked discovery_only must not
+    be installed from their legacy install_cmd.
+  evidence_level: Locally detected, upstream not verified
+  source_type: plugin-injected
+  provided_by: oh-my-opencode-slim
+  managed_by: plugin
+  directly_configured: false
+  dynamic: true
+  injected_by: oh-my-opencode-slim
+  generated: false
+  repair_class: Operational
+  failure_reason: null
+  pinned_version: null
+  recommended_pin: plugin-managed; pin the plugin instead
+  last_verified: '2026-10-25'

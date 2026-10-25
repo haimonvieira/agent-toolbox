@@ -1,0 +1,105 @@
+repository:
+  name: agent-toolbox
+  purpose: Personal, reproducible map of the AI coding-agent tooling installed on this machine.
+  license: not specified
+  canonical_branch: docs/toolbox-audit (audit branch; no commit/push performed)
+  generated_by: read-only local audit + manual documentation
+snapshot:
+  started_at: '2026-10-25T10:55:00-03:00'
+  finished_at: '2026-10-25T11:20:00-03:00'
+  host_os: Linux (Ubuntu-family, GNOME/Zorin)
+  machine_details_policy: username, hostname and absolute home path are normalized to ~
+  drift_detected: true
+  drift:
+  - at: '2026-10-25T11:07:00-03:00'
+    change: ~/.config/opencode/opencode.json gained the oh-my-opencode-slim plugin, LSP config, a new AGENTS.md
+      and a plugin config file while the audit was running.
+    impact: context7, gh_grep and later omgskills/memory became available at runtime; they are documented as observed
+      additions, not as part of the original snapshot.
+    caused_by: another running OpenCode process (opencode.exe) / user activity
+    action_taken: documented only; no system files were modified by this audit
+  - at: '2026-10-25T11:25:00-03:00'
+    change: The external volume was mounted; the global skill symlink (coordenacao-commit-seguro) changed from broken
+      to resolving, and the Codex project hooks became inspectable.
+    impact: The finding was downgraded from "broken symlink" to "volume-dependent symlink".
+    action_taken: documentation corrected; no system files modified
+counts:
+  harnesses_installed: 8
+  harnesses_orphaned_config: 3
+  skills_global_agents_dir: 349
+  skills_claude_duplicate_dir: 14
+  skills_omp_managed_local: 55
+  skills_plugin_provided: 40
+  skills_project_local: 19
+  skills_unique_names_across_sources_approx: 436
+  skills_with_executable_scripts: 62
+  mcp_servers_distinct: 19
+  mcp_servers_broken: 2
+  plugins_installed: 17
+  hook_sites_documented: 17
+  harnesses_shim_only: 1
+inventories:
+  harnesses: inventory/harnesses.yaml
+  skills: inventory/skills.yaml
+  mcps: inventory/mcps.yaml
+  plugins: inventory/plugins.yaml
+  hooks: inventory/hooks.yaml
+documents:
+  overview: docs/overview.md
+  harnesses: docs/harnesses.md
+  skills: docs/skills.md
+  mcps: docs/mcps.md
+  plugins: docs/plugins.md
+  hooks: docs/hooks.md
+  installation: docs/installation.md
+  updating: docs/updating.md
+  security: docs/security.md
+  troubleshooting: docs/troubleshooting.md
+  recommended_resources: docs/recommended-resources.md
+  audit_report: audit/AUDIT-REPORT.md
+  audit_changelog: audit/CHANGELOG-AUDIT.md
+  environment_snapshot: audit/environment-snapshot.md
+  architecture: docs/architecture.md
+  phase2_start: audit/phase2-start.md
+  skill_dedup_plan: audit/skill-dedup-plan.md
+  unknown_skills_triage: audit/unknown-skills-triage.md
+  pre_publish_check: audit/pre-publish-check.md
+  phase3_start: audit/phase3-start.md
+  phase3_report: audit/phase3-remediation-report.md
+  skill_full_tree: audit/skill-full-tree-comparison.md
+safety:
+  secrets_committed: none found (see scripts/verify.sh secret scan)
+  third_party_code_vendored: none
+  system_changes_made: none in Phase 2
+  runtime_verification_of_third_party_components: not performed for safety
+phase2:
+  date: '2026-10-25'
+  remote: public GitHub repository exists; unrelated 6-commit history on main; local branch unborn; no integration
+    performed
+  credential_permissions: all four reviewed configs are mode 600 at Phase 2 inspection (Phase 1 saw 644/777/664);
+    ctime 11:40
+  canonical_skill_store: ~/.agents/skills feasible for OpenCode, Codex, OMP, Zed; Claude via symlink; Delta/freebuff
+    unknown
+  dedup: 343 identical copies, 3 same-name/different-content, 16 plugin overlaps; no files changed
+  security_guidance: installed 2.0.15, catalog 2.0.16, Apache-2.0, unpinned claude-agent-sdk install at SessionStart;
+    activation inferred
+phase3:
+  date: '2026-10-25'
+  gate_c1: 'Completed: claude-agent-sdk 0.2.174 in venv; NOOP_VENV; failure path remains'
+  mcp_repairs:
+  - gemini-notebook-mcp path
+  - insomnia 0.8.2
+  - teams-mcp 1.0.1
+  - codebase-memory 0.12.1
+  - hostinger-api 3.8.1
+  mcp_unknowns:
+  - codegraph (disabled)
+  - openagents (disabled)
+  skill_symlinks: 333
+  skills_full_tree_identical: 342
+  sanitized: true
+  git_base: origin/main d40efaed
+  branch: docs/toolbox-audit
+  commit: 06504dd
+  pull_request: '#1'
+  push: docs/toolbox-audit (no force)

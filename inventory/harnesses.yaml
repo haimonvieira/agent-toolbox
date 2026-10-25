@@ -1,0 +1,317 @@
+# Harness inventory — Phase 2 consolidated.
+harnesses:
+- name: OpenCode
+  command: opencode
+  status: Installed
+  version: 2.1.4
+  scope: global
+  binary_path: ~/.nvm/versions/node/v24.22.0/bin/opencode
+  binary_target: ~/.nvm/versions/node/v24.22.0/lib/node_modules/@opencode/cli/bin/opencode.exe
+  install_method: npm global package (@opencode/cli), Node from nvm
+  package_source: https://www.npmjs.com/package/@opencode/cli
+  upstream_repository: https://github.com/sst/opencode
+  official_docs: https://opencode.ai/docs
+  config_paths:
+  - ~/.config/opencode/opencode.json
+  - ~/.config/opencode/cli.json
+  - ~/.config/opencode/AGENTS.md
+  - ~/.config/opencode/oh-my-opencode-slim.json
+  skill_paths:
+  - ~/.agents/skills
+  - ~/.config/opencode/skills
+  mcp_config_paths:
+  - ~/.config/opencode/opencode.json
+  plugin_paths:
+  - ~/.cache/opencode/npm
+  hook_config_paths: []
+  update_method: npm install -g @opencode/cli@latest (documented npm procedure; not run during audit)
+  remove_method: npm uninstall -g @opencode/cli
+  notes: Current config was modified at 2026-10-25 11:07 (plugin oh-my-opencode-slim added, MCP list changed) while
+    this audit was running. See audit/environment-snapshot.md.
+  evidence_level: Verified locally
+  canonical_store:
+    possible: 'yes'
+    method: reads ~/.agents/skills directly
+    symlink_support: yes (directory entries)
+    builtins_separate: separate (bundled/plugin skills)
+    evidence: https://opencode.ai/docs/skills/
+- name: Claude Code
+  command: claude
+  status: Installed
+  version: 2.1.309
+  scope: global
+  binary_path: ~/.local/bin/claude
+  binary_target: ~/.local/share/claude/versions/2.1.309
+  install_method: native installer (installMethod=native), auto-updates disabled
+  package_source: official native installer
+  upstream_repository: null
+  official_docs: https://docs.claude.com/en/docs/claude-code/overview
+  config_paths:
+  - ~/.claude/settings.json
+  - ~/.claude.json
+  - ~/.claude/CLAUDE.md
+  skill_paths:
+  - ~/.claude/skills
+  mcp_config_paths:
+  - ~/.claude.json
+  plugin_paths:
+  - ~/.claude/plugins
+  hook_config_paths:
+  - ~/.claude/settings.json (no hooks configured)
+  - plugin-provided hooks (~/.claude/plugins/cache)
+  update_method: native updater (auto-updates disabled); see official docs for reinstall
+  remove_method: use official uninstall procedure from docs (not verified locally)
+  notes: '~/.claude/skills is a byte-identical copy of ~/.agents/skills for most skills (269 MB each). Two skills
+    differ: code-review, graphify.'
+  evidence_level: Verified locally
+  canonical_store:
+    possible: via symlink
+    method: personal root is ~/.claude/skills; symlinked skill folders are supported
+    symlink_support: yes (skill folder symlink; dedup by target)
+    builtins_separate: separate (bundled + plugin skills)
+    evidence: https://code.claude.com/docs/en/skills
+- name: Codex CLI
+  command: codex
+  status: Installed
+  version: 0.164.0
+  scope: global
+  binary_path: ~/.nvm/versions/node/v24.22.0/bin/codex
+  binary_target: ~/.nvm/versions/node/v24.22.0/lib/node_modules/@openai/codex/bin/codex.js
+  install_method: npm global package (@openai/codex)
+  package_source: https://www.npmjs.com/package/@openai/codex
+  upstream_repository: https://github.com/openai/codex
+  official_docs: https://developers.openai.com/codex
+  config_paths:
+  - ~/.codex/config.toml
+  skill_paths:
+  - ~/.codex/skills/.system (5 built-in system skills; no user-installed skills)
+  mcp_config_paths:
+  - ~/.codex/config.toml
+  plugin_paths:
+  - ~/.codex/plugins
+  hook_config_paths:
+  - ~/.codex/config.toml (hooks.state)
+  update_method: npm install -g @openai/codex@latest (documented npm procedure; not run)
+  remove_method: npm uninstall -g @openai/codex
+  notes: config.toml trusts two project paths on an external volume. While the volume is unmounted those trusted
+    hook hashes are orphaned; when mounted, the project's .codex/hooks.json runs a local state-freshness check.
+  evidence_level: Verified locally
+  canonical_store:
+    possible: 'yes'
+    method: USER scope is $HOME/.agents/skills
+    symlink_support: yes (follows symlinked skill folders)
+    builtins_separate: separate ($CODEX_HOME/.system)
+    evidence: https://learn.chatgpt.com/docs/build-skills
+- name: Oh My Pi (OMP)
+  command: omp
+  status: Installed
+  version: 18.12.6
+  scope: global
+  binary_path: ~/.local/bin/omp
+  binary_target: null
+  install_method: standalone binary (256 MB) placed in ~/.local/bin
+  package_source: unknown (no package metadata next to binary)
+  upstream_repository: https://github.com/can1357/oh-my-pi
+  official_docs: https://github.com/can1357/oh-my-pi
+  config_paths:
+  - ~/.omp/agent/config.yml
+  - ~/.omp/agent/mcp.json
+  - ~/.omp/agent/models.yml
+  - ~/.omp/marketplaces.json
+  - ~/.omp/plugins/installed_plugins.json
+  skill_paths:
+  - ~/.omp/agent/managed-skills
+  mcp_config_paths:
+  - ~/.omp/agent/mcp.json
+  plugin_paths:
+  - ~/.omp/plugins
+  hook_config_paths:
+  - ~/.omp/agent/extensions (TypeScript lifecycle extensions)
+  - plugin-provided hooks
+  update_method: unknown (standalone binary; no documented updater verified)
+  remove_method: remove binary and ~/.omp (manual; not performed)
+  notes: 'Richest local setup: 11 plugins, 55 managed skills, 4 local extensions, 5 agent profiles (one profile
+    is a Git clone).'
+  evidence_level: Verified locally
+  canonical_store:
+    possible: 'yes'
+    method: agents provider reads ~/.agents/skills; enableAgentsUser defaults true
+    symlink_support: not documented in reviewed docs
+    builtins_separate: separate (native/plugins/managed priorities)
+    evidence: https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md
+- name: freebuff
+  command: freebuff
+  status: Installed
+  version: 0.2.34
+  scope: global
+  binary_path: ~/.nvm/versions/node/v24.22.0/bin/freebuff
+  binary_target: ~/.nvm/versions/node/v24.22.0/lib/node_modules/freebuff/index.js
+  install_method: npm global package
+  package_source: https://www.npmjs.com/package/freebuff
+  upstream_repository: https://github.com/CodebuffAI/freebuff-private (private; HTTP 404 publicly)
+  official_docs: https://freebuff.com
+  config_paths: []
+  skill_paths: []
+  mcp_config_paths: []
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: npm install -g freebuff@latest (documented npm procedure; not run)
+  remove_method: npm uninstall -g freebuff
+  notes: No configuration directory or MCP configuration was found for this harness.
+  evidence_level: Verified locally
+  canonical_store:
+    possible: unknown
+    method: no documented skill path or local config found
+    symlink_support: unknown
+    builtins_separate: unknown
+    evidence: https://freebuff.com
+- name: Zed
+  command: zed
+  status: Installed
+  version: 1.25.3
+  scope: global
+  binary_path: ~/.local/bin/zed
+  binary_target: ~/.local/zed.app/bin/zed
+  install_method: vendor app bundle in ~/.local/zed.app
+  package_source: https://zed.dev
+  upstream_repository: https://github.com/zed-industries/zed
+  official_docs: https://zed.dev/docs
+  config_paths:
+  - ~/.config/zed/settings.json
+  skill_paths: []
+  mcp_config_paths:
+  - ~/.config/zed/settings.json (context_servers)
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: vendor updater (not verified)
+  remove_method: remove app bundle (manual)
+  notes: One MCP context server configured (browseros-neo).
+  evidence_level: Verified locally
+  canonical_store:
+    possible: 'yes'
+    method: global root is ~/.agents/skills
+    symlink_support: 'yes (docs: use a symlink if needed)'
+    builtins_separate: separate (Zed built-ins)
+    evidence: https://zed.dev/docs/ai/skills
+- name: Delta
+  command: delta
+  status: Installed
+  version: 0.20.1
+  scope: global
+  binary_path: ~/.local/bin/delta
+  binary_target: ~/.local/delta.app/bin/delta
+  install_method: vendor app bundle
+  package_source: https://delta.dev
+  upstream_repository: null
+  official_docs: https://delta.dev
+  config_paths: []
+  skill_paths: []
+  mcp_config_paths: []
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: unknown
+  remove_method: unknown
+  notes: AI-native editor. A hidden data directory (~/.oleafly) contains AI/MCP settings and plaintext secret-like
+    fields; values were not read. Relationship between Delta and ~/.oleafly is inferred.
+  evidence_level: Locally detected, upstream not verified
+  canonical_store:
+    possible: unknown
+    method: Zed-based editor; no skill configuration found
+    symlink_support: unknown
+    builtins_separate: unknown
+    evidence: unknown
+- name: VS Code ChatGPT extension
+  command: code
+  status: Installed
+  version: 26.1021.22027 (older 26.1007.21434 also present)
+  scope: global
+  binary_path: /usr/bin/code
+  binary_target: null
+  install_method: VS Code extension marketplace
+  package_source: openai.chatgpt
+  upstream_repository: null
+  official_docs: https://developers.openai.com/codex
+  config_paths:
+  - ~/.vscode/extensions/openai.chatgpt-*/package.json
+  skill_paths: []
+  mcp_config_paths: []
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: VS Code extension auto-update
+  remove_method: VS Code extension uninstall
+  notes: Two versions installed side by side; the older one is stale.
+  evidence_level: Verified locally
+- name: Kiro
+  command: kiro (not found)
+  status: Orphaned / unknown consumer
+  version: null
+  scope: global
+  binary_path: null
+  binary_target: null
+  install_method: unknown
+  package_source: unknown
+  upstream_repository: null
+  official_docs: https://kiro.dev/docs
+  config_paths:
+  - ~/.kiro/settings/mcp.json
+  skill_paths:
+  - ~/.kiro/skills
+  mcp_config_paths:
+  - ~/.kiro/settings/mcp.json
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: unknown
+  remove_method: unknown
+  notes: mcp.json was modified 2026-10-25 11:09 but no kiro executable, desktop entry, snap, flatpak, or extension
+    was found. Starry app is installed but no evidence it reads ~/.kiro.
+  evidence_level: Verified locally
+- name: Gemini / Antigravity
+  command: gemini (not found)
+  status: Orphaned / possibly IDE-managed
+  version: null
+  scope: global
+  binary_path: null
+  binary_target: null
+  install_method: unknown
+  package_source: unknown
+  upstream_repository: null
+  official_docs: https://antigravity.google/docs
+  config_paths:
+  - ~/.gemini/settings.json
+  - ~/.gemini/config/mcp_config.json
+  - ~/.gemini/antigravity/mcp_config.json
+  skill_paths:
+  - ~/.gemini/config/skills
+  mcp_config_paths:
+  - ~/.gemini/config/mcp_config.json
+  - ~/.gemini/antigravity/mcp_config.json
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: unknown
+  remove_method: unknown
+  notes: No gemini/antigravity executable or app package found. Config last modified 2026-10-22. May be managed
+    by an IDE not present on PATH.
+  evidence_level: Verified locally
+- name: GitHub Copilot CLI
+  command: copilot (VS Code shim only)
+  status: Orphaned (CLI not installed; VS Code shim present)
+  version: null
+  scope: global
+  binary_path: null
+  binary_target: null
+  install_method: unknown (npm package not installed globally)
+  package_source: unknown
+  upstream_repository: https://github.com/github/copilot-cli
+  official_docs: https://docs.github.com/en/copilot/how-tos/copilot-cli
+  config_paths:
+  - ~/.copilot
+  skill_paths:
+  - ~/.copilot/skills
+  mcp_config_paths: []
+  plugin_paths: []
+  hook_config_paths: []
+  update_method: unknown
+  remove_method: unknown
+  notes: A /usr/bin/copilot symlink to the VS Code shim exists, but running it reports the CLI is not installed.
+    ~/.copilot still holds a skill and an auth database. Config remains orphaned.
+  evidence_level: Verified locally

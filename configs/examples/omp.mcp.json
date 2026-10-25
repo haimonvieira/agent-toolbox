@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
+  "mcpServers": {
+    "example-stdio": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "some-mcp@1.2.3"],
+      "env": {
+        "SOME_API_TOKEN": "<REDACTED>"
+      }
+    },
+    "example-http": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "enabled": true
+    },
+    "example-oauth": {
+      "type": "http",
+      "url": "https://example.com/mcp",
+      "auth": {
+        "type": "oauth",
+        "credentialId": "<REDACTED>",
+        "resource": "https://example.com",
+        "clientId": "<PUBLIC_CLIENT_ID>"
+      }
+    }
+  }
+}

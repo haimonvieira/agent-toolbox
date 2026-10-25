@@ -1,0 +1,19 @@
+# Sanitized example of ~/.codex/config.toml (MCP + plugin sections only).
+# Do not copy account/session state.
+
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+
+[mcp_servers.example-stdio]
+command = "/absolute/path/to/server"
+args = ["--app", "desktop", "--agent", "codexCLI"]
+
+[mcp_servers.example-remote]
+url = "https://mcp.example.com/mcp"
+
+[marketplaces.example]
+source_type = "git"
+source = "https://github.com/<owner>/<repo>.git"
+
+[plugins."example@example"]
+enabled = true

@@ -1,0 +1,334 @@
+# Hooks inventory — Phase 2 consolidated. No hook executed.
+hook_runtime:
+  git_hooks:
+    core_hooks_path: unset
+    inspected_repositories:
+    - path: ~/TeleDrive
+      active_hooks: none (only sample hooks)
+    notes: No repository-level Git hooks were found in the inspected repository.
+  shell_wrappers: not audited (out of scope for agent tooling)
+hooks:
+- name: ponytail SessionStart (Claude Code)
+  trigger: SessionStart (startup|resume|clear|compact)
+  owner: ponytail plugin 5.3.2
+  harnesses:
+  - claude
+  path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/claude-codex-hooks.json
+  executes: node hooks/ponytail-activate.js
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: true
+  provenance: plugin-provided
+  security_notes: Runs Node code from the plugin directory at every session start; review before trusting updates.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: ponytail SubagentStart (Claude Code)
+  trigger: SubagentStart
+  owner: ponytail plugin 5.3.2
+  harnesses:
+  - claude
+  path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/claude-codex-hooks.json
+  executes: node hooks/ponytail-subagent.js
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: true
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: ponytail UserPromptSubmit (Claude Code)
+  trigger: UserPromptSubmit
+  owner: ponytail plugin 5.3.2
+  harnesses:
+  - claude
+  path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/claude-codex-hooks.json
+  executes: node hooks/ponytail-mode-tracker.js
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: true
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: ponytail hooks (Codex)
+  trigger: session_start, user_prompt_submit, subagent_start
+  owner: ponytail plugin 5.3.2
+  harnesses:
+  - codex
+  path: ~/.codex/config.toml (hooks.state trusted hashes)
+  executes: plugin hook commands defined in hooks/claude-codex-hooks.json
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: true (trusted hashes present)
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: ponytail statusline script
+  trigger: statusline render
+  owner: ponytail / local
+  harnesses:
+  - claude
+  path: ~/.claude/ponytail-statusline.sh
+  executes: shell statusline formatter
+  modifies_files: no evidence
+  network_access: no evidence
+  destructive: false
+  depends_on_secrets: false
+  active: no reference found in ~/.claude/settings.json
+  provenance: unknown
+  security_notes: Orphaned candidate; verify before deleting.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: security-guidance SessionStart
+  trigger: SessionStart
+  owner: security-guidance plugin 2.0.15
+  harnesses:
+  - omp
+  path: ~/.omp/plugins/cache/plugins/claude-plugins-official___security-guidance___2.0.15/hooks/hooks.json
+  executes: bash hooks/sg-python.sh hooks/ensure_agent_sdk.py
+  modifies_files: yes (may create ~/.claude/security/agent-sdk-venv)
+  network_access: yes (pip install claude_agent_sdk when missing)
+  destructive: false
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  security_notes: Hook performs dependency installation at session start. This is a supply-chain and reproducibility
+    concern; no integrity pin was observed in the script header.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+  activation_status: inferred from installation; not runtime-verified
+  license: Apache-2.0
+  dependency: claude-agent-sdk (unpinned)
+- name: security-guidance UserPromptSubmit
+  trigger: UserPromptSubmit
+  owner: security-guidance plugin 2.0.15
+  harnesses:
+  - omp
+  path: same hooks.json
+  executes: python hooks/security_reminder_hook.py
+  modifies_files: state files under ~/.claude/security (inferred)
+  network_access: possible (LLM review on Stop)
+  destructive: false
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+  activation_status: inferred from installation; not runtime-verified
+  license: Apache-2.0
+  dependency: claude-agent-sdk (unpinned)
+- name: security-guidance PostToolUse
+  trigger: PostToolUse (Edit|Write|MultiEdit|NotebookEdit; Bash git commit)
+  owner: security-guidance plugin 2.0.15
+  harnesses:
+  - omp
+  path: same hooks.json
+  executes: python hooks/security_reminder_hook.py
+  modifies_files: false
+  network_access: possible
+  destructive: false
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+  activation_status: inferred from installation; not runtime-verified
+  license: Apache-2.0
+  dependency: claude-agent-sdk (unpinned)
+- name: security-guidance Stop
+  trigger: Stop
+  owner: security-guidance plugin 2.0.15
+  harnesses:
+  - omp
+  path: same hooks.json
+  executes: git-diff based review hook
+  modifies_files: false
+  network_access: yes (LLM review)
+  destructive: false
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+  activation_status: inferred from installation; not runtime-verified
+  license: Apache-2.0
+  dependency: claude-agent-sdk (unpinned)
+- name: sonarqube SessionStart
+  trigger: SessionStart
+  owner: sonarqube plugin 2.6.0
+  harnesses:
+  - omp
+  path: ~/.omp/plugins/cache/plugins/claude-plugins-official___sonarqube___2.6.0/claude-hooks/hooks.json
+  executes: node scripts/setup.js
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  security_notes: Source-available license; hooks not executed during audit.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: superpowers SessionStart
+  trigger: SessionStart (startup|clear|compact)
+  owner: superpowers plugin 7.0.0
+  harnesses:
+  - omp
+  path: ~/.omp/plugins/cache/plugins/superpowers-marketplace___superpowers___7.0.0/hooks/hooks.json
+  executes: hooks/run-hook.cmd session-start (bash)
+  modifies_files: unknown
+  network_access: unknown
+  destructive: no evidence
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: lethe refresh-index
+  trigger: before_agent_start (plugin hook)
+  owner: lethe plugin 0.19.0
+  harnesses:
+  - omp
+  path: ~/.omp/plugins/cache/plugins/teimurjan___lethe___0.19.0/hooks/refresh-index.sh
+  executes: background `lethe index --all`, throttled (default 900s)
+  modifies_files: yes (search index)
+  network_access: false
+  destructive: false
+  depends_on_secrets: false
+  active: installed
+  provenance: plugin-provided (no LICENSE file found)
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: orca-agent-status extension
+  trigger: OMP session/tool lifecycle events
+  owner: Orca (inferred)
+  harnesses:
+  - omp
+  path: ~/.omp/agent/extensions/orca-agent-status.ts
+  executes: local HTTP POST to Orca status endpoint (1s timeout)
+  modifies_files: false
+  network_access: localhost only (inferred)
+  destructive: false
+  depends_on_secrets: false
+  active: loaded by OMP extension loader
+  provenance: Orca-managed
+  evidence_level: Inferred
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: orca-prefill extension
+  trigger: session_start
+  owner: Orca (inferred)
+  harnesses:
+  - omp
+  path: ~/.omp/agent/extensions/orca-prefill.ts
+  executes: reads ORCA_OMP_PREFILL and sets editor text
+  modifies_files: false
+  network_access: false
+  destructive: false
+  depends_on_secrets: false
+  active: loaded by OMP extension loader
+  provenance: Orca-managed
+  evidence_level: Inferred
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: pr-template-guard extension
+  trigger: session_start + tool call guard
+  owner: locally authored
+  harnesses:
+  - omp
+  path: ~/.omp/agent/extensions/pr-template-guard.ts
+  executes: blocks `gh pr create` until PR template and private skill are read
+  modifies_files: false
+  network_access: no (the blocked command would call `gh`)
+  destructive: false
+  depends_on_secrets: false
+  active: loaded by OMP extension loader
+  provenance: local
+  security_notes: Contains a private organization repository reference; do not publish verbatim.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: codex project hooks (team-lead)
+  trigger: UserPromptSubmit, Stop, SessionEnd
+  owner: project-local .codex/hooks.json
+  harnesses:
+  - codex
+  path: <external-volume>/<project>/.codex/hooks.json
+  executes: python3 .codex/hooks/state_freshness.py {prompt|stop|end} (3 s timeout)
+  modifies_files: temporary baseline under the system temp dir (0600/0700, cleaned at end)
+  network_access: no evidence
+  destructive: no; fails open
+  depends_on_secrets: false
+  active: only while the external volume is mounted
+  provenance: project-local
+  security_notes: Checks whether canonical project state was updated after source changes and can block the session
+    end with a reminder. Not executed during the audit.
+  evidence_level: Verified locally
+  source_type: plugin-hook
+  managed_by: plugin manager
+  directly_configured: false
+  dynamic: false
+  last_verified: '2026-10-25'
