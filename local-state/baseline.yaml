@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: '2026-10-25T17:06:56+00:00'
+generated_at: '2026-10-25T17:43:18+00:00'
 host:
   os: Linux
   arch: x86_64
@@ -33,6 +33,10 @@ harnesses:
   installed: true
   binary_path: ~/.local/bin/delta
   version: delta 0.20.1
+- name: code
+  installed: true
+  binary_path: /usr/bin/code
+  version: 1.143.1
 skill_stores:
 - path: ~/.agents/skills
   kind: canonical
@@ -6289,12 +6293,14 @@ hooks:
   git_hooks_path_set: false
   hook_files:
   - path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/claude-band.json
-    owner: 5.3.2
+    owner: ponytail
+    scope: installed
     triggers: []
     exists: true
     command_count: 0
   - path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/claude-codex-hooks.json
-    owner: 5.3.2
+    owner: ponytail
+    scope: installed
     triggers:
     - SessionStart
     - SubagentStart
@@ -6302,28 +6308,32 @@ hooks:
     exists: true
     command_count: 3
   - path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/copilot-hooks.json
-    owner: 5.3.2
+    owner: ponytail
+    scope: installed
     triggers:
     - sessionStart
     - userPromptSubmitted
     exists: true
     command_count: 2
   - path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/cursor-hooks.json
-    owner: 5.3.2
+    owner: ponytail
+    scope: installed
     triggers:
     - beforeSubmitPrompt
     - sessionStart
     exists: true
     command_count: 2
   - path: ~/.claude/plugins/cache/ponytail/ponytail/5.3.2/hooks/qoder-hooks.json
-    owner: 5.3.2
+    owner: ponytail
+    scope: installed
     triggers:
     - PreToolUse
     - UserPromptSubmit
     exists: true
     command_count: 2
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/claude-security/hooks/hooks.json
-    owner: claude-security
+    owner: claude-plugins-official/claude-security
+    scope: catalog
     triggers:
     - PermissionRequest
     - PostToolUse
@@ -6332,7 +6342,8 @@ hooks:
     exists: true
     command_count: 4
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/code-modernization/hooks/hooks.json
-    owner: code-modernization
+    owner: claude-plugins-official/code-modernization
+    scope: catalog
     triggers:
     - PostToolUseFailure
     - SessionStart
@@ -6342,13 +6353,15 @@ hooks:
     exists: true
     command_count: 5
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/explanatory-output-style/hooks/hooks.json
-    owner: explanatory-output-style
+    owner: claude-plugins-official/explanatory-output-style
+    scope: catalog
     triggers:
     - SessionStart
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/hookify/hooks/hooks.json
-    owner: hookify
+    owner: claude-plugins-official/hookify
+    scope: catalog
     triggers:
     - PostToolUse
     - PreToolUse
@@ -6357,19 +6370,22 @@ hooks:
     exists: true
     command_count: 4
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/learning-output-style/hooks/hooks.json
-    owner: learning-output-style
+    owner: claude-plugins-official/learning-output-style
+    scope: catalog
     triggers:
     - SessionStart
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/ralph-loop/hooks/hooks.json
-    owner: ralph-loop
+    owner: claude-plugins-official/ralph-loop
+    scope: catalog
     triggers:
     - Stop
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/marketplaces/claude-plugins-official/plugins/security-guidance/hooks/hooks.json
-    owner: security-guidance
+    owner: claude-plugins-official/security-guidance
+    scope: catalog
     triggers:
     - PostToolUse
     - SessionStart
@@ -6378,12 +6394,14 @@ hooks:
     exists: true
     command_count: 5
   - path: ~/.omp/plugins/cache/marketplaces/ponytail/hooks/claude-band.json
-    owner: ponytail
+    owner: ponytail/claude-band.json
+    scope: catalog
     triggers: []
     exists: true
     command_count: 0
   - path: ~/.omp/plugins/cache/marketplaces/ponytail/hooks/claude-codex-hooks.json
-    owner: ponytail
+    owner: ponytail/claude-codex-hooks.json
+    scope: catalog
     triggers:
     - SessionStart
     - SubagentStart
@@ -6391,40 +6409,46 @@ hooks:
     exists: true
     command_count: 3
   - path: ~/.omp/plugins/cache/marketplaces/ponytail/hooks/copilot-hooks.json
-    owner: ponytail
+    owner: ponytail/copilot-hooks.json
+    scope: catalog
     triggers:
     - sessionStart
     - userPromptSubmitted
     exists: true
     command_count: 2
   - path: ~/.omp/plugins/cache/marketplaces/ponytail/hooks/cursor-hooks.json
-    owner: ponytail
+    owner: ponytail/cursor-hooks.json
+    scope: catalog
     triggers:
     - beforeSubmitPrompt
     - sessionStart
     exists: true
     command_count: 2
   - path: ~/.omp/plugins/cache/marketplaces/ponytail/hooks/qoder-hooks.json
-    owner: ponytail
+    owner: ponytail/qoder-hooks.json
+    scope: catalog
     triggers:
     - PreToolUse
     - UserPromptSubmit
     exists: true
     command_count: 2
   - path: ~/.omp/plugins/cache/marketplaces/teimurjan/plugins/claude-code/hooks/hooks.json
-    owner: claude-code
+    owner: teimurjan/claude-code
+    scope: catalog
     triggers:
     - UserPromptSubmit
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/marketplaces/teimurjan/plugins/codex/hooks/hooks.json
-    owner: codex
+    owner: teimurjan/codex
+    scope: catalog
     triggers:
     - UserPromptSubmit
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/plugins/claude-plugins-official___security-guidance___2.0.15/hooks/hooks.json
     owner: claude-plugins-official___security-guidance___2.0.15
+    scope: installed
     triggers:
     - PostToolUse
     - SessionStart
@@ -6432,13 +6456,22 @@ hooks:
     - UserPromptSubmit
     exists: true
     command_count: 5
+  - path: ~/.omp/plugins/cache/plugins/claude-plugins-official___sonarqube___2.6.0/claude-hooks/hooks.json
+    owner: claude-plugins-official___sonarqube___2.6.0
+    scope: installed
+    triggers:
+    - SessionStart
+    exists: true
+    command_count: 1
   - path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2/hooks/claude-band.json
     owner: ponytail___ponytail___5.3.2
+    scope: installed
     triggers: []
     exists: true
     command_count: 0
   - path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2/hooks/claude-codex-hooks.json
     owner: ponytail___ponytail___5.3.2
+    scope: installed
     triggers:
     - SessionStart
     - SubagentStart
@@ -6447,6 +6480,7 @@ hooks:
     command_count: 3
   - path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2/hooks/copilot-hooks.json
     owner: ponytail___ponytail___5.3.2
+    scope: installed
     triggers:
     - sessionStart
     - userPromptSubmitted
@@ -6454,6 +6488,7 @@ hooks:
     command_count: 2
   - path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2/hooks/cursor-hooks.json
     owner: ponytail___ponytail___5.3.2
+    scope: installed
     triggers:
     - beforeSubmitPrompt
     - sessionStart
@@ -6461,6 +6496,7 @@ hooks:
     command_count: 2
   - path: ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2/hooks/qoder-hooks.json
     owner: ponytail___ponytail___5.3.2
+    scope: installed
     triggers:
     - PreToolUse
     - UserPromptSubmit
@@ -6468,12 +6504,14 @@ hooks:
     command_count: 2
   - path: ~/.omp/plugins/cache/plugins/superpowers-marketplace___superpowers___7.0.0/hooks/hooks-cursor.json
     owner: superpowers-marketplace___superpowers___7.0.0
+    scope: installed
     triggers:
     - sessionStart
     exists: true
     command_count: 1
   - path: ~/.omp/plugins/cache/plugins/superpowers-marketplace___superpowers___7.0.0/hooks/hooks.json
     owner: superpowers-marketplace___superpowers___7.0.0
+    scope: installed
     triggers:
     - SessionStart
     exists: true

@@ -1,0 +1,22 @@
+schema_version: 1
+id: base
+name: Shared baseline expectations
+profile_version: 1
+status: active
+scope: public
+description: >-
+  Expectations shared by every profile: the runtime prerequisites and the canonical
+  skill store. Contains no harness-specific components on purpose.
+requirements:
+  commands:
+    - git
+    - node
+    - npm
+  directories:
+    - ~/.agents/skills
+notes: >-
+  ~/.agents/skills is the canonical skill store for OpenCode, Codex CLI, OMP and Zed.
+  Claude Code consumes it through per-skill symlinks; plugin and built-in skills stay
+  in their own stores.
+evidence_level: Verified locally
+last_verified: "2026-10-25"

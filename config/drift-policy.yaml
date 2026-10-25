@@ -37,6 +37,13 @@ severity:
   unknown_upstream: high
   floating_version: medium
   credential_mode: critical
+  profile_component_missing: medium
+  profile_component_extra: info
+  profile_version_mismatch: medium
+  profile_optional_missing: info
+  profile_dynamic_changed: info
+  profile_component_unknown: medium
+  profile_reproducibility_changed: medium
 
 exit_on:
   - critical

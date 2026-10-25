@@ -154,3 +154,20 @@ audit/drift-report.yaml / .md, audit/backlog.md
 
 The collector never reads environment values, credential values, or private content. Managed-skill
 names are redacted; external-volume paths collapse to `<external-volume>/<project>`.
+
+
+## Profile layer
+
+```text
+inventory/*.yaml ──► profiles/*.yaml ──► profile evaluation
+   (source of truth)   (declarative)        (vs local snapshot)
+                            │
+                            ├── profiles/generated/ownership-index.yaml
+                            ├── profiles/generated/relationships.yaml
+                            ├── docs/profiles/<id>.md
+                            └── audit/profile-reproducibility.md
+```
+
+Profiles add a *selection* and *expectation* layer on top of the inventory. They never duplicate
+component metadata, never store secret values, and never change the machine. The audit compares a
+profile with the current snapshot and reports `PROFILE_*` findings alongside global drift.

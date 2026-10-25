@@ -455,7 +455,7 @@ plugins:
   generated: false
   dynamic: false
   last_verified: '2026-10-25'
-- name: openai.chatgpt (VS Code extension)
+- name: openai.chatgpt
   version: 26.1021.22027
   status: Installed (duplicate version)
   harnesses:

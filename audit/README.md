@@ -151,6 +151,13 @@ change was performed. Integration is **Gate F** and is blocked until private nam
 **Credential permissions:** the four reviewed configs are all mode `600` now (Phase 1 saw `644`,
 `777`, `664`). No rotation is recommended without exposure evidence.
 
+## Environment profiles
+
+The repository also ships declarative environment profiles in [`profiles/`](../profiles/README.md).
+They reference inventory ids, describe one coherent setup each, and are compared with the local
+machine by `./scripts/audit.sh --profile <id>`. Reproducibility per profile is reported in
+[audit/profile-reproducibility.md](profile-reproducibility.md).
+
 ## Audit status
 
 | Item | Status |

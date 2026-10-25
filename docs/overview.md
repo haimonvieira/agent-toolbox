@@ -91,3 +91,10 @@ shell history, unrelated repositories, and any recursive scan of the home direct
 The inventory is not static. `./scripts/audit.sh` performs a read-only local collection and compares
 it with `local-state/baseline.yaml`; `./scripts/verify.sh` checks repository data only. Reports land
 in `audit/drift-report.*` and `audit/backlog.md`. See [self-audit.md](self-audit.md).
+
+## Environment profiles
+
+`profiles/` adds declarative environment profiles on top of the inventory. A profile states which
+harnesses, plugins, skills, MCP servers, hooks and versions belong to one working setup, and how
+reproducible that set is. Profiles reference inventory ids, never copy component metadata, and never
+install anything. See [profiles.md](profiles.md).

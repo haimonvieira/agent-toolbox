@@ -14,6 +14,7 @@ Unresolved items requiring human judgment. No automatic remediation.
 - [ ] **Establish provenance for the GSD skill cluster** — Exact upstream/version unproven; original project is archived.
 - [ ] **Identify the writer/consumer of the Kiro config** — Config is modified but no executable was found.
 - [ ] **Pin the security-guidance failure-path dependency** — Healthy venv is pinned; failed import triggers an unpinned install.
+- [ ] **Decide how divergent skill variants are represented per profile** — code-review, graphify and find-docs have harness-specific variants; profiles currently reference the canonical copy.
 - [ ] **UNKNOWN: opencode:envsitter-guard@latest** — floating plugin version (`drift`)
 - [ ] **UNKNOWN: opencode:opencode-mem@latest** — floating plugin version (`drift`)
 
@@ -23,3 +24,5 @@ Unresolved items requiring human judgment. No automatic remediation.
 - [ ] **Confirm whether Gemini/Antigravity and Copilot configs are active** — Preserve until an owner/consumer is identified.
 - [ ] **Confirm pinning support for oh-my-opencode-slim** — Resolved 3.0.6 but left managed by OpenCode.
 - [ ] **Decide whether to decouple the global skill symlink from the external volume** — Symlink breaks when the volume is unmounted.
+- [ ] **Decide whether plugin-managed versions may float in profiles** — oh-my-opencode-slim and the OpenCode npm plugins resolve their own versions.
+- [ ] **Add an editor-only profile if the Zed/VS Code setup stays supported** — Only the full profile currently covers editor harnesses.

@@ -31,6 +31,9 @@ except ModuleNotFoundError:  # pragma: no cover
     print("ERROR: PyYAML is required (pip install pyyaml)", file=sys.stderr)
     raise SystemExit(1)
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import profile_engine as pe  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
 HOME = Path.home()
 CACHE_DIR = ROOT / ".local-state"
@@ -587,23 +590,54 @@ def collect_plugins() -> list[dict]:
     return sorted(entries, key=lambda x: (x["harness"], x["name"], x.get("version") or ""))
 
 
+def _hook_owner(path: Path) -> tuple[str, str]:
+    """Return (owner, scope) for a hook manifest path.
+
+    scope is "installed" for plugin caches and "catalog" for marketplace catalogs
+    that are downloaded but not installed.
+    """
+    parts = list(path.parts)
+    if "cache" in parts:
+        i = len(parts) - 1 - parts[::-1].index("cache")
+        rest = parts[i + 1:]
+        for segment in rest:
+            if "___" in segment:
+                return segment, "installed"
+        if rest and rest[0] == "marketplaces":
+            market = rest[1] if len(rest) > 1 else "marketplace"
+            plugin = rest[3] if len(rest) > 3 else (rest[-2] if len(rest) > 1 else "plugin")
+            return f"{market}/{plugin}", "catalog"
+        if len(rest) >= 2:
+            return rest[1], "installed"
+        if rest:
+            return rest[0], "installed"
+    return path.parent.name, "installed"
+
+
 def collect_hooks(quick: bool = False) -> dict:
     files = []
     for base in [HOME / ".claude" / "plugins" / "cache", HOME / ".omp" / "plugins" / "cache"]:
         if not base.is_dir():
             continue
-        for p in sorted(base.glob("**/hooks/*.json")):
+        candidates = set(base.glob("**/hooks.json"))
+        candidates |= set(base.glob("**/hooks/*.json"))
+        for p in sorted(candidates):
             try:
                 data = read_json(p)
             except (OSError, ValueError):
                 continue
-            triggers = sorted((data.get("hooks") or {}).keys())
+            hooks = data.get("hooks")
+            if not isinstance(hooks, dict):
+                continue
+            triggers = sorted(hooks.keys())
+            owner, scope = _hook_owner(p)
             files.append({
                 "path": norm_path(p),
-                "owner": p.parent.parent.name,
+                "owner": owner,
+                "scope": scope,
                 "triggers": triggers,
                 "exists": True,
-                "command_count": sum(len(v) for v in (data.get("hooks") or {}).values() if isinstance(v, list)),
+                "command_count": sum(len(v) for v in hooks.values() if isinstance(v, list)),
             })
     extensions = []
     ext = HOME / ".omp" / "agent" / "extensions"
@@ -702,7 +736,7 @@ def collect_external_dependencies() -> list[dict]:
 # --------------------------------------------------------------------------- #
 
 HARNESSES = [
-    "opencode", "claude", "codex", "omp", "freebuff", "zed", "delta",
+    "opencode", "claude", "codex", "omp", "freebuff", "zed", "delta", "code",
 ]
 
 
@@ -949,6 +983,9 @@ def detect_drift(baseline: dict, current: dict, policy: dict) -> list[dict]:
             findings.append(finding("harness", "BROKEN_REFERENCE", severity_for("broken_reference", policy),
                                     name, "documented harness has no executable"))
     findings += static_findings(current, policy)
+    profiles, catalog, profile_errors = profile_context()
+    if not profile_errors:
+        findings += profile_drift_findings(profiles, catalog, current, policy)
     return findings
 
 
@@ -1249,6 +1286,7 @@ def verify_repository() -> tuple[list[str], list[str]]:
     policy = load_policy()
     errors = []
     errors += validate_inventory_structure()
+    errors += validate_profiles_repo()
     errors += validate_against_schemas()
     errors += duplicate_inventory_ids()
     errors += validate_links()
@@ -1499,6 +1537,268 @@ def cmd_report_only(args) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------- #
+# Environment profiles
+# --------------------------------------------------------------------------- #
+
+PROFILES_DIR = ROOT / "profiles"
+PROFILE_SCHEMA = ROOT / "schemas" / "profile.schema.json"
+PROFILE_GENERATED_DIR = ROOT / "profiles" / "generated"
+REPRODUCIBILITY_FILE = PROFILE_GENERATED_DIR / "reproducibility.yaml"
+OWNERSHIP_FILE = PROFILE_GENERATED_DIR / "ownership-index.yaml"
+RELATIONSHIPS_FILE = PROFILE_GENERATED_DIR / "relationships.yaml"
+PROFILE_DOCS_DIR = ROOT / "docs" / "profiles"
+
+
+def profile_context():
+    profiles, errors = pe.load_profiles(ROOT)
+    catalog = pe.Catalog(ROOT)
+    for pid, profile in profiles.items():
+        for ref in pe.unresolved_refs(profile, profiles, catalog):
+            errors.append(f"profiles/{profile.get('_path', pid)}: unknown reference '{ref}'")
+    return profiles, catalog, errors
+
+
+def validate_profiles_repo() -> list[str]:
+    errors: list[str] = []
+    profiles, load_errors = pe.load_profiles(ROOT)
+    errors += load_errors
+    if not PROFILES_DIR.is_dir():
+        errors.append("profiles/ directory is missing")
+        return errors
+    schema = read_json(PROFILE_SCHEMA)
+    for pid, profile in sorted(profiles.items()):
+        name = f"profiles/{profile.get('_path', pid)}"
+        errors += [f"{name}: {e}" for e in _mini_validate(profile, schema, schema)]
+        if profile.get("status") not in pe.STATUSES:
+            errors.append(f"{name}: invalid status '{profile.get('status')}'")
+        if not isinstance(profile.get("profile_version"), int):
+            errors.append(f"{name}: profile_version must be an integer")
+        for level in ("required", "optional"):
+            for item in (profile.get("environment_variables") or {}).get(level, []) or []:
+                if not re.match(r"^[A-Z][A-Z0-9_]*$", str(item.get("name", ""))):
+                    errors.append(f"{name}: invalid environment variable name")
+        for key in ("harnesses", "plugins", "skills", "mcps", "hooks"):
+            block = profile.get(key)
+            if block is None:
+                continue
+            if not isinstance(block, dict):
+                errors.append(f"{name}: '{key}' must be a mapping")
+                continue
+            for level, items in block.items():
+                if not isinstance(items, list):
+                    errors.append(f"{name}: '{key}.{level}' must be a list")
+                    continue
+                for item in items:
+                    if not isinstance(item, dict) or not item.get("ref"):
+                        errors.append(f"{name}: '{key}.{level}' entry needs a ref")
+    catalog = pe.Catalog(ROOT)
+    for pid, profile in profiles.items():
+        for ref in pe.unresolved_refs(profile, profiles, catalog):
+            errors.append(f"profiles/{profile.get('_path', pid)}: unresolved reference '{ref}'")
+    return errors
+
+
+def profile_drift_findings(profiles: dict, catalog, current: dict, policy: dict) -> list[dict]:
+    findings: list[dict] = []
+    if not profiles:
+        return findings
+    saved = {}
+    if REPRODUCIBILITY_FILE.is_file():
+        saved = load_yaml(REPRODUCIBILITY_FILE) or {}
+    for pid, profile in sorted(profiles.items()):
+        if not pe.profile_applicable(profile, catalog, current):
+            continue
+        wanted = sorted({
+            e.get("name")
+            for level in ("required", "optional")
+            for e in (profile.get("environment_variables") or {}).get(level, []) or []
+            if e.get("name")
+        })
+        result = pe.evaluate_profile(profile, profiles, catalog, current, pe.env_var_presence(wanted))
+        optional_missing = []
+        for item in result["results"]:
+            status = item["status"]
+            if status == "MISSING":
+                kind = "PROFILE_COMPONENT_MISSING"
+                severity = severity_for("profile_component_missing", policy)
+            elif status == "VERSION_MISMATCH":
+                kind = "PROFILE_VERSION_MISMATCH"
+                severity = severity_for("profile_version_mismatch", policy)
+            elif status == "OPTIONAL_MISSING":
+                optional_missing.append(item["ref"])
+                continue
+            elif status == "DYNAMIC_MISSING":
+                kind = "PROFILE_DYNAMIC_CHANGED"
+                severity = severity_for("profile_dynamic_changed", policy)
+            elif status == "UNKNOWN":
+                kind = "PROFILE_COMPONENT_UNKNOWN"
+                severity = severity_for("profile_component_unknown", policy)
+            else:
+                continue
+            findings.append(finding("profile", kind, severity, f"{pid}:{item['ref']}",
+                                     item.get("detail", ""), profile=pid))
+        if optional_missing:
+            findings.append(finding("profile", "PROFILE_OPTIONAL_MISSING",
+                                    severity_for("profile_optional_missing", policy), pid,
+                                    f"{len(optional_missing)} optional component(s) not installed: "
+                                    + ", ".join(sorted(optional_missing)[:8])
+                                    + ("..." if len(optional_missing) > 8 else ""),
+                                    profile=pid))
+        extras = pe.profile_extras(profile, profiles, catalog, current)
+        extra_total = sum(len(refs) for refs in extras.values())
+        if extra_total:
+            summary = ", ".join(f"{category}={len(refs)}" for category, refs in sorted(extras.items()))
+            findings.append(finding("profile", "PROFILE_COMPONENT_EXTRA",
+                                    severity_for("profile_component_extra", policy),
+                                    pid,
+                                    f"{extra_total} component(s) installed but not part of the profile ({summary})",
+                                    profile=pid))
+        repro = pe.compute_reproducibility(profile, profiles, catalog)
+        previous = (saved.get("profiles") or {}).get(pid, {}).get("status")
+        if previous and previous != repro["status"]:
+            findings.append(finding("profile", "PROFILE_REPRODUCIBILITY_CHANGED",
+                                    severity_for("profile_reproducibility_changed", policy), pid,
+                                    f"{previous} -> {repro['status']}", profile=pid))
+    return findings
+
+
+def cmd_list_profiles(args) -> int:
+    profiles, catalog, errors = profile_context()
+    for error in errors:
+        print(f"FAIL {error}")
+    for pid, profile in sorted(profiles.items()):
+        repro = pe.compute_reproducibility(profile, profiles, catalog)
+        print(f"{pid:16} v{profile.get('profile_version')} {profile.get('status'):10} {repro['status']}")
+    return 1 if errors else 0
+
+
+def cmd_profile(args) -> int:
+    profiles, catalog, errors = profile_context()
+    for error in errors:
+        print(f"FAIL {error}")
+    if errors:
+        return 1
+    profile = profiles.get(args.profile)
+    if profile is None:
+        known = ", ".join(sorted(profiles))
+        print(f"ERROR: unknown profile '{args.profile}'. Known: {known}", file=sys.stderr)
+        return 3
+    current = load_yaml(CURRENT) if CURRENT.is_file() else None
+    wanted = sorted({
+        e.get("name")
+        for level in ("required", "optional")
+        for e in (profile.get("environment_variables") or {}).get(level, []) or []
+        if e.get("name")
+    })
+    result = pe.evaluate_profile(profile, profiles, catalog, current, pe.env_var_presence(wanted))
+    repro = pe.compute_reproducibility(profile, profiles, catalog)
+    print(f"profile {profile.get('id')} (v{profile.get('profile_version')}, {profile.get('status')})")
+    print(f"reproducibility: {repro['status']}")
+    for reason in repro["reasons"]:
+        print(f"  reason: {reason}")
+    for blocker in repro["blockers"]:
+        print(f"  blocker: {blocker}")
+    print("")
+    for status in ("PRESENT", "MISSING", "VERSION_MISMATCH", "OPTIONAL_MISSING",
+                   "DYNAMIC_PRESENT", "DYNAMIC_MISSING", "UNKNOWN"):
+        rows = [r for r in result["results"] if r["status"] == status]
+        if not rows:
+            continue
+        print(f"{status} ({len(rows)}):")
+        for row in rows:
+            detail = f" - {row['detail']}" if row.get("detail") else ""
+            print(f"  {row['ref']} [{row.get('ownership', '')}]{detail}")
+    missing = result["counts"].get("MISSING", 0)
+    mismatch = result["counts"].get("VERSION_MISMATCH", 0)
+    if missing or mismatch:
+        print(f"\n{missing} required component(s) missing, {mismatch} version mismatch(es)")
+        return 2
+    return 0
+
+
+def cmd_compare_profiles(args) -> int:
+    profiles, catalog, errors = profile_context()
+    a_id, b_id = args.compare_profiles
+    if a_id not in profiles or b_id not in profiles:
+        known = ", ".join(sorted(profiles))
+        print(f"ERROR: unknown profile(s): {a_id}, {b_id}. Known: {known}", file=sys.stderr)
+        return 3
+    diff = pe.compare_profiles(profiles[a_id], profiles[b_id], profiles)
+    repro_a = pe.compute_reproducibility(profiles[a_id], profiles, catalog)
+    repro_b = pe.compute_reproducibility(profiles[b_id], profiles, catalog)
+    print(f"{a_id} vs {b_id}")
+    print(f"reproducibility: {repro_a['status']} vs {repro_b['status']}")
+    for category, data in diff["components"].items():
+        if not data["only_a"] and not data["only_b"]:
+            print(f"  {category:10} shared={data['shared']} (no differences)")
+            continue
+        print(f"  {category:10} shared={data['shared']}")
+        for ref in data["only_a"]:
+            print(f"    only in {a_id}: {ref}")
+        for ref in data["only_b"]:
+            print(f"    only in {b_id}: {ref}")
+    env = diff["environment_variables"]
+    print(f"  environment variables (required): shared={len(env['shared'])}, "
+          f"only {a_id}={env['only_a']}, only {b_id}={env['only_b']}")
+    ext = diff["external_dependencies"]
+    if ext["only_a"] or ext["only_b"]:
+        print(f"  external dependencies: only {a_id}={ext['only_a']}, only {b_id}={ext['only_b']}")
+    return 0
+
+
+def cmd_who_uses(args) -> int:
+    profiles, catalog, errors = profile_context()
+    index = pe.ownership_index(profiles, catalog)
+    query = slug(args.who_uses)
+    matches = []
+    for cid, record in index.items():
+        if query in slug(cid) or query in slug(record.get("name", "")):
+            matches.append((cid, record))
+    if not matches:
+        print(f"No profile references a component matching '{args.who_uses}'.")
+        return 0
+    for cid, record in sorted(matches):
+        print(cid)
+        print(f"  name:        {record.get('name')}")
+        print(f"  category:    {record.get('category')}")
+        print(f"  profiles:    {', '.join(record.get('profiles', []))}")
+        print(f"  ownership:   {', '.join(record.get('ownership', []))}")
+        if record.get("managed_by"):
+            print(f"  managed by:  {', '.join(record['managed_by'])}")
+        print(f"  canonical:   {record.get('canonical')}")
+        print(f"  divergent:   {record.get('divergent')}")
+        print(f"  evidence:    {record.get('evidence_level')}")
+    return 0
+
+
+def cmd_profiles_report(args) -> int:
+    profiles, catalog, errors = profile_context()
+    if errors:
+        for error in errors:
+            print(f"FAIL {error}")
+        return 1
+    REPORTS.mkdir(parents=True, exist_ok=True)
+    PROFILE_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    PROFILE_GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+    (REPORTS / "profile-reproducibility.md").write_text(
+        pe.render_reproducibility_report(profiles, catalog), encoding="utf-8")
+    write_yaml(OWNERSHIP_FILE, pe.ownership_index(profiles, catalog))
+    write_yaml(RELATIONSHIPS_FILE, pe.relationships(profiles, catalog))
+    repro = {}
+    for pid, profile in sorted(profiles.items()):
+        repro[pid] = pe.compute_reproducibility(profile, profiles, catalog)
+        (PROFILE_DOCS_DIR / f"{pid}.md").write_text(
+            pe.render_profile_doc(profile, profiles, catalog), encoding="utf-8")
+    write_yaml(REPRODUCIBILITY_FILE, {
+        "schema_version": SCHEMA_VERSION,
+        "generated_by": "scripts/audit.py --profiles-report",
+        "profiles": repro,
+    })
+    print(f"wrote {len(profiles)} profile document(s), ownership index, relationships and reproducibility report")
+    return 0
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Read-only agent-toolbox audit")
     parser.add_argument("command", nargs="?", default="full",
@@ -1510,7 +1810,22 @@ def main(argv=None) -> int:
     parser.add_argument("--yes", action="store_true")
     parser.add_argument("--check-upstreams", action="store_true")
     parser.add_argument("--output")
+    parser.add_argument("--profile", help="validate one profile against the current snapshot")
+    parser.add_argument("--compare-profiles", nargs=2, metavar=("A", "B"), help="compare two profiles")
+    parser.add_argument("--who-uses", help="show which profiles reference a component")
+    parser.add_argument("--profiles-report", action="store_true", help="generate profile documents and reports")
+    parser.add_argument("--list-profiles", action="store_true", help="list known profiles")
     args = parser.parse_args(argv)
+    if args.list_profiles:
+        return cmd_list_profiles(args)
+    if args.compare_profiles:
+        return cmd_compare_profiles(args)
+    if args.who_uses:
+        return cmd_who_uses(args)
+    if args.profiles_report:
+        return cmd_profiles_report(args)
+    if args.profile:
+        return cmd_profile(args)
     if args.report_only:
         return cmd_report_only(args)
     if args.accept_baseline:

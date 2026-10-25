@@ -1,0 +1,90 @@
+schema_version: 1
+id: codex
+name: Codex CLI
+profile_version: 1
+status: active
+scope: public
+extends:
+  - base
+description: >-
+  Codex CLI 0.164.0 with the ponytail plugin, its built-in skills, the canonical
+  shared skill store, and the MCP servers configured in ~/.codex/config.toml.
+harnesses:
+  required:
+    - ref: harness-codex-cli
+      ownership: directly_configured
+      version: "0.164.0"
+plugins:
+  required:
+    - ref: plugin-ponytail
+      ownership: directly_configured
+      version: "5.3.2"
+      note: Shared with Claude Code and OMP at the same version.
+mcps:
+  required:
+    - ref: mcp-browseros-neo
+      ownership: directly_configured
+      note: Local BrowserOS relay on 127.0.0.1:9010.
+    - ref: mcp-pencil
+      ownership: directly_configured
+  optional:
+    - ref: mcp-graphify
+      ownership: directly_configured
+      note: Third-party remote endpoint; upstream not fully verified.
+skills:
+  built_in:
+    - ref: skill-imagegen
+      ownership: built_in
+      managed_by: harness-codex-cli
+    - ref: skill-openai-docs
+      ownership: built_in
+      managed_by: harness-codex-cli
+    - ref: skill-review-agent
+      ownership: built_in
+      managed_by: harness-codex-cli
+    - ref: skill-skill-creator-built-in
+      ownership: built_in
+      managed_by: harness-codex-cli
+    - ref: skill-skill-installer
+      ownership: built_in
+      managed_by: harness-codex-cli
+  canonical_shared:
+    - ref: skill-code-review
+      ownership: canonical_shared
+      reason: Canonical store copy consumed by Codex through $HOME/.agents/skills.
+hooks:
+  plugin_managed:
+    - ref: hook-ponytail-hooks-codex
+      ownership: plugin_managed
+      managed_by: plugin-ponytail
+  project_local:
+    - ref: hook-codex-project-hooks-team-lead
+      ownership: project_local
+      reason: >-
+        Project-local .codex/hooks.json for a private project on an external volume;
+        inactive while the volume is unmounted.
+environment_variables:
+  optional: []
+requirements:
+  commands:
+    - codex
+  files:
+    - ~/.codex/config.toml
+  directories:
+    - ~/.codex/skills
+    - ~/.agents/skills
+external_dependencies:
+  - ref: external-nvme
+    required: false
+    reason: >-
+      Project-local Codex trust entries and hooks live on an external volume; the
+      profile works without them.
+    scope: private
+platforms:
+  - linux
+notes: >-
+  Codex reads $HOME/.agents/skills as its USER skill scope and follows symlinked
+  skill folders, so the canonical store needs no copy. Built-in skills stay in
+  $CODEX_HOME/.system.
+evidence_level: Verified locally
+last_verified: "2026-10-25"

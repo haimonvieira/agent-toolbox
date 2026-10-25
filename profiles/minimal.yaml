@@ -1,0 +1,45 @@
+schema_version: 1
+id: minimal
+name: Minimal agent setup
+profile_version: 1
+status: active
+scope: public
+extends:
+  - base
+description: >-
+  The smallest useful setup that this environment supports: one terminal harness,
+  the canonical skill store, and no optional integrations. Designed for a quick
+  start or a constrained machine, not for feature parity.
+harnesses:
+  required:
+    - ref: harness-opencode
+      ownership: directly_configured
+      version: "2.1.4"
+plugins: {}
+mcps: {}
+skills:
+  optional:
+    - ref: skill-code-review
+      ownership: canonical_shared
+      reason: Available from the canonical store when needed.
+hooks: {}
+environment_variables:
+  optional: []
+requirements:
+  commands:
+    - opencode
+  files:
+    - ~/.config/opencode/opencode.json
+  directories:
+    - ~/.agents/skills
+external_dependencies: []
+platforms:
+  - linux
+notes: >-
+  Intentionally excluded: marketplace plugins (ponytail, superpowers, security-guidance,
+  sonarqube, coderabbit, lethe, best-of), all MCP servers (design, browser, cloud,
+  email, knowledge-graph and notebook integrations), the OpenCode orchestration plugin
+  and its injected MCP servers, editor integrations, and OMP-specific components.
+  Adding them later does not invalidate this profile.
+evidence_level: Verified locally
+last_verified: "2026-10-25"

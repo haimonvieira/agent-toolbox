@@ -1,0 +1,126 @@
+schema_version: 1
+id: opencode-go
+name: OpenCode (Go provider)
+profile_version: 1
+status: active
+scope: public
+extends:
+  - base
+description: >-
+  OpenCode 2.1.4 running the oh-my-opencode-slim "opencode-go" preset, the npm
+  plugins configured in opencode.json, the MCP servers configured in the same
+  file, and the canonical skill store.
+harnesses:
+  required:
+    - ref: harness-opencode
+      ownership: directly_configured
+      version: "2.1.4"
+plugins:
+  required:
+    - ref: plugin-oh-my-opencode-slim
+      ownership: directly_configured
+      version: "3.0.6"
+      note: >-
+        Owns the "opencode-go" preset in ~/.config/opencode/oh-my-opencode-slim.json and
+        the injected MCP servers below.
+  optional:
+    - ref: plugin-envsitter-guard
+      ownership: directly_configured
+      version: "0.1.0"
+      note: Configured as envsitter-guard@latest; version floats.
+    - ref: plugin-opencode-mem
+      ownership: directly_configured
+      version: "2.34.0"
+      note: Configured as opencode-mem@latest; version floats.
+mcps:
+  required:
+    - ref: mcp-pencil
+      ownership: directly_configured
+      note: Local binary from the pen.dev desktop app.
+    - ref: mcp-browseros-neo
+      ownership: directly_configured
+      note: Local BrowserOS relay on 127.0.0.1:9010.
+    - ref: mcp-cloudflare-api
+      ownership: directly_configured
+      note: Official Cloudflare remote MCP.
+    - ref: mcp-figma
+      ownership: directly_configured
+      note: Official Figma remote MCP.
+    - ref: mcp-insomnia
+      ownership: directly_configured
+      version: "0.8.2"
+      note: Pinned npx invocation.
+    - ref: mcp-teams-mcp
+      ownership: directly_configured
+      version: "1.0.1"
+      note: Pinned npx invocation.
+  optional:
+    - ref: mcp-aas-core
+      ownership: directly_configured
+      version: "19.15.0"
+      note: Present but disabled in the OpenCode config.
+    - ref: mcp-obsidian-mcp-connector
+      ownership: directly_configured
+      note: Requires the Obsidian connector plugin.
+    - ref: mcp-graphify
+      ownership: directly_configured
+      note: Third-party remote endpoint; upstream not fully verified.
+  dynamic:
+    - ref: mcp-context7
+      ownership: plugin_injected
+      managed_by: plugin-oh-my-opencode-slim
+    - ref: mcp-gh-grep
+      ownership: plugin_injected
+      managed_by: plugin-oh-my-opencode-slim
+    - ref: mcp-omgskills
+      ownership: plugin_injected
+      managed_by: plugin-oh-my-opencode-slim
+  unresolved:
+    - ref: mcp-codegraph
+      ownership: unresolved
+      reason: npm package identity unrelated; the entry is disabled and preserved.
+    - ref: mcp-openagents
+      ownership: unresolved
+      reason: CLI upstream unidentified; the entry is disabled and preserved.
+skills:
+  optional:
+    - ref: skill-code-review
+      ownership: canonical_shared
+      reason: Canonical store copy; the profile requires the store, not this skill.
+hooks: {}
+environment_variables:
+  optional:
+    - name: CONTEXT7_API_KEY
+      required_by:
+        - mcp-context7
+      reason: Optional higher Context7 quota.
+    - name: HOSTINGER_API_TOKEN
+      required_by:
+        - mcp-hostinger-api
+      reason: Only needed if the optional Hostinger MCP is enabled.
+    - name: OA_WORKSPACE_TOKEN
+      required_by:
+        - mcp-openagents
+      reason: Only needed if the unresolved OpenAgents MCP is enabled.
+requirements:
+  commands:
+    - opencode
+  files:
+    - ~/.config/opencode/opencode.json
+    - ~/.config/opencode/oh-my-opencode-slim.json
+  directories:
+    - ~/.agents/skills
+    - ~/.cache/opencode/npm
+external_dependencies: []
+floating_versions:
+  - plugin-envsitter-guard
+  - plugin-opencode-mem
+platforms:
+  - linux
+notes: >-
+  The "opencode-go" preset selects model roles under the opencode-go provider
+  (for example opencode-go/minimax-m3 and opencode-go/qwen3.8-max). No provider
+  credentials belong in this profile. The injected MCP servers are owned by
+  oh-my-opencode-slim and must not be configured independently.
+evidence_level: Verified locally
+last_verified: "2026-10-25"

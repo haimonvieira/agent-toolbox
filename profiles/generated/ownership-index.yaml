@@ -1,0 +1,883 @@
+harness-claude-code:
+  category: harness
+  name: Claude Code
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+plugin-ponytail:
+  category: plugin
+  name: ponytail
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - codex
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-pencil:
+  category: mcp
+  name: pencil
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - codex
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-browseros-neo:
+  category: mcp
+  name: browseros-neo
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - codex
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+skill-code-review:
+  category: skill
+  name: code-review
+  evidence_level: Verified locally
+  canonical: true
+  divergent: false
+  profiles:
+  - claude-code
+  - codex
+  - full
+  - minimal
+  - opencode-go
+  ownership:
+  - canonical_shared
+  managed_by: []
+hook-ponytail-sessionstart-claude-code:
+  category: hook
+  name: ponytail SessionStart (Claude Code)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - full
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-ponytail
+hook-ponytail-subagentstart-claude-code:
+  category: hook
+  name: ponytail SubagentStart (Claude Code)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - full
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-ponytail
+hook-ponytail-userpromptsubmit-claude-code:
+  category: hook
+  name: ponytail UserPromptSubmit (Claude Code)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - claude-code
+  - full
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-ponytail
+harness-codex-cli:
+  category: harness
+  name: Codex CLI
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-graphify:
+  category: mcp
+  name: graphify
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+skill-imagegen:
+  category: skill
+  name: imagegen
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - built_in
+  managed_by:
+  - harness-codex-cli
+skill-openai-docs:
+  category: skill
+  name: openai-docs
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - built_in
+  managed_by:
+  - harness-codex-cli
+skill-review-agent:
+  category: skill
+  name: review-agent
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - built_in
+  managed_by:
+  - harness-codex-cli
+skill-skill-creator-built-in:
+  category: skill
+  name: skill-creator
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - built_in
+  managed_by:
+  - harness-codex-cli
+skill-skill-installer:
+  category: skill
+  name: skill-installer
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - built_in
+  managed_by:
+  - harness-codex-cli
+hook-ponytail-hooks-codex:
+  category: hook
+  name: ponytail hooks (Codex)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-ponytail
+hook-codex-project-hooks-team-lead:
+  category: hook
+  name: codex project hooks (team-lead)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - codex
+  - full
+  ownership:
+  - project_local
+  managed_by: []
+harness-opencode:
+  category: harness
+  name: OpenCode
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - minimal
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+harness-oh-my-pi-omp:
+  category: harness
+  name: Oh My Pi (OMP)
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []
+harness-freebuff:
+  category: harness
+  name: freebuff
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+harness-zed:
+  category: harness
+  name: Zed
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+harness-vs-code-chatgpt-extension:
+  category: harness
+  name: VS Code ChatGPT extension
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+harness-delta:
+  category: harness
+  name: Delta
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - directly_configured
+  managed_by: []
+plugin-superpowers:
+  category: plugin
+  name: superpowers
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-security-guidance:
+  category: plugin
+  name: security-guidance
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-sonarqube:
+  category: plugin
+  name: sonarqube
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-coderabbit:
+  category: plugin
+  name: coderabbit
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-lethe:
+  category: plugin
+  name: lethe
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-best-of:
+  category: plugin
+  name: best-of
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-feature-dev:
+  category: plugin
+  name: feature-dev
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-context7:
+  category: plugin
+  name: context7
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-42crunch-api-security-testing:
+  category: plugin
+  name: 42crunch-api-security-testing
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-oh-my-opencode-slim:
+  category: plugin
+  name: oh-my-opencode-slim
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+plugin-envsitter-guard:
+  category: plugin
+  name: envsitter-guard
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+plugin-opencode-mem:
+  category: plugin
+  name: opencode-mem
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+plugin-github:
+  category: plugin
+  name: github
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+mcp-cloudflare-api:
+  category: mcp
+  name: cloudflare-api
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-figma:
+  category: mcp
+  name: figma
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-insomnia:
+  category: mcp
+  name: insomnia
+  evidence_level: Verified upstream
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-teams-mcp:
+  category: mcp
+  name: teams-mcp
+  evidence_level: Verified upstream
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-aas-core:
+  category: mcp
+  name: aas-core
+  evidence_level: Verified upstream
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-codebase-memory:
+  category: mcp
+  name: codebase-memory
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-hostinger-api:
+  category: mcp
+  name: hostinger-api
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-gemini-notebook-mcp:
+  category: mcp
+  name: gemini-notebook-mcp
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-obsidian-mcp-connector:
+  category: mcp
+  name: obsidian-mcp-connector
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - directly_configured
+  managed_by: []
+mcp-context7:
+  category: mcp
+  name: context7
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - plugin_injected
+  managed_by:
+  - plugin-oh-my-opencode-slim
+mcp-gh-grep:
+  category: mcp
+  name: gh_grep
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - plugin_injected
+  managed_by:
+  - plugin-oh-my-opencode-slim
+mcp-omgskills:
+  category: mcp
+  name: omgskills
+  evidence_level: Locally detected, upstream not verified
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - opencode-go
+  ownership:
+  - plugin_injected
+  managed_by:
+  - plugin-oh-my-opencode-slim
+mcp-codegraph:
+  category: mcp
+  name: codegraph
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - unresolved
+  managed_by: []
+mcp-openagents:
+  category: mcp
+  name: openagents
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  - opencode-go
+  ownership:
+  - unresolved
+  managed_by: []
+mcp-doop:
+  category: mcp
+  name: doop
+  evidence_level: Unknown
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - unresolved
+  managed_by: []
+mcp-starry:
+  category: mcp
+  name: starry
+  evidence_level: Unknown
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - unresolved
+  managed_by: []
+skill-autofix:
+  category: skill
+  name: autofix
+  evidence_level: Verified locally
+  canonical: true
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - canonical_shared
+  managed_by: []
+skill-graphify:
+  category: skill
+  name: graphify
+  evidence_level: Locally detected, upstream not verified
+  canonical: true
+  divergent: true
+  profiles:
+  - full
+  ownership:
+  - canonical_shared
+  managed_by: []
+skill-find-docs:
+  category: skill
+  name: find-docs
+  evidence_level: Inferred
+  canonical: true
+  divergent: true
+  profiles:
+  - full
+  ownership:
+  - canonical_shared
+  managed_by: []
+skill-code-review-plugin:
+  category: skill
+  name: code-review
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+skill-autofix-plugin:
+  category: skill
+  name: autofix
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  ownership:
+  - plugin_managed
+  managed_by: []
+hook-security-guidance-sessionstart:
+  category: hook
+  name: security-guidance SessionStart
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-security-guidance
+hook-security-guidance-userpromptsubmit:
+  category: hook
+  name: security-guidance UserPromptSubmit
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-security-guidance
+hook-security-guidance-posttooluse:
+  category: hook
+  name: security-guidance PostToolUse
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-security-guidance
+hook-security-guidance-stop:
+  category: hook
+  name: security-guidance Stop
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-security-guidance
+hook-sonarqube-sessionstart:
+  category: hook
+  name: sonarqube SessionStart
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-sonarqube
+hook-superpowers-sessionstart:
+  category: hook
+  name: superpowers SessionStart
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-superpowers
+hook-lethe-refresh-index:
+  category: hook
+  name: lethe refresh-index
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-lethe
+hook-orca-agent-status-extension:
+  category: hook
+  name: orca-agent-status extension
+  evidence_level: Inferred
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-orca-agent-status
+hook-orca-prefill-extension:
+  category: hook
+  name: orca-prefill extension
+  evidence_level: Inferred
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by:
+  - plugin-orca-prefill
+hook-pr-template-guard-extension:
+  category: hook
+  name: pr-template-guard extension
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - full
+  - omp
+  ownership:
+  - directly_configured
+  managed_by:
+  - plugin-pr-template-guard
+plugin-orca-agent-status:
+  category: plugin
+  name: orca-agent-status
+  evidence_level: Inferred
+  canonical: false
+  divergent: false
+  profiles:
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-orca-prefill:
+  category: plugin
+  name: orca-prefill
+  evidence_level: Inferred
+  canonical: false
+  divergent: false
+  profiles:
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-orca-titlebar-spinner:
+  category: plugin
+  name: orca-titlebar-spinner
+  evidence_level: Inferred
+  canonical: false
+  divergent: false
+  profiles:
+  - omp
+  ownership:
+  - plugin_managed
+  managed_by: []
+plugin-pr-template-guard:
+  category: plugin
+  name: pr-template-guard
+  evidence_level: Verified locally
+  canonical: false
+  divergent: false
+  profiles:
+  - omp
+  ownership:
+  - directly_configured
+  managed_by: []

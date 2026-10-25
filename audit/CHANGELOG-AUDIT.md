@@ -138,3 +138,29 @@ documents. See `docs/updating.md`.
 - Commit `06504dd` on `docs/toolbox-audit`, based on `origin/main` (`d40efaed`).
 - Pushed without force; PR #1 opened against `main`.
 - `main` and the curated catalog were not modified.
+
+## 2026-10-25 — Phase 5: versioned environment profiles
+
+### Added
+
+- `profiles/` — `base`, `opencode-go`, `omp`, `codex`, `claude-code`, `minimal`, `full`.
+- `schemas/profile.schema.json`.
+- `scripts/profile_engine.py` — profile model, inheritance, ownership, comparison, scoring.
+- `docs/profiles.md`, `docs/profiles/<id>.md` (generated), `profiles/README.md`.
+- `profiles/generated/` — ownership index, relationships, reproducibility snapshot (generated).
+- `audit/profile-reproducibility.md` (generated).
+- `tests/test_profiles.py`.
+
+### Changed
+
+- `scripts/audit.py` — profile commands, profile drift findings, profile validation in `verify`.
+- `config/drift-policy.yaml` — profile severity mapping.
+- `config/backlog.yaml` — profile backlog seeds.
+- `.github/workflows/validate-toolbox.yml` — profile validation and generated-artifact freshness.
+- `inventory/plugins.yaml` — VS Code extension renamed to its marketplace id `openai.chatgpt`.
+- `README.md` — environment profiles section.
+
+### Safety
+
+- Profiles are declarative only: no install, removal, config change, symlink change, or execution.
+- No secret values, private names, or private URLs in profiles; environment variables are names only.
