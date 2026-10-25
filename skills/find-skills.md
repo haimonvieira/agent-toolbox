@@ -6,18 +6,8 @@ Helps users discover and install agent skills when they ask questions like "how 
 
 ## Origem
 
-| Campo | Valor |
-|---|---|
-| Repositório | https://github.com/anthropics/skills |
-| Caminho | `skills/find-skills/SKILL.md` |
-| Licença | MIT |
-| Confiança | provável |
-
-```bash
-npx skills add anthropics/skills@find-skills
-```
-
-A versão local foi estendida para usar o catálogo omgskills como fonte primária.
+Não documentada. A skill está instalada, mas o arquivo não cita repositório
+nem autor. Para completar, edite `data/provenance.json`.
 
 ## Tamanho
 

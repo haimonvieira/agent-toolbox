@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Setup de agente de IA documentado: skills instaladas, servidores MCP e recomendações.",
   "repository": "https://github.com/haimonvieira/agent-toolbox",
-  "generated_at": "2026-10-25T06:14:35Z",
+  "generated_at": "2026-10-25T10:40:58Z",
   "counts": {
     "skills": 41,
     "mcps": 10,
-    "recommended": 11,
-    "origins_known": 8
+    "recommended": 12,
+    "origins_known": 6
   },
   "skills": [
     {
@@ -103,12 +103,7 @@
       "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill. Searches the omgskills public catalog (55k+ skills) via MCP, checks the skills.sh leaderboard, and evaluates quality before recommending.",
       "resources": {},
       "origin": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/find-skills/SKILL.md",
-        "license": "MIT",
-        "install": "npx skills add anthropics/skills@find-skills",
-        "confidence": "provável",
-        "note": "A versão local foi estendida para usar o catálogo omgskills como fonte primária."
+        "confidence": "nao_declarada"
       },
       "page": "skills/find-skills.md"
     },
@@ -143,11 +138,7 @@
         "references": true
       },
       "origin": {
-        "repo": "https://github.com/anthropics/skills",
-        "path": "skills/gh-cli/SKILL.md",
-        "license": "MIT",
-        "install": "npx skills add anthropics/skills@gh-cli",
-        "confidence": "provável"
+        "confidence": "nao_declarada"
       },
       "page": "skills/gh-cli.md"
     },
@@ -439,12 +430,13 @@
         "assets": true
       },
       "origin": {
-        "repo": "local",
-        "path": "skills/skill-creator/",
-        "license": "Apache-2.0 (partes da Anthropic) + MIT (partes autorais)",
-        "install": "incluso neste repositório em mine/skill-creator/",
+        "repo": "https://github.com/anthropics/skills",
+        "path": "skills/skill-creator/SKILL.md",
+        "license": "Apache-2.0 (código original da Anthropic) + MIT (partes autorais)",
+        "install": "npx skills add anthropics/skills@skill-creator",
         "confidence": "confirmado",
-        "note": "Baseada no skill-creator da Anthropic (Apache 2.0). O SKILL.md, o servidor MCP e os validadores são autorais."
+        "note": "A versão local foi reescrita (92 → 463 linhas) e ganhou servidor MCP, validadores e testes. O código de terceiros está preservado em mine/skill-creator/ com LICENSE.txt.",
+        "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
       },
       "page": "skills/skill-creator.md"
     },
@@ -686,6 +678,26 @@
     }
   ],
   "recommended": [
+    {
+      "slug": "find-skills",
+      "name": "find-skills",
+      "category": "discovery",
+      "verdict": "essencial",
+      "why": "Pesquisa catálogos de skills por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. Neste ambiente foi estendida para consultar o omgskills via MCP como fonte primária.",
+      "tags": [
+        "descoberta",
+        "instalacao",
+        "catalogo"
+      ],
+      "repo": "local",
+      "path": "skills/find-skills/",
+      "commit": "",
+      "license": "MIT",
+      "stars": null,
+      "last_push": null,
+      "install": null,
+      "page": "recommended/find-skills.md"
+    },
     {
       "slug": "obra-superpowers-writing-skills",
       "name": "writing-skills",

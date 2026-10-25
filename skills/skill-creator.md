@@ -8,12 +8,16 @@ Cria, avalia e melhora skills para agentes de IA seguindo práticas de referênc
 
 | Campo | Valor |
 |---|---|
-| Repositório | local |
-| Caminho | `skills/skill-creator/` |
-| Licença | Apache-2.0 (partes da Anthropic) + MIT (partes autorais) |
+| Repositório | https://github.com/anthropics/skills |
+| Caminho | `skills/skill-creator/SKILL.md` |
+| Licença | Apache-2.0 (código original da Anthropic) + MIT (partes autorais) |
 | Confiança | confirmado |
 
-Baseada no skill-creator da Anthropic (Apache 2.0). O SKILL.md, o servidor MCP e os validadores são autorais.
+```bash
+npx skills add anthropics/skills@skill-creator
+```
+
+A versão local foi reescrita (92 → 463 linhas) e ganhou servidor MCP, validadores e testes. O código de terceiros está preservado em mine/skill-creator/ com LICENSE.txt.
 
 ## Recursos
 

@@ -30,12 +30,13 @@
       "confidence": "confirmado"
     },
     "skill-creator": {
-      "repo": "local",
-      "path": "skills/skill-creator/",
-      "license": "Apache-2.0 (partes da Anthropic) + MIT (partes autorais)",
-      "install": "incluso neste repositório em mine/skill-creator/",
+      "repo": "https://github.com/anthropics/skills",
+      "path": "skills/skill-creator/SKILL.md",
+      "license": "Apache-2.0 (código original da Anthropic) + MIT (partes autorais)",
+      "install": "npx skills add anthropics/skills@skill-creator",
       "confidence": "confirmado",
-      "note": "Baseada no skill-creator da Anthropic (Apache 2.0). O SKILL.md, o servidor MCP e os validadores são autorais."
+      "note": "A versão local foi reescrita (92 → 463 linhas) e ganhou servidor MCP, validadores e testes. O código de terceiros está preservado em mine/skill-creator/ com LICENSE.txt.",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44"
     },
     "incident-response": {
       "repo": "local",
@@ -44,21 +45,6 @@
       "install": "incluso neste repositório em mine/incident-response/",
       "confidence": "confirmado",
       "note": "Autoral."
-    },
-    "find-skills": {
-      "repo": "https://github.com/anthropics/skills",
-      "path": "skills/find-skills/SKILL.md",
-      "license": "MIT",
-      "install": "npx skills add anthropics/skills@find-skills",
-      "confidence": "provável",
-      "note": "A versão local foi estendida para usar o catálogo omgskills como fonte primária."
-    },
-    "gh-cli": {
-      "repo": "https://github.com/anthropics/skills",
-      "path": "skills/gh-cli/SKILL.md",
-      "license": "MIT",
-      "install": "npx skills add anthropics/skills@gh-cli",
-      "confidence": "provável"
     }
   },
   "unknown": [
@@ -68,8 +54,10 @@
     "browser-batch",
     "context-map",
     "exa-search",
+    "find-skills",
     "firecrawl",
     "free-tts",
+    "gh-cli",
     "github-search",
     "hermes-codebase-inspection",
     "hermes-github-auth",

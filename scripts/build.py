@@ -68,28 +68,40 @@ def load():
     by_key = {(p["slug"], p["skill"]): p for p in pins}
     rec = []
     for c in curated.get("entries", []):
-        pin = by_key.get(tuple(c["slug_source"]))
-        if not pin or pin.get("error"):
-            continue
         e = dict(c)
-        e.update({
-            "repo": pin["repo"], "repo_slug": pin["slug"], "skill": pin["skill"],
-            "path": pin["path"], "commit": pin["commit"], "license": pin["license"],
-            "license_ok_to_copy": pin.get("license_ok_to_copy", False),
-            "stars": pin["stars"], "pushed_at": pin["pushed_at"],
-            "repo_description": pin.get("description"), "commit_short": pin["commit"][:12],
-        })
-        e.pop("slug_source", None)
+        if e.get("local"):
+            # Skill instalada localmente, sem upstream confirmável.
+            e.update({
+                "repo": "local", "repo_slug": "local", "skill": e["slug"],
+                "path": f"skills/{e['slug']}/", "commit": "", "commit_short": "",
+                "license": "MIT", "license_ok_to_copy": True,
+                "stars": None, "pushed_at": None, "repo_description": None,
+            })
+        else:
+            pin = by_key.get(tuple(c["slug_source"]))
+            if not pin or pin.get("error"):
+                continue
+            e.update({
+                "repo": pin["repo"], "repo_slug": pin["slug"], "skill": pin["skill"],
+                "path": pin["path"], "commit": pin["commit"], "license": pin["license"],
+                "license_ok_to_copy": pin.get("license_ok_to_copy", False),
+                "stars": pin["stars"], "pushed_at": pin["pushed_at"],
+                "repo_description": pin.get("description"), "commit_short": pin["commit"][:12],
+            })
+            e.pop("slug_source", None)
         rec.append(e)
 
     for s in skills:
         s["category"] = SKILL_CATEGORY.get(s["dir"], "other")
         s["origin"] = prov.get("known", {}).get(s["dir"])
 
-    return skills, mcps, prov, rec, curated.get("categories", {})
+    discovery = j("discovery.json") or {"intro": "", "entries": []}
+    return skills, mcps, prov, rec, curated.get("categories", {}), discovery
 
 
 def install_cmd(e):
+    if e.get("local"):
+        return None
     if e["license"] is None:
         return None
     return f'npx skills add {e["repo_slug"]}@{e["skill"]}'
@@ -128,7 +140,7 @@ def build_catalog(skills, mcps, rec):
     }
 
 
-def build_readme(skills, mcps, prov, rec, cur_cats):
+def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
     by_cat = defaultdict(list)
     for s in skills:
         by_cat[s["category"]].append(s)
@@ -158,6 +170,24 @@ def build_readme(skills, mcps, prov, rec, cur_cats):
     A("")
     A("---")
     A("")
+    A("## Como descobrir skills")
+    A("")
+    A(discovery.get("intro", ""))
+    A("")
+    for d in discovery.get("entries", []):
+        A(f"### {d['name']}")
+        A("")
+        A(d["what"])
+        A("")
+        A(f"- Como usar: `{d['how']}`" if d["kind"] in ("mcp", "cli") else f"- Como usar: {d['how']}")
+        A(f"- Onde: {d['url']}")
+        A(f"- Escopo: {d['scope']} · Autenticação: {d['auth']}")
+        if d.get("caveat"):
+            A(f"- Ressalva: {d['caveat']}")
+        A("")
+
+    A("---")
+    A("")
     A("## Recomendações")
     A("")
     A("Estas 11 skills foram verificadas uma a uma: o commit existe, o arquivo está no caminho")
@@ -180,10 +210,14 @@ def build_readme(skills, mcps, prov, rec, cur_cats):
             A("")
             A(e["why"])
             A("")
-            A(f"- Repositório: [{e['repo_slug']}]({e['repo']}) — {e['stars']:,} stars, último push {e['pushed_at']}")
-            A(f"- Caminho: `{e['path']}`")
-            A(f"- Commit: `{e['commit_short']}`")
-            A(f"- Licença: {e['license'] or 'não declarada'}")
+            if e.get("local"):
+                A(f"- Origem: instalada neste ambiente (sem upstream confirmável)")
+                A(f"- Caminho: `{e['path']}`")
+            else:
+                A(f"- Repositório: [{e['repo_slug']}]({e['repo']}) — {e['stars']:,} stars, último push {e['pushed_at']}")
+                A(f"- Caminho: `{e['path']}`")
+                A(f"- Commit: `{e['commit_short']}`")
+                A(f"- Licença: {e['license'] or 'não declarada'}")
             cmd = install_cmd(e)
             if cmd:
                 A(f"- Instalar: `{cmd}`")
@@ -341,15 +375,24 @@ def build_recommended_pages(rec, cur_cats):
              f"Classificação: {e['verdict']}.", "", "## Por que está aqui", "", e["why"], ""]
         if e.get("warning"):
             L += [f"Atenção: {e['warning']}", ""]
-        L += ["## Origem", "", "| Campo | Valor |", "|---|---|",
-              f"| Repositório | [{e['repo_slug']}]({e['repo']}) |",
-              f"| Caminho | `{e['path']}` |", f"| Commit | `{e['commit']}` |",
-              f"| Licença | {e['license'] or 'não declarada'} |",
-              f"| Stars | {e['stars']:,} |", f"| Último push | {e['pushed_at']} |",
-              f"| Tags | {', '.join('`'+t+'`' for t in e['tags'])} |", ""]
+        if e.get("local"):
+            L += ["## Origem", "",
+                  "Instalada neste ambiente. Não há upstream confirmável: circulam cópias do",
+                  "mesmo texto em vários repositórios e o original não pôde ser localizado.", "",
+                  f"Caminho: `{e['path']}`", ""]
+        else:
+            L += ["## Origem", "", "| Campo | Valor |", "|---|---|",
+                  f"| Repositório | [{e['repo_slug']}]({e['repo']}) |",
+                  f"| Caminho | `{e['path']}` |", f"| Commit | `{e['commit']}` |",
+                  f"| Licença | {e['license'] or 'não declarada'} |",
+                  f"| Stars | {e['stars']:,} |", f"| Último push | {e['pushed_at']} |",
+                  f"| Tags | {', '.join('`'+t+'`' for t in e['tags'])} |", ""]
         L += ["## Instalar", ""]
         cmd = install_cmd(e)
-        if cmd:
+        if e.get("local"):
+            L += ["Incluída em `mine/` neste repositório. Copie para o diretório de skills do",
+                  "seu agente.", ""]
+        elif cmd:
             L += ["```bash", cmd, "```", "",
                   "No commit exato deste catálogo:", "",
                   "```bash", f"git clone {e['repo']} /tmp/s",
@@ -367,7 +410,7 @@ def build_recommended_pages(rec, cur_cats):
 
 
 def main():
-    skills, mcps, prov, rec, cur_cats = load()
+    skills, mcps, prov, rec, cur_cats, discovery = load()
     if not skills:
         print("ERRO: rode scripts/gather.py primeiro.", file=sys.stderr)
         return 1
@@ -375,7 +418,7 @@ def main():
     (ROOT / "catalog.json").write_text(
         json.dumps(build_catalog(skills, mcps, rec), indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8")
-    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats), encoding="utf-8")
+    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats, discovery), encoding="utf-8")
     sp = build_skill_pages(skills)
     ep = build_mcp_pages(mcps)
     rp = build_recommended_pages(rec, cur_cats)

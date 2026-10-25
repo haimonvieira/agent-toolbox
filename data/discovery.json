@@ -1,0 +1,46 @@
+{
+  "_comment": "A camada de descoberta: como encontrar skill antes de instalar. Documentada porque foi o que motivou o repositório.",
+  "intro": "O ecossistema tem dezenas de milhares de skills. Estes são os três caminhos que eu uso para encontrar uma skill quando não sei que ela existe.",
+  "entries": [
+    {
+      "name": "find-skills",
+      "kind": "skill",
+      "what": "Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill pra X', é ela que roda.",
+      "how": "Está instalada aqui. Para instalar em outro ambiente: copie de mine/ ou escreva a sua.",
+      "url": "https://skills.sh/",
+      "auth": "nenhuma",
+      "scope": "agrega os catálogos abaixo",
+      "caveat": "O arquivo local foi estendido para consultar o omgskills via MCP como fonte primária. A origem original não é confirmável: circulam cópias do mesmo texto em vários repositórios."
+    },
+    {
+      "name": "omgskills",
+      "kind": "mcp",
+      "what": "Catálogo público com cerca de 55 mil skills. Exposto como servidor MCP read-only, sem autenticação. Traz plano de instalação pinada (repo + path + commit) quando consegue resolver.",
+      "how": "minis-mcp-cli add --name omgskills --url https://omgskills.com/mcp",
+      "url": "https://omgskills.com/mcp",
+      "auth": "nenhuma",
+      "scope": "≈55.000 skills",
+      "caveat": "Os metadados nem sempre estão atualizados: o star count do devops-engineer vinha como 8.810 quando o repositório tinha 12.043. Resolva o pin na fonte antes de confiar."
+    },
+    {
+      "name": "skills.sh (npx skills)",
+      "kind": "cli",
+      "what": "CLI do ecossistema de skills e leaderboard público ordenado por número de instalações. É o caminho mais rápido para instalar uma skill que você já sabe qual é.",
+      "how": "npx skills find <consulta>  ·  npx skills add <owner/repo@skill>  ·  npx skills update",
+      "url": "https://skills.sh/",
+      "auth": "nenhuma",
+      "scope": "leaderboard público",
+      "caveat": "Sem pin por padrão: instala do branch, então o que você instala hoje pode não ser o que está amanhã."
+    },
+    {
+      "name": "AAS — Agentic Awesome Skills",
+      "kind": "mcp",
+      "what": "Catálogo de 2.750 skills com servidor MCP local (stdio) e CLI. O diferencial é o compose_stack: em vez de buscar uma skill por vez, você declara as capacidades do projeto e ele monta um stack, cobrindo cada capacidade ou reportando lacuna. Expõe search_skills, get_skill, compose_stack, inspect_stack e diff_stack.",
+      "how": "git clone https://github.com/sickn33/agentic-awesome-skills   # MIT no código, CC BY 4.0 no conteúdo",
+      "url": "https://aaskills.tech/",
+      "auth": "nenhuma",
+      "scope": "≈2.750 skills",
+      "caveat": "O Core não rankeia nem recomenda — ele só registra e valida a escolha do agente. Útil quando o problema é cobertura, não descoberta."
+    }
+  ]
+}

@@ -6,16 +6,8 @@ GitHub CLI (gh) operational quick reference for repos, issues, pull requests, Ac
 
 ## Origem
 
-| Campo | Valor |
-|---|---|
-| Repositório | https://github.com/anthropics/skills |
-| Caminho | `skills/gh-cli/SKILL.md` |
-| Licença | MIT |
-| Confiança | provável |
-
-```bash
-npx skills add anthropics/skills@gh-cli
-```
+Não documentada. A skill está instalada, mas o arquivo não cita repositório
+nem autor. Para completar, edite `data/provenance.json`.
 
 ## Recursos
 

@@ -17,12 +17,61 @@ Para consumir por agente: [`catalog.json`](catalog.json).
 
 ---
 
+## Como descobrir skills
+
+O ecossistema tem dezenas de milhares de skills. Estes são os três caminhos que eu uso para encontrar uma skill quando não sei que ela existe.
+
+### find-skills
+
+Uma skill que pesquisa catálogos por palavra-chave e devolve candidatos com install count e origem. É o ponto de entrada: quando peço 'acha uma skill pra X', é ela que roda.
+
+- Como usar: Está instalada aqui. Para instalar em outro ambiente: copie de mine/ ou escreva a sua.
+- Onde: https://skills.sh/
+- Escopo: agrega os catálogos abaixo · Autenticação: nenhuma
+- Ressalva: O arquivo local foi estendido para consultar o omgskills via MCP como fonte primária. A origem original não é confirmável: circulam cópias do mesmo texto em vários repositórios.
+
+### omgskills
+
+Catálogo público com cerca de 55 mil skills. Exposto como servidor MCP read-only, sem autenticação. Traz plano de instalação pinada (repo + path + commit) quando consegue resolver.
+
+- Como usar: `minis-mcp-cli add --name omgskills --url https://omgskills.com/mcp`
+- Onde: https://omgskills.com/mcp
+- Escopo: ≈55.000 skills · Autenticação: nenhuma
+- Ressalva: Os metadados nem sempre estão atualizados: o star count do devops-engineer vinha como 8.810 quando o repositório tinha 12.043. Resolva o pin na fonte antes de confiar.
+
+### skills.sh (npx skills)
+
+CLI do ecossistema de skills e leaderboard público ordenado por número de instalações. É o caminho mais rápido para instalar uma skill que você já sabe qual é.
+
+- Como usar: `npx skills find <consulta>  ·  npx skills add <owner/repo@skill>  ·  npx skills update`
+- Onde: https://skills.sh/
+- Escopo: leaderboard público · Autenticação: nenhuma
+- Ressalva: Sem pin por padrão: instala do branch, então o que você instala hoje pode não ser o que está amanhã.
+
+### AAS — Agentic Awesome Skills
+
+Catálogo de 2.750 skills com servidor MCP local (stdio) e CLI. O diferencial é o compose_stack: em vez de buscar uma skill por vez, você declara as capacidades do projeto e ele monta um stack, cobrindo cada capacidade ou reportando lacuna. Expõe search_skills, get_skill, compose_stack, inspect_stack e diff_stack.
+
+- Como usar: `git clone https://github.com/sickn33/agentic-awesome-skills   # MIT no código, CC BY 4.0 no conteúdo`
+- Onde: https://aaskills.tech/
+- Escopo: ≈2.750 skills · Autenticação: nenhuma
+- Ressalva: O Core não rankeia nem recomenda — ele só registra e valida a escolha do agente. Útil quando o problema é cobertura, não descoberta.
+
+---
+
 ## Recomendações
 
 Estas 11 skills foram verificadas uma a uma: o commit existe, o arquivo está no caminho
 indicado e a licença foi conferida. Cada uma tem uma ficha com o commit exato.
 
 ### Escrever e encontrar skills
+
+#### [find-skills](recommended/find-skills.md) · essencial
+
+Pesquisa catálogos de skills por palavra-chave e devolve candidatos com install count e origem. É o que roda quando peço 'acha uma skill para X'. Neste ambiente foi estendida para consultar o omgskills via MCP como fonte primária.
+
+- Origem: instalada neste ambiente (sem upstream confirmável)
+- Caminho: `skills/find-skills/`
 
 #### [writing-for-agents](recommended/mattpocock-writing-for-agents.md) · recomendada
 
@@ -146,7 +195,7 @@ Cobre Cloudflare, Docker, GCP, Kubernetes e GitOps. Consta aqui apenas como refe
 
 ## Inventário
 
-Skills instaladas no meu ambiente. 8 têm origem confirmada, 33 não. As
+Skills instaladas no meu ambiente. 6 têm origem confirmada, 35 não. As
 sem origem aparecem marcadas como não documentadas, e não com uma origem suposta.
 
 | Categoria | Skills |
@@ -163,13 +212,13 @@ sem origem aparecem marcadas como não documentadas, e não com uma origem supos
 
 | Skill | O que faz | Origem |
 |---|---|---|
-| [`find-skills`](skills/find-skills.md) | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a … | [anthropics/skills](https://github.com/anthropics/skills) |
+| [`find-skills`](skills/find-skills.md) | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a … | não documentada |
 | [`mcp-connector`](skills/mcp-connector.md) | Connect to and interact with Model Context Protocol (MCP) servers: discover tools, initialize sessio… | não documentada |
 | [`production-agent-public`](skills/production-agent-public.md) | 生产级 ReAct Agent 技能。当用户说"生产级方案"、"可部署代码"、"Production Agent"、 "ReAct格式"、"帮我写一个能跑的"、"长期稳定运行"、"生产环境"、"直接部… | não documentada |
 | [`saa-orchestrator`](skills/saa-orchestrator.md) | Sistema Agente Autônomo que orquestra o ciclo Executor→Crítico→Otimizador e delega para Multi-Agente… | não documentada |
 | [`self-improving-agent`](skills/self-improving-agent.md) | Self-improvement logging and closed-loop feedback: Trigger when a command or operation fails, the us… | não documentada |
 | [`self-learning`](skills/self-learning.md) | Capture a hard-won "golden path" from the current session as a reusable Agent Skill, so future sessi… | não documentada |
-| [`skill-creator`](skills/skill-creator.md) | Cria, avalia e melhora skills para agentes de IA seguindo práticas de referência (MCP, OpenAI, Claud… | local |
+| [`skill-creator`](skills/skill-creator.md) | Cria, avalia e melhora skills para agentes de IA seguindo práticas de referência (MCP, OpenAI, Claud… | [anthropics/skills](https://github.com/anthropics/skills) |
 | [`skill-orchestrator`](skills/skill-orchestrator.md) | Planejar seleção de capacidades e orientar execução pelo coordenador. Usar em tarefas multi-etapa e … | não documentada |
 | [`tool-builder`](skills/tool-builder.md) | Create structured tools and APIs for autonomous agents to execute actions and retrieve external data… | não documentada |
 
@@ -203,7 +252,7 @@ sem origem aparecem marcadas como não documentadas, e não com uma origem supos
 
 | Skill | O que faz | Origem |
 |---|---|---|
-| [`gh-cli`](skills/gh-cli.md) | GitHub CLI (gh) operational quick reference for repos, issues, pull requests, Actions, releases, aut… | [anthropics/skills](https://github.com/anthropics/skills) |
+| [`gh-cli`](skills/gh-cli.md) | GitHub CLI (gh) operational quick reference for repos, issues, pull requests, Actions, releases, aut… | não documentada |
 | [`github-search`](skills/github-search.md) | Search GitHub repositories, issues, users, and code via the REST API. Use when the user asks to find… | não documentada |
 | [`hermes-github-auth`](skills/hermes-github-auth.md) | GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login. | não documentada |
 
