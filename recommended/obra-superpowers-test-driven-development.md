@@ -14,7 +14,7 @@ Exige o teste antes do código de produção, com o teste falhando primeiro. Faz
 | Caminho | `skills/test-driven-development/SKILL.md` |
 | Commit | `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b` |
 | Licença | MIT |
-| Stars | 304,780 |
+| Stars | 304,782 |
 | Último push | 2026-10-23 |
 | Tags | `tdd`, `testes` |
 

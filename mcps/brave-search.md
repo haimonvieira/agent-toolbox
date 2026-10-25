@@ -1,22 +1,84 @@
 # brave-search
 
-Servidor MCP via stdio. Estado atual: ativo.
+Servidor MCP via stdio. Estado no ambiente de origem: ativo.
 
-## Registrar
+## Configurar
+
+A mesma configuração nos três formatos. Troque `COLE_O_VALOR_AQUI` pelo valor real e mantenha a credencial fora do repositório.
+
+### omp
+
+Em `.omp/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "COLE_O_VALOR_AQUI"
+      }
+    }
+  }
+}
+```
+
+### Claude Code
+
+Em `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "COLE_O_VALOR_AQUI"
+      }
+    }
+  }
+}
+```
+
+### OpenCode
+
+Em `opencode.json ou opencode.jsonc`:
+
+```json
+{
+  "mcp": {
+    "brave-search": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "enabled": true,
+      "environment": {
+        "BRAVE_API_KEY": "COLE_O_VALOR_AQUI"
+      }
+    }
+  }
+}
+```
+
+Ou, no Claude Code, por comando:
 
 ```bash
-minis-mcp-cli add --name brave-search --command npx --args "-y @modelcontextprotocol/server-brave-search"
+claude mcp add --env BRAVE_API_KEY=COLE_O_VALOR_AQUI brave-search -- npx -y @modelcontextprotocol/server-brave-search
 ```
 
 ## Variáveis de ambiente
 
 O servidor espera estas variáveis. Os valores não estão neste repositório:
 
-- `BRAVE_API_KEY` — [criar](minis://settings/environments?create_key=BRAVE_API_KEY)
-
-## Verificar
-
-```bash
-minis-mcp-cli ping brave-search
-minis-mcp-cli tools brave-search
-```
+- `BRAVE_API_KEY`

@@ -14,7 +14,7 @@ Instruções para escrever uma skill: frontmatter, seções, casos de teste e it
 | Caminho | `skills/writing-skills/SKILL.md` |
 | Commit | `2ce8aa15d05bd57213e6f746f953aafb7ded7a8b` |
 | Licença | MIT |
-| Stars | 304,780 |
+| Stars | 304,782 |
 | Último push | 2026-10-23 |
 | Tags | `skills`, `authoring` |
 

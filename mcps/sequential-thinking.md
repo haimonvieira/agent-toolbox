@@ -1,16 +1,69 @@
 # sequential-thinking
 
-Servidor MCP via stdio. Estado atual: ativo.
+Servidor MCP via stdio. Estado no ambiente de origem: ativo.
 
-## Registrar
+## Configurar
 
-```bash
-minis-mcp-cli add --name sequential-thinking --command npx --args "-y @modelcontextprotocol/server-sequential-thinking"
+A mesma configuração nos três formatos.
+
+### omp
+
+Em `.omp/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  }
+}
 ```
 
-## Verificar
+### Claude Code
+
+Em `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  }
+}
+```
+
+### OpenCode
+
+Em `opencode.json ou opencode.jsonc`:
+
+```json
+{
+  "mcp": {
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Ou, no Claude Code, por comando:
 
 ```bash
-minis-mcp-cli ping sequential-thinking
-minis-mcp-cli tools sequential-thinking
+claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 ```

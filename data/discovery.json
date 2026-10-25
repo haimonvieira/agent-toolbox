@@ -16,7 +16,7 @@
       "name": "omgskills",
       "kind": "mcp",
       "what": "Catálogo público com cerca de 55 mil skills. Exposto como servidor MCP read-only, sem autenticação. Traz plano de instalação pinada (repo + path + commit) quando consegue resolver.",
-      "how": "minis-mcp-cli add --name omgskills --url https://omgskills.com/mcp",
+      "how": "Servidor MCP remoto. Registre em .omp/mcp.json, .mcp.json ou opencode.json com type http e url https://omgskills.com/mcp — veja a ficha em mcps/omgskills.md",
       "url": "https://omgskills.com/mcp",
       "auth": "nenhuma",
       "scope": "≈55.000 skills",

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Setup de agente de IA documentado: skills instaladas, servidores MCP e recomendações.",
   "repository": "https://github.com/haimonvieira/agent-toolbox",
-  "generated_at": "2026-10-25T10:44:23Z",
+  "generated_at": "2026-10-25T10:54:48Z",
   "counts": {
     "skills": 41,
     "mcps": 10,
@@ -717,7 +717,7 @@
       "path": "skills/writing-skills/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304780,
+      "stars": 304782,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@writing-skills",
       "page": "recommended/obra-superpowers-writing-skills.md"
@@ -736,7 +736,7 @@
       "path": "skills/productivity/writing-for-agents/SKILL.md",
       "commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
       "license": "MIT",
-      "stars": 302801,
+      "stars": 302805,
       "last_push": "2026-10-22",
       "install": "npx skills add mattpocock/skills@writing-for-agents",
       "page": "recommended/mattpocock-writing-for-agents.md"
@@ -755,7 +755,7 @@
       "path": "skills/ponytail/SKILL.md",
       "commit": "09c434ab73ca43761c5d8b0c5d341926c2fba710",
       "license": "MIT",
-      "stars": 175781,
+      "stars": 175787,
       "last_push": "2026-10-18",
       "install": "npx skills add DietrichGebert/ponytail@ponytail",
       "page": "recommended/dietrichgebert-ponytail.md"
@@ -773,7 +773,7 @@
       "path": "skills/systematic-debugging/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304780,
+      "stars": 304782,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@systematic-debugging",
       "page": "recommended/obra-superpowers-systematic-debugging.md"
@@ -792,7 +792,7 @@
       "path": "skills/test-driven-development/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304780,
+      "stars": 304782,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@test-driven-development",
       "page": "recommended/obra-superpowers-test-driven-development.md"
@@ -810,7 +810,7 @@
       "path": "skills/engineering/pr/SKILL.md",
       "commit": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
       "license": "MIT",
-      "stars": 302801,
+      "stars": 302805,
       "last_push": "2026-10-22",
       "install": "npx skills add mattpocock/skills@pr",
       "page": "recommended/mattpocock-pr.md"
@@ -828,7 +828,7 @@
       "path": "skills/writing-plans/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304780,
+      "stars": 304782,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@writing-plans",
       "page": "recommended/obra-superpowers-writing-plans.md"
@@ -846,7 +846,7 @@
       "path": "skills/verification-before-completion/SKILL.md",
       "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b",
       "license": "MIT",
-      "stars": 304780,
+      "stars": 304782,
       "last_push": "2026-10-23",
       "install": "npx skills add obra/superpowers@verification-before-completion",
       "page": "recommended/obra-superpowers-verification-before-completion.md"

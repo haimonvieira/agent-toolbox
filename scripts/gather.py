@@ -3,8 +3,14 @@
 gather.py — Coleta o estado real do ambiente para dentro de data/.
 
 Lê:
-  • /var/minis/skills/*/SKILL.md   → data/skills.json  (as skills instaladas)
-  • minis-mcp-cli list/info        → data/mcps.json    (os servidores MCP)
+  • skills instaladas              → data/skills.json
+  • servidores MCP configurados    → data/mcps.json
+
+Ordem de descoberta de MCP:
+  1. arquivos dos agentes: .mcp.json, .omp/mcp.json, opencode.json
+     (no diretório indicado por --root, padrão: diretório atual)
+  2. variável SKILLS_ROOT, padrão /var/minis/skills, para as skills
+  3. fallback: minis-mcp-cli, quando existe neste ambiente
 
 Separado do build.py de propósito: gather.py toca o sistema, build.py só
 transforma dados em documentos. Assim o build roda offline e é reprodutível.
@@ -14,6 +20,7 @@ Uso:
 """
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -98,7 +105,59 @@ def gather_skills():
     return skills
 
 
+TOOL_FILES = [".mcp.json", ".omp/mcp.json", "opencode.json", "opencode.jsonc"]
+
+
+def read_tool_configs(root: Path):
+    """Lê servidores MCP dos arquivos dos agentes. Retorna lista no formato interno."""
+    achados = []
+    for rel in TOOL_FILES:
+        f = root / rel
+        if not f.exists():
+            continue
+        try:
+            dados = json.loads(f.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        bloco = dados.get("mcpServers") or dados.get("mcp") or {}
+        for nome, cfg in bloco.items():
+            if not isinstance(cfg, dict):
+                continue
+            tipo = cfg.get("type")
+            is_http = tipo in ("http", "remote", "streamable-http", "sse") or bool(cfg.get("url"))
+            cmd = cfg.get("command")
+            if isinstance(cmd, list):
+                cmd, args = (cmd[0], cmd[1:]) if cmd else (None, [])
+            else:
+                args = cfg.get("args") or []
+            achados.append({
+                "name": nome,
+                "transport": "http" if is_http else "stdio",
+                "url": cfg.get("url"),
+                "command": None if is_http else cmd,
+                "args": [] if is_http else args,
+                "env_vars": sorted((cfg.get("env") or cfg.get("environment") or {}).keys()),
+                "header_names": sorted((cfg.get("headers") or {}).keys()),
+                "enabled": cfg.get("enabled", True) is not False,
+                "note": f"lido de {rel}",
+            })
+    # primeiro arquivo vence para nomes duplicados
+    vistos, unicos = set(), []
+    for m in achados:
+        if m["name"] in vistos:
+            continue
+        vistos.add(m["name"])
+        unicos.append(m)
+    return unicos
+
+
 def gather_mcps():
+    root = Path(os.environ.get("AGENT_ROOT", ".")).resolve()
+    locais = read_tool_configs(root)
+    if locais:
+        print(f"  {len(locais)} servidor(es) lidos dos arquivos do projeto", file=sys.stderr)
+        return locais
+
     out = subprocess.run(["minis-mcp-cli", "list", "--all"],
                          capture_output=True, text=True, timeout=60)
     try:

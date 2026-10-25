@@ -1,16 +1,69 @@
 # everything
 
-Servidor MCP via stdio. Estado atual: ativo.
+Servidor MCP via stdio. Estado no ambiente de origem: ativo.
 
-## Registrar
+## Configurar
 
-```bash
-minis-mcp-cli add --name everything --command npx --args "-y @modelcontextprotocol/server-everything"
+A mesma configuração nos três formatos.
+
+### omp
+
+Em `.omp/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    }
+  }
+}
 ```
 
-## Verificar
+### Claude Code
+
+Em `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    }
+  }
+}
+```
+
+### OpenCode
+
+Em `opencode.json ou opencode.jsonc`:
+
+```json
+{
+  "mcp": {
+    "everything": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Ou, no Claude Code, por comando:
 
 ```bash
-minis-mcp-cli ping everything
-minis-mcp-cli tools everything
+claude mcp add everything -- npx -y @modelcontextprotocol/server-everything
 ```

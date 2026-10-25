@@ -51,6 +51,15 @@ SKILL_CATEGORY = {
 }
 
 VERSION = "1.0.0"
+
+# Skills que só funcionam no ambiente iSH/Minis (usam CLIs ou caminhos desse sistema).
+ENV_SPECIFIC = {
+    "minis-config-ops",
+    "ish-background-services",
+    "instalar-packages-python-no-ish",
+    "browser-batch",
+    "appstoreprice-hub",
+}
 REPO_URL = "https://github.com/haimonvieira/agent-toolbox"
 
 
@@ -94,9 +103,11 @@ def load():
     for s in skills:
         s["category"] = SKILL_CATEGORY.get(s["dir"], "other")
         s["origin"] = prov.get("known", {}).get(s["dir"])
+        s["env_specific"] = s["dir"] in ENV_SPECIFIC
 
     discovery = j("discovery.json") or {"intro": "", "entries": []}
-    return skills, mcps, prov, rec, curated.get("categories", {}), discovery
+    tools = (j("tools.json") or {}).get("tools", [])
+    return skills, mcps, prov, rec, curated.get("categories", {}), discovery, tools
 
 
 def install_cmd(e):
@@ -140,7 +151,7 @@ def build_catalog(skills, mcps, rec):
     }
 
 
-def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
+def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools):
     by_cat = defaultdict(list)
     for s in skills:
         by_cat[s["category"]].append(s)
@@ -165,9 +176,68 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
     A("repositórios de origem recebem push semanal, então uma cópia ficaria defasada; e uma das")
     A("skills não declara licença, o que impede redistribuição. Cada ficha traz o commit exato.")
     A("")
-    A("Para reconstruir o ambiente: `bash scripts/install_all.sh` (simula por padrão).")
+    A("Para aplicar no seu agente: `python3 scripts/emit_config.py --tool omp` (ou `claude-code`, `opencode`).")
     A("Para consumir por agente: [`catalog.json`](catalog.json).")
     A("")
+    A("---")
+    A("")
+    A("## Como configurar")
+    A("")
+    A("Cada agente lê MCP e skills de um lugar diferente. Estas são as localizações e os")
+    A("formatos, verificados na documentação oficial de cada um.")
+    A("")
+    A("| | omp | Claude Code | OpenCode |")
+    A("|---|---|---|---|")
+    A("| MCP (projeto) | `.omp/mcp.json` | `.mcp.json` | `opencode.json` |")
+    A("| MCP (usuário) | `~/.omp/agent/mcp.json` | `~/.claude.json` | `~/.config/opencode/opencode.json` |")
+    A("| Bloco raiz | `mcpServers` | `mcpServers` | `mcp` |")
+    A("| stdio | `command` + `args` | `command` + `args` | `type: local` + `command` (array) |")
+    A("| remoto | `type: http` + `url` | `type: http` + `url` | `type: remote` + `url` |")
+    A("| Skills (usuário) | `~/.omp/agent/skills/<nome>/` | `~/.claude/skills/<nome>/` | `~/.config/opencode/skills/<nome>/` |")
+    A("| Skills (projeto) | `.omp/skills/<nome>/` | `.claude/skills/<nome>/` | `.opencode/skills/<nome>/` |")
+    A("")
+
+    for t in tools:
+        A(f"### {t['name']}")
+        A("")
+        A(f"Documentação: {t['site']}")
+        A("")
+        A("Arquivos de configuração de MCP:")
+        A("")
+        for f in t["mcp"]["config_files"]:
+            A(f"- {f['scope']}: `{f['path']}`")
+        A("")
+        if t["mcp"].get("commands"):
+            A("Comandos:")
+            A("")
+            A("```bash")
+            for c in t["mcp"]["commands"]:
+                A(c)
+            A("```")
+            A("")
+        A("Servidor stdio:")
+        A("")
+        A("```json")
+        A(json.dumps(t["mcp"]["stdio"], indent=2, ensure_ascii=False))
+        A("```")
+        A("")
+        A("Servidor remoto:")
+        A("")
+        A("```json")
+        A(json.dumps(t["mcp"]["http"], indent=2, ensure_ascii=False))
+        A("```")
+        A("")
+        A("Skills:")
+        A("")
+        for f in t["skills"]["paths"]:
+            A(f"- {f['scope']}: `{f['path']}`")
+        A("")
+        A("Observações:")
+        A("")
+        for n in t["mcp"]["notes"] + t["skills"]["notes"]:
+            A(f"- {n}")
+        A("")
+
     A("---")
     A("")
     A("## Como descobrir skills")
@@ -231,6 +301,11 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
     A("")
     A(f"Skills instaladas no meu ambiente. {known} têm origem confirmada, {unknown_n} não. As")
     A("sem origem aparecem marcadas como não documentadas, e não com uma origem suposta.")
+    env_n = sum(1 for x in skills if x.get("env_specific"))
+    if env_n:
+        A("")
+        A(f"As marcadas com † ({env_n}) dependem do ambiente iSH/Minis e não funcionam em omp,")
+        A("Claude Code ou OpenCode. Ficam registradas porque fazem parte do inventário real.")
     A("")
 
     A("| Categoria | Skills |")
@@ -252,7 +327,8 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
                 o = f"[{r.replace('https://github.com/', '')}]({r})" if r.startswith("http") else r
             else:
                 o = "não documentada"
-            A(f"| [`{s['dir']}`](skills/{s['dir']}.md) | {d} | {o} |")
+            marca = "†" if s.get("env_specific") else ""
+            A(f"| [`{s['dir']}`](skills/{s['dir']}.md){marca} | {d} | {o} |")
         A("")
 
     A("---")
@@ -273,13 +349,22 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery):
 
     A("---")
     A("")
-    A("## Reconstruir o ambiente")
+    A("## Aplicar a configuração")
+    A("")
+    A("O catálogo é a fonte. Este script traduz para o formato do seu agente:")
     A("")
     A("```bash")
-    A(f"git clone {REPO_URL} && cd agent-toolbox")
-    A("bash scripts/install_all.sh          # simula: mostra o que seria feito")
-    A("bash scripts/install_all.sh --apply  # executa, confirmando item por item")
+    A("python3 scripts/emit_config.py --tool omp            # imprime o JSON")
+    A("python3 scripts/emit_config.py --tool opencode       # imprime o JSON")
+    A("python3 scripts/emit_config.py --tool claude-code    # imprime os comandos")
+    A("")
+    A("python3 scripts/emit_config.py --tool omp --write    # grava em .omp/mcp.json")
+    A("python3 scripts/emit_config.py --tool opencode --write   # grava em opencode.json")
+    A("python3 scripts/emit_config.py --tool opencode --only omgskills")
     A("```")
+    A("")
+    A("Com `--write`, chaves já existentes no arquivo são preservadas; só o bloco de MCP é")
+    A("mesclado. Substitua `COLE_O_VALOR_AQUI` pelos valores reais depois.")
     A("")
     A("Manter o inventário em dia:")
     A("")
@@ -332,34 +417,100 @@ def build_skill_pages(skills):
     return out
 
 
-def build_mcp_pages(mcps):
+def mcp_snippets(m, tools):
+    """Gera a configuração do servidor para cada agente, no formato nativo."""
+    out = []
+    env = {v: "COLE_O_VALOR_AQUI" for v in m["env_vars"]}
+    headers = {h: "Bearer COLE_O_VALOR_AQUI" for h in m["header_names"]}
+    is_http = m["transport"] == "http"
+
+    for t in tools:
+        tid = t["id"]
+        if tid in ("omp", "claude-code"):
+            entry = {}
+            if is_http:
+                entry = {"type": "http", "url": m["url"]}
+                if headers:
+                    entry["headers"] = headers
+            else:
+                entry = {"command": m["command"]}
+                if m["args"]:
+                    entry["args"] = m["args"]
+                if env:
+                    entry["env"] = env
+            snippet = json.dumps({"mcpServers": {m["name"]: entry}}, indent=2, ensure_ascii=False)
+            out.append((t["name"], snippet, t["mcp"]["config_files"][0]["path"], ""))
+
+        elif tid == "opencode":
+            if is_http:
+                entry = {"type": "remote", "url": m["url"], "enabled": True}
+                if headers:
+                    entry["headers"] = headers
+            else:
+                entry = {"type": "local", "command": [m["command"]] + m["args"], "enabled": True}
+                if env:
+                    entry["environment"] = env
+            snippet = json.dumps({"mcp": {m["name"]: entry}}, indent=2, ensure_ascii=False)
+            out.append((t["name"], snippet, t["mcp"]["config_files"][0]["path"], ""))
+
+    return out
+
+
+def claude_code_command(m):
+    """Comando `claude mcp add` equivalente."""
+    import shlex
+    args = ["claude", "mcp", "add"]
+    if m["transport"] == "http":
+        args += ["--transport", "http", m["name"], m["url"]]
+        for h in m["header_names"]:
+            args += ["--header", f"{h}: Bearer COLE_O_VALOR_AQUI"]
+    else:
+        for v in m["env_vars"]:
+            args += ["--env", f"{v}=COLE_O_VALOR_AQUI"]
+        args += [m["name"], "--", m["command"]] + m["args"]
+    return " ".join(shlex.quote(a) for a in args)
+
+
+def portable(arg):
+    """Troca o caminho absoluto da máquina de origem por um relativo ao clone."""
+    if not isinstance(arg, str):
+        return arg
+    return (arg.replace("/var/minis/skills/skill-creator", "$HOME/agent-toolbox/mine/skill-creator")
+               .replace("/var/minis/shared", "$HOME/agent-toolbox")
+               .replace("/var/minis", "$HOME"))
+
+
+def build_mcp_pages(mcps, tools):
     out = []
     for m in mcps:
+        m = dict(m)
+        m["args"] = [portable(a) for a in (m.get("args") or [])]
+        m["command"] = portable(m.get("command"))
         L = [f"# {m['name']}", "",
-             f"Servidor MCP via {m['transport']}. Estado atual: "
+             f"Servidor MCP via {m['transport']}. Estado no ambiente de origem: "
              f"{'ativo' if m['enabled'] else 'desligado'}.", ""]
-        L += ["## Registrar", ""]
-        if m["transport"] == "http":
-            hdrs = "".join(f' \\\n  --header "{h}: <valor>"' for h in m["header_names"])
-            L += ["```bash", f'minis-mcp-cli add --name {m["name"]} --url "{m["url"]}"{hdrs}', "```", ""]
-        else:
-            args = " ".join(m["args"])
-            L += ["```bash",
-                  f'minis-mcp-cli add --name {m["name"]} --command {m["command"]}' +
-                  (f' --args "{args}"' if args else ""),
-                  "```", ""]
+        precisa_cred = bool(m["env_vars"] or m["header_names"])
+        intro = "A mesma configuração nos três formatos."
+        if precisa_cred:
+            intro += (" Troque `COLE_O_VALOR_AQUI` pelo valor real e mantenha a credencial"
+                      " fora do repositório.")
+        L += ["## Configurar", "", intro, ""]
+        for tname, snippet, path, _ in mcp_snippets(m, tools):
+            L += [f"### {tname}", "", f"Em `{path}`:", "", "```json", snippet, "```", ""]
+        # comando do Claude Code
+        cc = [t for t in tools if t["id"] == "claude-code"]
+        if cc:
+            L += ["Ou, no Claude Code, por comando:", "", "```bash", claude_code_command(m), "```", ""]
         if m["env_vars"]:
             L += ["## Variáveis de ambiente", "",
                   "O servidor espera estas variáveis. Os valores não estão neste repositório:", ""]
             for v in m["env_vars"]:
-                L += [f"- `{v}` — [criar](minis://settings/environments?create_key={v})"]
+                L += [f"- `{v}`"]
             L += [""]
         if m["header_names"]:
             L += ["## Cabeçalhos", "", "Requer: " + ", ".join(f"`{h}`" for h in m["header_names"]), ""]
         if m["note"]:
             L += ["## Nota", "", m["note"], ""]
-        L += ["## Verificar", "", "```bash",
-              f"minis-mcp-cli ping {m['name']}", f"minis-mcp-cli tools {m['name']}", "```", ""]
         p = ROOT / "mcps" / f"{m['name']}.md"
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("\n".join(L), encoding="utf-8")
@@ -410,7 +561,7 @@ def build_recommended_pages(rec, cur_cats):
 
 
 def main():
-    skills, mcps, prov, rec, cur_cats, discovery = load()
+    skills, mcps, prov, rec, cur_cats, discovery, tools = load()
     if not skills:
         print("ERRO: rode scripts/gather.py primeiro.", file=sys.stderr)
         return 1
@@ -418,9 +569,9 @@ def main():
     (ROOT / "catalog.json").write_text(
         json.dumps(build_catalog(skills, mcps, rec), indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8")
-    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats, discovery), encoding="utf-8")
+    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools), encoding="utf-8")
     sp = build_skill_pages(skills)
-    ep = build_mcp_pages(mcps)
+    ep = build_mcp_pages(mcps, tools)
     rp = build_recommended_pages(rec, cur_cats)
 
     print(f"README.md       — {len(skills)} skills, {len(mcps)} MCPs, {len(rec)} recomendações")

@@ -1,16 +1,69 @@
 # fetch
 
-Servidor MCP via stdio. Estado atual: desligado.
+Servidor MCP via stdio. Estado no ambiente de origem: desligado.
 
-## Registrar
+## Configurar
 
-```bash
-minis-mcp-cli add --name fetch --command npx --args "-y @modelcontextprotocol/server-fetch"
+A mesma configuração nos três formatos.
+
+### omp
+
+Em `.omp/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ]
+    }
+  }
+}
 ```
 
-## Verificar
+### Claude Code
+
+Em `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ]
+    }
+  }
+}
+```
+
+### OpenCode
+
+Em `opencode.json ou opencode.jsonc`:
+
+```json
+{
+  "mcp": {
+    "fetch": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Ou, no Claude Code, por comando:
 
 ```bash
-minis-mcp-cli ping fetch
-minis-mcp-cli tools fetch
+claude mcp add fetch -- npx -y @modelcontextprotocol/server-fetch
 ```

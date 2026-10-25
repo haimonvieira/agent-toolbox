@@ -1,0 +1,156 @@
+{
+  "_comment": "Onde cada agente lê configuração de MCP e skills. Fatos verificados na documentação oficial de cada um em 2026-10-25.",
+  "tools": [
+    {
+      "id": "omp",
+      "name": "omp",
+      "site": "https://omp.sh/docs/mcp",
+      "mcp": {
+        "config_files": [
+          { "scope": "projeto", "path": ".omp/mcp.json" },
+          { "scope": "usuário", "path": "~/.omp/agent/mcp.json" },
+          { "scope": "perfil", "path": "~/.omp/profiles/<nome>/agent/mcp.json" },
+          { "scope": "portável", "path": "mcp.json ou .mcp.json na raiz do projeto" }
+        ],
+        "stdio": {
+          "mcpServers": {
+            "filesystem": {
+              "command": "npx",
+              "args": ["-y", "@modelcontextprotocol/server-filesystem", "/caminho/absoluto"]
+            }
+          }
+        },
+        "http": {
+          "mcpServers": {
+            "exemplo": {
+              "type": "http",
+              "url": "https://mcp.example.com/mcp",
+              "headers": { "Authorization": "Bearer <token>" }
+            }
+          }
+        },
+        "commands": ["/mcp add", "/mcp list", "/mcp reload", "/mcp test <nome>"],
+        "notes": [
+          "stdio é o transporte padrão quando type é omitido.",
+          "Um servidor não pode ter command e url ao mesmo tempo.",
+          "Para SSE legado, use type: \"sse\" explicitamente — URL terminando em /sse não seleciona o transporte sozinha.",
+          "omp importa automaticamente definições de MCP do Claude Code, Codex, Gemini CLI, OpenCode, Cursor, Windsurf e VS Code."
+        ]
+      },
+      "skills": {
+        "paths": [
+          { "scope": "usuário", "path": "~/.omp/agent/skills/<nome>/SKILL.md" },
+          { "scope": "projeto", "path": ".omp/skills/<nome>/SKILL.md" }
+        ],
+        "notes": [
+          "Descoberta é um nível de profundidade: skills/postgres/SKILL.md é achado, skills/databases/postgres/SKILL.md não.",
+          "Mantenha os arquivos referenciados pelo SKILL.md dentro da mesma pasta da skill.",
+          "/extensions abre a lista de skills; /reload-plugins recarrega a sessão.",
+          "Invocação explícita: /skill:<nome>."
+        ]
+      }
+    },
+    {
+      "id": "claude-code",
+      "name": "Claude Code",
+      "site": "https://docs.claude.com/en/docs/claude-code/mcp",
+      "mcp": {
+        "config_files": [
+          { "scope": "projeto", "path": ".mcp.json" },
+          { "scope": "local e usuário", "path": "~/.claude.json" }
+        ],
+        "stdio": {
+          "mcpServers": {
+            "filesystem": {
+              "command": "npx",
+              "args": ["-y", "@modelcontextprotocol/server-filesystem", "/caminho/absoluto"]
+            }
+          }
+        },
+        "http": {
+          "mcpServers": {
+            "exemplo": {
+              "type": "http",
+              "url": "https://mcp.example.com/mcp",
+              "headers": { "Authorization": "Bearer <token>" }
+            }
+          }
+        },
+        "commands": [
+          "claude mcp add <nome> --env CHAVE=valor -- <comando> [args]",
+          "claude mcp add --transport http <nome> <url> --header \"Authorization: Bearer <token>\"",
+          "claude mcp list",
+          "claude mcp get <nome>"
+        ],
+        "notes": [
+          "Sem --transport, o padrão é stdio.",
+          "O -- duplo separa as opções do Claude Code do comando do servidor. Sem ele, flags como -y são lidas como opções do Claude.",
+          "Um bloco com url e sem type é lido como stdio e o servidor é ignorado: inclua \"type\": \"http\".",
+          "Escopos: padrão local; use --scope project ou --scope user para mudar.",
+          "O tipo aceita http e streamable-http como sinônimos."
+        ]
+      },
+      "skills": {
+        "paths": [
+          { "scope": "pessoal", "path": "~/.claude/skills/<nome>/" },
+          { "scope": "projeto", "path": ".claude/skills/<nome>/" }
+        ],
+        "notes": [
+          "/skills lista as skills carregadas; /reload-skills recarrega após adicionar uma.",
+          "Skills de plugin chegam por marketplace e são removidas com /plugin uninstall.",
+          "Para impedir que o modelo invoque sozinho, use disable-model-invocation: true no frontmatter."
+        ]
+      }
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "site": "https://opencode.ai/docs/mcp-servers/",
+      "mcp": {
+        "config_files": [
+          { "scope": "projeto", "path": "opencode.json ou opencode.jsonc" },
+          { "scope": "global", "path": "~/.config/opencode/opencode.json" }
+        ],
+        "stdio": {
+          "mcp": {
+            "filesystem": {
+              "type": "local",
+              "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/caminho/absoluto"],
+              "enabled": true
+            }
+          }
+        },
+        "http": {
+          "mcp": {
+            "exemplo": {
+              "type": "remote",
+              "url": "https://mcp.example.com/mcp",
+              "enabled": true,
+              "headers": { "Authorization": "Bearer <token>" }
+            }
+          }
+        },
+        "commands": [],
+        "notes": [
+          "O bloco se chama mcp, não mcpServers.",
+          "type é obrigatório: local ou remote.",
+          "command é um array, não uma string.",
+          "Variáveis vão em environment, dentro do bloco do servidor.",
+          "enabled: false desliga o servidor sem removê-lo da configuração."
+        ]
+      },
+      "skills": {
+        "paths": [
+          { "scope": "projeto", "path": ".opencode/skills/<nome>/SKILL.md" },
+          { "scope": "global", "path": "~/.config/opencode/skills/<nome>/SKILL.md" },
+          { "scope": "compatível com Claude", "path": ".claude/skills/ e ~/.claude/skills/" },
+          { "scope": "compatível com agentes", "path": ".agents/skills/ e ~/.agents/skills/" }
+        ],
+        "notes": [
+          "Skills são carregadas sob demanda pela skill tool nativa.",
+          "Em caminhos de projeto, o OpenCode sobe do diretório atual até a raiz do worktree do git."
+        ]
+      }
+    }
+  ]
+}
