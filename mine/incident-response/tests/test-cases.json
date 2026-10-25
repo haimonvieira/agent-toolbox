@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "name": "log-com-error-fatals",
+      "description": "Log com erros FATAL e ERROR deve ser analisado corretamente",
+      "input": {
+        "script": "parse_logs.py",
+        "stdin": "2024-01-15 10:30:45,123 INFO  [api] request ok\n2024-01-15 10:30:46,200 ERROR [payment] Connection refused to db-host:5432\n2024-01-15 10:30:47,300 FATAL [payment] OutOfMemoryError: Java heap space\n2024-01-15 10:30:48,400 WARN  [api] retry attempt 3\n",
+        "args": []
+      },
+      "expect": {
+        "exit": 0,
+        "contains": ["\"error_lines\": 2", "\"severity\": \"CRITICA\"", "Connection refused", "OutOfMemoryError"],
+        "not_contains": ["erro interno", "entrada vazia"]
+      }
+    },
+    {
+      "name": "so-info-sem-erros",
+      "description": "Log apenas com INFO deve reportar 0 erros e gravidade BAIXA",
+      "input": {
+        "script": "parse_logs.py",
+        "stdin": "2024-01-15 10:30:45 INFO [api] request ok\n2024-01-15 10:30:46 INFO [api] health check ok\n",
+        "args": []
+      },
+      "expect": {
+        "exit": 0,
+        "contains": ["\"error_lines\": 0", "\"severity\": \"BAIXA\""],
+        "not_contains": ["FATAL", "ERROR"]
+      }
+    },
+    {
+      "name": "entrada-vazia",
+      "description": "Entrada vazia deve retornar erro com exit 1",
+      "input": {
+        "script": "parse_logs.py",
+        "stdin": "",
+        "args": []
+      },
+      "expect": {
+        "exit": 1,
+        "contains": ["entrada vazia"],
+        "not_contains": []
+      }
+    },
+    {
+      "name": "arquivo-inexistente",
+      "description": "Arquivo que não existe deve retornar exit 1",
+      "input": {
+        "script": "parse_logs.py",
+        "args": ["/nao/existe/app.log"]
+      },
+      "expect": {
+        "exit": 1,
+        "contains": ["nao foi possível ler"],
+        "not_contains": []
+      }
+    },
+    {
+      "name": "padrao-conhecido",
+      "description": "Erros devem detectar padrao conhecido (Connection refused)",
+      "input": {
+        "script": "parse_logs.py",
+        "stdin": "2024-01-15 10:30:45 ERROR [db] Connection refused to db-host:5432\n",
+        "args": []
+      },
+      "expect": {
+        "exit": 0,
+        "contains": ["Falha de conexão com dependência", "Connection refused"],
+        "not_contains": []
+      }
+    }
+  ]
+}

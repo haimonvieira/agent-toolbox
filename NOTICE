@@ -1,0 +1,88 @@
+# Avisos de terceiros
+
+Este repositório documenta e referencia trabalho de terceiros. Nada é
+redistribuído sem licença — mas duas partes exigem atenção.
+
+---
+
+## 1. Código incluído neste repositório
+
+### `mine/skill-creator/` — Apache License 2.0
+
+Esta pasta contém código **redistribuído** sob a Apache License 2.0, proveniente
+do skill-creator oficial da Anthropic:
+
+| Componente | Origem |
+|---|---|
+| `LICENSE.txt` | Apache License 2.0 |
+| `agents/` (analyzer, comparator, grader) | Anthropic |
+| `eval-viewer/` | Anthropic |
+| `assets/eval_review.html` | Anthropic |
+| `scripts/quick_validate.py` | Anthropic |
+| `scripts/package_skill.py` | Anthropic |
+| `scripts/run_eval.py`, `run_loop.py` | Anthropic |
+| `scripts/improve_description.py` | Anthropic |
+| `scripts/aggregate_benchmark.py`, `generate_report.py` | Anthropic |
+| `scripts/utils.py` | Anthropic |
+| `references/schemas.md` | Anthropic |
+
+**Partes autorais** (não provenientes da Anthropic), sob MIT conforme [LICENSE](LICENSE):
+
+| Componente | O que é |
+|---|---|
+| `SKILL.md` | Reescrito: 92 → 463 linhas, com as seções da spec |
+| `mcp/skill-server.py` | Servidor MCP com 7 ferramentas |
+| `mcp/test-server.py` | 15 testes |
+| `scripts/skill-scaffold.sh` | Gerador de estrutura |
+| `scripts/skill-validate.py` | Validador estrutural + spec do Claude |
+| `scripts/skill-test.py` | Executor de testes |
+| `scripts/verify-all.sh` | 16 verificações ponta a ponta |
+| `references/mcp-server-guide.md` | Guia de servidor MCP |
+| `references/plugin-packaging.md` | Guia de empacotamento |
+| `references/mcp-integration-patterns.md` | Padrões A/B/C |
+| `references/skill-template.md` | Template anotado |
+| `references/skill-test-checklist.md` | Metodologia dos 5 testes |
+| `references/eval-harness.md` | As duas trilhas de avaliação |
+| `assets/quality-checklist.md` | Checklist de qualidade |
+
+O texto integral da Apache License 2.0 está em
+[`mine/skill-creator/LICENSE.txt`](mine/skill-creator/LICENSE.txt).
+
+### `mine/incident-response/` — MIT
+
+Integralmente autoral.
+
+---
+
+## 2. Skills referenciadas (não incluídas)
+
+As entradas em [`recommended/`](recommended/) **não contêm o código das skills**.
+São fichas de catalogação que apontam para o repositório de origem, com o commit
+exato. Cada skill mantém sua licença original:
+
+| Skill | Repositório | Licença |
+|---|---|---|
+| writing-skills | obra/superpowers | MIT |
+| writing-for-agents | mattpocock/skills | MIT |
+| ponytail | DietrichGebert/ponytail | MIT |
+| pr | mattpocock/skills | MIT |
+| systematic-debugging | obra/superpowers | MIT |
+| test-driven-development | obra/superpowers | MIT |
+| writing-plans | obra/superpowers | MIT |
+| verification-before-completion | obra/superpowers | MIT |
+| acquire-codebase-knowledge | github/awesome-copilot | MIT |
+| devops-engineer | jeffallan/claude-skills | MIT |
+| devops | mrgoonie/claudekit-skills | **não declarada** |
+
+A entrada `mrgoonie/claudekit-skills` aparece **apenas como referência**, sem
+instrução de instalação, porque o repositório não declara licença. Não há
+permissão de redistribuição.
+
+---
+
+## 3. Servidores MCP
+
+Os servidores listados em [`mcps/`](mcps/) também são de terceiros. Este
+repositório documenta a configuração; não inclui nem redistribui o código deles.
+Marque de cada servidor pertence aos respectivos autores (Anthropic, Microsoft,
+Firecrawl, Asaas e outros).

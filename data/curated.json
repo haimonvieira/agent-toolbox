@@ -1,0 +1,116 @@
+{
+  "_comment": "Camada editorial. O campo 'why' descreve a skill em termos verificáveis, sem adjetivos de propaganda. O build.py cruza isto com data/pins.json.",
+  "categories": {
+    "discovery": {
+      "title": "Escrever e encontrar skills",
+      "order": 1
+    },
+    "engineering": {
+      "title": "Engenharia",
+      "order": 2
+    },
+    "planning": {
+      "title": "Planejamento e verificação",
+      "order": 3
+    },
+    "codebase": {
+      "title": "Código desconhecido",
+      "order": 4
+    },
+    "devops": {
+      "title": "DevOps",
+      "order": 5
+    }
+  },
+  "entries": [
+    {
+      "slug": "obra-superpowers-writing-skills",
+      "slug_source": ["obra/superpowers", "writing-skills"],
+      "category": "discovery",
+      "tags": ["skills", "authoring"],
+      "why": "Instruções para escrever uma skill: frontmatter, seções, casos de teste e iteração. É o mesmo problema que o harness de avaliação da Anthropic resolve por ferramenta, aqui como texto que o agente lê.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "mattpocock-writing-for-agents",
+      "slug_source": ["mattpocock/skills", "writing-for-agents"],
+      "category": "discovery",
+      "tags": ["agents-md", "documentacao"],
+      "why": "Cobre o que o agente lê fora das skills: AGENTS.md, CLAUDE.md e documentação de projeto. Esses arquivos costumam ser escritos uma vez e nunca revisados.",
+      "verdict": "recomendada"
+    },
+    {
+      "slug": "dietrichgebert-ponytail",
+      "slug_source": ["DietrichGebert/ponytail", "ponytail"],
+      "category": "engineering",
+      "tags": ["simplicidade", "yagni"],
+      "why": "Restringe a mudança ao mínimo que resolve a tarefa e pede respostas de uma leitura. Três níveis: lite, full (padrão) e ultra. O repositório traz ainda variantes para auditoria, dívida técnica e revisão.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "obra-superpowers-systematic-debugging",
+      "slug_source": ["obra/superpowers", "systematic-debugging"],
+      "category": "engineering",
+      "tags": ["debug"],
+      "why": "Impede propor correção antes de identificar a causa. Define a ordem: reproduzir, isolar, só então corrigir.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "obra-superpowers-test-driven-development",
+      "slug_source": ["obra/superpowers", "test-driven-development"],
+      "category": "engineering",
+      "tags": ["tdd", "testes"],
+      "why": "Exige o teste antes do código de produção, com o teste falhando primeiro. Faz o agente produzir código verificável em vez de código plausível.",
+      "verdict": "recomendada"
+    },
+    {
+      "slug": "mattpocock-pr",
+      "slug_source": ["mattpocock/skills", "pr"],
+      "category": "engineering",
+      "tags": ["pull-request"],
+      "why": "Escreve o corpo de um pull request com o contexto que a revisão precisa: o que mudou, por quê, e como foi verificado.",
+      "verdict": "recomendada"
+    },
+    {
+      "slug": "obra-superpowers-writing-plans",
+      "slug_source": ["obra/superpowers", "writing-plans"],
+      "category": "planning",
+      "tags": ["planejamento"],
+      "why": "Produz o plano antes de tocar no código. Corrigir um plano custa minutos; corrigir uma implementação custa horas.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "obra-superpowers-verification-before-completion",
+      "slug_source": ["obra/superpowers", "verification-before-completion"],
+      "category": "planning",
+      "tags": ["verificacao"],
+      "why": "Exige rodar o comando de verificação e mostrar a saída antes de afirmar que algo funciona. Evita o agente declarar concluído o que não testou.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "github-awesome-copilot-acquire-codebase-knowledge",
+      "slug_source": ["github/awesome-copilot", "acquire-codebase-knowledge"],
+      "category": "codebase",
+      "tags": ["onboarding", "arquitetura"],
+      "why": "Mapeia um código desconhecido: pontos de entrada, arquitetura, convenções e um CLAUDE.md inicial. Mantido pelo GitHub no repositório awesome-copilot.",
+      "verdict": "essencial"
+    },
+    {
+      "slug": "jeffallan-devops-engineer",
+      "slug_source": ["jeffallan/claude-skills", "devops-engineer"],
+      "category": "devops",
+      "tags": ["infra", "ci-cd"],
+      "why": "Operações de infraestrutura e CI/CD sem exigir uma stack específica. Licença MIT e repositório ativo. Obs.: o catálogo do omgskills mostra 8.810 stars; o repositório tem 12.043 — o catálogo está desatualizado.",
+      "verdict": "recomendada"
+    },
+    {
+      "slug": "mrgoonie-claudekit-devops",
+      "slug_source": ["mrgoonie/claudekit-skills", "devops"],
+      "category": "devops",
+      "tags": ["cloudflare", "kubernetes", "sem-licenca"],
+      "why": "Cobre Cloudflare, Docker, GCP, Kubernetes e GitOps. Consta aqui apenas como referência: o repositório não declara licença, então não há permissão de redistribuição nem de instalação automatizada. O último push foi em abril de 2026.",
+      "verdict": "referencia-only",
+      "warning": "Sem licença declarada — consulte a fonte diretamente, não redistribua."
+    }
+  ]
+}

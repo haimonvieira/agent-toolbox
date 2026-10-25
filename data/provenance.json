@@ -1,0 +1,99 @@
+{
+  "_comment": "Origem declarada de cada skill instalada. 'known' = confirmada. Preencha os 'unknown' conforme descobrir. Chave = nome do diretório da skill.",
+  "known": {
+    "systematic-debugging": {
+      "repo": "https://github.com/obra/superpowers",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add obra/superpowers@systematic-debugging",
+      "confidence": "confirmado"
+    },
+    "verification-before-completion": {
+      "repo": "https://github.com/obra/superpowers",
+      "path": "skills/verification-before-completion/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add obra/superpowers@verification-before-completion",
+      "confidence": "confirmado"
+    },
+    "writing-plans": {
+      "repo": "https://github.com/obra/superpowers",
+      "path": "skills/writing-plans/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add obra/superpowers@writing-plans",
+      "confidence": "confirmado"
+    },
+    "executing-plans": {
+      "repo": "https://github.com/obra/superpowers",
+      "path": "skills/executing-plans/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add obra/superpowers@executing-plans",
+      "confidence": "confirmado"
+    },
+    "skill-creator": {
+      "repo": "local",
+      "path": "skills/skill-creator/",
+      "license": "Apache-2.0 (partes da Anthropic) + MIT (partes autorais)",
+      "install": "incluso neste repositório em mine/skill-creator/",
+      "confidence": "confirmado",
+      "note": "Baseada no skill-creator da Anthropic (Apache 2.0). O SKILL.md, o servidor MCP e os validadores são autorais."
+    },
+    "incident-response": {
+      "repo": "local",
+      "path": "skills/incident-response/",
+      "license": "MIT",
+      "install": "incluso neste repositório em mine/incident-response/",
+      "confidence": "confirmado",
+      "note": "Autoral."
+    },
+    "find-skills": {
+      "repo": "https://github.com/anthropics/skills",
+      "path": "skills/find-skills/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add anthropics/skills@find-skills",
+      "confidence": "provável",
+      "note": "A versão local foi estendida para usar o catálogo omgskills como fonte primária."
+    },
+    "gh-cli": {
+      "repo": "https://github.com/anthropics/skills",
+      "path": "skills/gh-cli/SKILL.md",
+      "license": "MIT",
+      "install": "npx skills add anthropics/skills@gh-cli",
+      "confidence": "provável"
+    }
+  },
+  "unknown": [
+    "appstoreprice-hub",
+    "asaas-mcp",
+    "browser-automation",
+    "browser-batch",
+    "context-map",
+    "exa-search",
+    "firecrawl",
+    "free-tts",
+    "github-search",
+    "hermes-codebase-inspection",
+    "hermes-github-auth",
+    "hermes-maps",
+    "instalar-packages-python-no-ish",
+    "ish-background-services",
+    "mcp-connector",
+    "memory-defrag",
+    "memory-ingest",
+    "memory-notes",
+    "memory-reflect",
+    "memory-schema",
+    "memory-supermemory",
+    "memory-tasks",
+    "minis-config-ops",
+    "openrouter-rate-limits",
+    "production-agent-public",
+    "refactor-plan",
+    "saa-orchestrator",
+    "self-improving-agent",
+    "self-learning",
+    "skill-orchestrator",
+    "tool-builder",
+    "web-content-extractor",
+    "web-search"
+  ]
+}

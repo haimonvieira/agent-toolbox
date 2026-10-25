@@ -1,0 +1,144 @@
+[
+  {
+    "name": "asaas",
+    "transport": "http",
+    "url": "https://docs.asaas.com/mcp",
+    "command": null,
+    "args": [],
+    "env_vars": [],
+    "header_names": [
+      "Authorization"
+    ],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "brave-search",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-brave-search"
+    ],
+    "env_vars": [
+      "BRAVE_API_KEY"
+    ],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "everything",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-everything"
+    ],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "fetch",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-fetch"
+    ],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": false,
+    "note": null
+  },
+  {
+    "name": "filesystem",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-filesystem",
+      "/var/minis/shared"
+    ],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "firecrawl-mcp",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "firecrawl-mcp"
+    ],
+    "env_vars": [
+      "FIRECRAWL_API_KEY"
+    ],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "github",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ],
+    "env_vars": [
+      "GITHUB_PERSONAL_ACCESS_TOKEN"
+    ],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "omgskills",
+    "transport": "http",
+    "url": "https://omgskills.com/mcp",
+    "command": null,
+    "args": [],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": true,
+    "note": "Catálogo público read-only de skills de agentes (55k+). Ferramentas: search_skills, get_skill, get_skills, list_trending, list_gold_basket, list_by_author. Instalável apenas quando pinned_install existe."
+  },
+  {
+    "name": "sequential-thinking",
+    "transport": "stdio",
+    "url": null,
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-sequential-thinking"
+    ],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": true,
+    "note": null
+  },
+  {
+    "name": "skill-creator",
+    "transport": "stdio",
+    "url": null,
+    "command": "python3",
+    "args": [
+      "/var/minis/skills/skill-creator/mcp/skill-server.py"
+    ],
+    "env_vars": [],
+    "header_names": [],
+    "enabled": true,
+    "note": "Servidor MCP para criar, validar, testar e gerir skills de agentes de IA"
+  }
+]

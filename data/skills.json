@@ -1,0 +1,496 @@
+[
+  {
+    "dir": "appstoreprice-hub",
+    "name": "appstoreprice-hub",
+    "description": "查询 App Store 全球各地区应用价格的技能，通过 appstoreprice.org 获取数据。 使用 Minis 内置浏览器（minis-browser-use CLI）在页面上下文中直接调用网站原生签名函数， 无需 API Key、无需自行实现签名算法。支持：按名称搜索应用、查询单个 App 所有地区价格、 获取最便宜地区排行、分页浏览应用列表。 当用户提到\"App Store 价格\"、\"哪个区最便宜\"、\"土耳其区价格\"、\"appstoreprice\"、 \"app 比价\"、\"App Store 低价区\"、\"订阅哪个区划算\"，或任何需要查询 iOS/macOS App 跨地区价格对比的场景，必须触发本技能。",
+    "version": null,
+    "license_field": null,
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 134,
+    "skill_md_bytes": 6418,
+    "files": 2
+  },
+  {
+    "dir": "asaas-mcp",
+    "name": "asaas-mcp",
+    "description": "Interact with Asaas services via the public MCP server. Configure your MCP client to connect to https://docs.asaas.com/mcp and use your Asaas access_token for authenticated API calls.",
+    "version": "1.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 127,
+    "skill_md_bytes": 4990,
+    "files": 1
+  },
+  {
+    "dir": "browser-automation",
+    "name": "browser-automation",
+    "description": "Browser automation powers web testing, scraping, and AI agent",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 1107,
+    "skill_md_bytes": 29491,
+    "files": 1
+  },
+  {
+    "dir": "browser-batch",
+    "name": "browser-batch",
+    "description": "Accelerate browser automation in the iSH/Minis environment by batching multiple browser actions into a single shell round-trip via the minis-browser-use CLI, instead of one browser_use tool call per action. Covers the performance trade-off, error handling, session-wedge prevention, and recovery. Trigger when browser automation feels slow, when the user complains about response time, or when writing multi-step web flows.",
+    "version": null,
+    "license_field": "MIT",
+    "has": {},
+    "body_lines": 133,
+    "skill_md_bytes": 6292,
+    "files": 1
+  },
+  {
+    "dir": "context-map",
+    "name": "context-map",
+    "description": "Generate a map of all files relevant to a task before making changes",
+    "version": "1.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 60,
+    "skill_md_bytes": 1397,
+    "files": 2
+  },
+  {
+    "dir": "exa-search",
+    "name": "exa-search",
+    "description": "Search the web, read webpages as markdown, and run filtered web retrieval with Exa MCP. Use this skill whenever the user asks for current web information, web research, domain/date/category-filtered search, company or people lookup via search filters, or extracting clean page content from one or more URLs.",
+    "version": null,
+    "license_field": null,
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 48,
+    "skill_md_bytes": 2411,
+    "files": 2
+  },
+  {
+    "dir": "executing-plans",
+    "name": "executing-plans",
+    "description": "Use when you have a written implementation plan to execute in a separate session with review checkpoints",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 61,
+    "skill_md_bytes": 2305,
+    "files": 1
+  },
+  {
+    "dir": "find-skills",
+    "name": "find-skills",
+    "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill. Searches the omgskills public catalog (55k+ skills) via MCP, checks the skills.sh leaderboard, and evaluates quality before recommending.",
+    "version": "2.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 186,
+    "skill_md_bytes": 7427,
+    "files": 1
+  },
+  {
+    "dir": "firecrawl",
+    "name": "firecrawl",
+    "description": "Firecrawl gives AI agents and apps fast, reliable web context with strong search, scraping, and interaction tools. One install command sets up three skill segments: live CLI tools, app-integration build skills, and outcome-focused workflow skills. Route the reader to the right usage path after install.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 304,
+    "skill_md_bytes": 13105,
+    "files": 1
+  },
+  {
+    "dir": "free-tts",
+    "name": "free-tts",
+    "description": "免费语音合成（edge-tts），无需 API Key 无需注册。将文本转为 mp3 音频文件。 当用户说\"朗读\"\"语音合成\"\"文字转语音\"\"TTS\"\"生成音频\"\"读一下\" \"读出来\"\"念一下\"\"听一下\"或任何需要将文本转为语音播放的场景时触发。",
+    "version": "1.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 92,
+    "skill_md_bytes": 3733,
+    "files": 1
+  },
+  {
+    "dir": "gh-cli",
+    "name": "gh-cli",
+    "description": "GitHub CLI (gh) operational quick reference for repos, issues, pull requests, Actions, releases, auth, API calls, and safe GitHub automation from the command line.",
+    "version": "2.85.1",
+    "license_field": null,
+    "has": {
+      "references": true
+    },
+    "body_lines": 90,
+    "skill_md_bytes": 3409,
+    "files": 2
+  },
+  {
+    "dir": "github-search",
+    "name": "github-search",
+    "description": "Search GitHub repositories, issues, users, and code via the REST API. Use when the user asks to find repos on GitHub, search for open-source projects, browse repo contents, read files from repos, or any GitHub exploration task. Triggers: 'search GitHub', 'find repo', 'buscar no GitHub', 'procurar repositório', 'GitHub search', 'GitHub busca'.",
+    "version": "1.0.1",
+    "license_field": null,
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 69,
+    "skill_md_bytes": 3451,
+    "files": 2
+  },
+  {
+    "dir": "hermes-codebase-inspection",
+    "name": "codebase-inspection",
+    "description": "Inspect codebases w/ pygount: LOC, languages, ratios.",
+    "version": null,
+    "license_field": "MIT",
+    "has": {},
+    "body_lines": 111,
+    "skill_md_bytes": 3969,
+    "files": 1
+  },
+  {
+    "dir": "hermes-github-auth",
+    "name": "github-auth",
+    "description": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+    "version": null,
+    "license_field": "MIT",
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 244,
+    "skill_md_bytes": 7887,
+    "files": 2
+  },
+  {
+    "dir": "hermes-maps",
+    "name": "maps",
+    "description": "Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.",
+    "version": null,
+    "license_field": "MIT",
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 190,
+    "skill_md_bytes": 7067,
+    "files": 2
+  },
+  {
+    "dir": "incident-response",
+    "name": "incident-response",
+    "description": "Diagnostica incidentes de producao a partir de logs e gera plano de acao com post de Slack, checklist e ticket de tracking. Use quando o usuario colar logs de erro, pedir para analisar incidente, diagnosticar falha, \"o que quebrou\", \"analise de incidente\", \"pos-mortem\", \"o que aconteceu com o sistema\", \"deu erro na producao\", \"investigar falha\", ou enviar trecho de log e pedir interpretacao. Tambem ativa se o usuario pedir \"gerar comunicado de incidente\", \"plano de acao\", \"checklist do que fazer\", ou mencionar spike de erro, 5xx, timeout, exception. Nao use para requests de feature, duvidas de negocio, ou logs sem mensagem de erro. Suporta modo com servidor MCP (cria ticket no Jira) e modo apenas-skill (analise + comunicado). Scripts necessarios: scripts/parse_logs.py.",
+    "version": "1.0.0",
+    "license_field": null,
+    "has": {
+      "scripts": true,
+      "references": true,
+      "assets": true,
+      "tests": true
+    },
+    "body_lines": 125,
+    "skill_md_bytes": 6778,
+    "files": 5
+  },
+  {
+    "dir": "instalar-packages-python-no-ish",
+    "name": "instalar-packages-python-no-ish",
+    "description": "Instala packages Python no iSH/Alpine Linux via apk add, evitando o problema de wheels musllinux_aarch64 missing no PyPI. Gatilhos: \"instalar Python\", \"pip install falhou\", \"numpy no iSH\", \"package Python Alpine\", \"apk add Python\", \"instalar package\", \"install package\", \"como instalo\", \"instalacao Python\". Golden path verificada: /var/minis/shared/tools/check_install.py.",
+    "version": "1.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 77,
+    "skill_md_bytes": 2825,
+    "files": 1
+  },
+  {
+    "dir": "ish-background-services",
+    "name": "ish-background-services",
+    "description": "Start, inspect, stop and restart long-running background services on iSH (Alpine aarch64) — node servers, python http.server, watchers — and diagnose the \"port already in use\" / \"my server won't stop\" / \"the change didn't take effect because the old process is still running\" class of problems. Use this skill whenever you launch a local dev/preview server on this device, when a port is occupied, when a restart seems ignored, or when `pkill` appears to do nothing. Trigger even if the user only says \"restart the app\" or \"the page still shows the old version\".",
+    "version": "1.0",
+    "license_field": "MIT",
+    "has": {},
+    "body_lines": 98,
+    "skill_md_bytes": 4863,
+    "files": 1
+  },
+  {
+    "dir": "mcp-connector",
+    "name": "mcp-connector",
+    "description": "Connect to and interact with Model Context Protocol (MCP) servers: discover tools, initialize sessions, call tools, handle auth safely, and debug JSON-RPC integrations.",
+    "version": "1.1.0",
+    "license_field": null,
+    "has": {
+      "scripts": true,
+      "references": true
+    },
+    "body_lines": 53,
+    "skill_md_bytes": 2407,
+    "files": 8
+  },
+  {
+    "dir": "memory-defrag",
+    "name": "memory-defrag",
+    "description": "Defragment and reorganize agent memory files: split bloated files, merge duplicates, remove stale information, and restructure the memory hierarchy. Use when memory files have grown unwieldy, contain redundancies, or need reorganization. Run periodically (weekly) or on demand.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 83,
+    "skill_md_bytes": 3700,
+    "files": 1
+  },
+  {
+    "dir": "memory-ingest",
+    "name": "memory-ingest",
+    "description": "Process unstructured external input (meeting transcripts, conversation logs, pasted documents) into structured Basic Memory entities. Extracts entities, searches for existing matches, proposes new entities with approval, creates notes with observations and relations, and captures action items.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 306,
+    "skill_md_bytes": 11587,
+    "files": 1
+  },
+  {
+    "dir": "memory-notes",
+    "name": "memory-notes",
+    "description": "How to write well-structured Basic Memory notes: frontmatter, observations with semantic categories, relations with wiki-links, and best practices for building a rich knowledge graph. Use when creating or improving notes.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 323,
+    "skill_md_bytes": 13208,
+    "files": 1
+  },
+  {
+    "dir": "memory-reflect",
+    "name": "memory-reflect",
+    "description": "Sleep-time memory reflection: review recent conversations and daily notes, extract insights, and consolidate into long-term memory. Use when triggered by cron, heartbeat, or explicit request to reflect on recent activity. Runs as background processing to improve memory quality over time.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 70,
+    "skill_md_bytes": 3251,
+    "files": 1
+  },
+  {
+    "dir": "memory-schema",
+    "name": "memory-schema",
+    "description": "Schema lifecycle management for Basic Memory: discover unschemaed notes, infer schemas, create and edit schema definitions, validate notes, and detect drift. Use when working with structured note types (Task, Person, Meeting, etc.) to maintain consistency across the knowledge graph.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 234,
+    "skill_md_bytes": 7788,
+    "files": 1
+  },
+  {
+    "dir": "memory-supermemory",
+    "name": "memory-supermemory",
+    "description": "Backend adapter for Basic Memory skills (memory-notes, memory-tasks, memory-schema, memory-ingest, memory-reflect, memory-defrag) that stores all data in Supermemory cloud via MCP. Replaces local filesystem storage with semantic search, graph memory, and cross-device sync. Use when you want memory-* skills to persist to Supermemory instead of /var/minis/memory/.",
+    "version": null,
+    "license_field": null,
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 181,
+    "skill_md_bytes": 7172,
+    "files": 3
+  },
+  {
+    "dir": "memory-tasks",
+    "name": "memory-tasks",
+    "description": "Task management via Basic Memory schemas: create, track, and resume structured tasks that survive context compaction. Uses BM's schema system for uniform notes queryable through the knowledge graph.",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 163,
+    "skill_md_bytes": 5614,
+    "files": 1
+  },
+  {
+    "dir": "minis-config-ops",
+    "name": "minis-config-ops",
+    "description": "Read, bulk-edit, verify and revert Minis app settings from the shell with the `minis-config` CLI — sub agent instructions, providers, models, defaults, environment-adjacent fields, soul body. Use this skill whenever a task means \"change Minis settings\", \"edit the sub agent instructions\", \"add a provider\", \"apply this to all N agents/entries\", \"make the same change across every model\", \"revert that config change\", or whenever you would otherwise tell the user to tap through Settings. Also use it before ANY bulk config write, because the write payload is JSON-encoded-inside-JSON and the naive version fails.",
+    "version": "1.0",
+    "license_field": "MIT",
+    "has": {
+      "scripts": true
+    },
+    "body_lines": 157,
+    "skill_md_bytes": 7086,
+    "files": 2
+  },
+  {
+    "dir": "openrouter-rate-limits",
+    "name": "openrouter-rate-limits",
+    "description": "Understand and handle OpenRouter rate limits. Use when hitting 429 errors,",
+    "version": "2.0.0",
+    "license_field": "MIT",
+    "has": {
+      "references": true
+    },
+    "body_lines": 225,
+    "skill_md_bytes": 9738,
+    "files": 7
+  },
+  {
+    "dir": "production-agent-public",
+    "name": "production-agent-public",
+    "description": "生产级 ReAct Agent 技能。当用户说\"生产级方案\"、\"可部署代码\"、\"Production Agent\"、 \"ReAct格式\"、\"帮我写一个能跑的\"、\"长期稳定运行\"、\"生产环境\"、\"直接部署\"、 \"加上错误处理\"、\"加上重试机制\"、\"做成生产级\"、\"工业级代码\"、\"企业级\"、 \"加监控\"、\"加日志\"、\"加健康检查\"、\"Docker部署\"、\"NAS部署\"、\"群晖部署\"、 \"帮我上线\"、\"别挂掉\"、\"跑起来\"、\"开启生产\"时触发。 激活后以「Claude Production Agent」身份运行，强制使用 ReAct 格式， 每3步插入自我反思，优先考虑错误处理、持久化、性能和部署落地。 完整示例输出见 references/示例输出.md。",
+    "version": "1.0.1",
+    "license_field": null,
+    "has": {
+      "references": true,
+      "evals": true
+    },
+    "body_lines": 141,
+    "skill_md_bytes": 6033,
+    "files": 3
+  },
+  {
+    "dir": "refactor-plan",
+    "name": "refactor-plan",
+    "description": "Plan a multi-file refactor with proper sequencing and rollback steps",
+    "version": "1.0.1",
+    "license_field": null,
+    "has": {},
+    "body_lines": 70,
+    "skill_md_bytes": 1774,
+    "files": 1
+  },
+  {
+    "dir": "saa-orchestrator",
+    "name": "saa-orchestrator",
+    "description": "Sistema Agente Autônomo que orquestra o ciclo Executor→Crítico→Otimizador e delega para Multi-Agentes especializados. Use quando receber tarefas que exijam especialização, múltiplas perspectivas, ou orquestração de agentes. Modelo preferenciais: NVIDIA + KILO; Gemini só 2.5 Flash; free via SAA_USE_FREE=1.",
+    "version": "2.1.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 217,
+    "skill_md_bytes": 11696,
+    "files": 1
+  },
+  {
+    "dir": "self-improving-agent",
+    "name": "self-improving-agent",
+    "description": "Self-improvement logging and closed-loop feedback: Trigger when a command or operation fails, the user corrects you, outdated knowledge is identified, an external API fails, or a better reusable solution is found. Review historical learnings before important tasks. Avoid triggering during ordinary chat, for temporary mistakes that do not need to be logged, or when the user has explicitly said not to log.",
+    "version": null,
+    "license_field": null,
+    "has": {
+      "scripts": true,
+      "references": true,
+      "data": true
+    },
+    "body_lines": 340,
+    "skill_md_bytes": 14370,
+    "files": 9
+  },
+  {
+    "dir": "self-learning",
+    "name": "self-learning",
+    "description": "Capture a hard-won \"golden path\" from the current session as a reusable Agent Skill, so future sessions start already knowing it. Use it (1) right after non-trivial debugging, after working out a multi-step operational workflow, or after rediscovering project facts you didn't know up front — e.g. how to reach the dev/prod database, where credentials and env vars live, how to deploy, run migrations, or verify a change live; and (2) whenever the user says \"remember this\", \"save this as a skill\", \"make a skill for this\", \"don't make me re-explain this next time\", or otherwise wants a workflow preserved across sessions. Proactively recognize the moment even when unprompted: if a task took several attempts before it worked, used non-obvious tooling, or is likely to recur, harvest it without asking first. Delegates to a subagent when your tool supports one, or works inline, to extract the proven procedure into a new project-local or global skill.",
+    "version": "1.0",
+    "license_field": "MIT",
+    "has": {
+      "references": true,
+      "assets": true
+    },
+    "body_lines": 171,
+    "skill_md_bytes": 10371,
+    "files": 3
+  },
+  {
+    "dir": "skill-creator",
+    "name": "skill-creator",
+    "description": "Cria, avalia e melhora skills para agentes de IA seguindo práticas de referência (MCP, OpenAI, Claude). Use quando o usuário quiser: criar uma skill nova, revisar uma skill existente, converter instruções em skill, integrar skill com servidor MCP, testar validar ou distribuir uma skill, decidir entre skill vs MCP vs ferramenta nativa, gerar estrutura de skill, validar frontmatter e corpo, adicionar scripts/referências/assets, empacotar skill para distribuição, ou revisar se uma skill está completa e funcional. Suporta skills no formato SKILL.md (Anthropic/OpenAI compatível), integração MCP, criação de servidores MCP e empacotamento de plugins. Usa o servidor MCP 'skill-creator' e os scripts de scaffold/validação/teste para garantir qualidade verificável.",
+    "version": "3.0.0",
+    "license_field": null,
+    "has": {
+      "scripts": true,
+      "references": true,
+      "assets": true
+    },
+    "body_lines": 450,
+    "skill_md_bytes": 21486,
+    "files": 31
+  },
+  {
+    "dir": "skill-orchestrator",
+    "name": "skill-orchestrator",
+    "description": "Planejar seleção de capacidades e orientar execução pelo coordenador. Usar em tarefas multi-etapa e revisão do roteamento; o CLI apenas planeja, não executa capacidades nem instala skills autonomamente.",
+    "version": "2.0.0",
+    "license_field": null,
+    "has": {},
+    "body_lines": 197,
+    "skill_md_bytes": 9107,
+    "files": 3
+  },
+  {
+    "dir": "systematic-debugging",
+    "name": "systematic-debugging",
+    "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 280,
+    "skill_md_bytes": 9465,
+    "files": 11
+  },
+  {
+    "dir": "tool-builder",
+    "name": "tool-builder",
+    "description": "Create structured tools and APIs for autonomous agents to execute actions and retrieve external data.",
+    "version": "1.0.1",
+    "license_field": null,
+    "has": {},
+    "body_lines": 373,
+    "skill_md_bytes": 12382,
+    "files": 1
+  },
+  {
+    "dir": "verification-before-completion",
+    "name": "verification-before-completion",
+    "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 117,
+    "skill_md_bytes": 3646,
+    "files": 1
+  },
+  {
+    "dir": "web-content-extractor",
+    "name": "web-content-extractor",
+    "description": "Clean and extract the main body content from a webpage URL. Use this skill whenever the user asks to extract, scrape, or read the main article, text, or content from a webpage, especially if they mention wanting clean Markdown or text without ads and navigation.",
+    "version": "1.0.1",
+    "license_field": null,
+    "has": {},
+    "body_lines": 45,
+    "skill_md_bytes": 2607,
+    "files": 1
+  },
+  {
+    "dir": "web-search",
+    "name": "web-search",
+    "description": "General web search skill that uses browser automation with multiple search engines and selects the priority chain based on search intent. Supports: Perplexity, Metaso AI, Google, Bing, Brave, DuckDuckGo, Baidu, Sogou, Tavily. Trigger when the user mentions \"web search,\" \"search for it,\" \"search this for me,\" \"look it up online,\" \"search engine,\" or needs real-time information from the internet.",
+    "version": null,
+    "license_field": null,
+    "has": {
+      "scripts": true,
+      "evals": true
+    },
+    "body_lines": 85,
+    "skill_md_bytes": 3933,
+    "files": 3
+  },
+  {
+    "dir": "writing-plans",
+    "name": "writing-plans",
+    "description": "Use when you have a spec or requirements for a multi-step task, before touching code",
+    "version": null,
+    "license_field": null,
+    "has": {},
+    "body_lines": 168,
+    "skill_md_bytes": 7053,
+    "files": 2
+  }
+]
