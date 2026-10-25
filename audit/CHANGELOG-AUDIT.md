@@ -132,3 +132,9 @@ documents. See `docs/updating.md`.
 - Moved `superpowers` 6.3.0, `security-guidance` 2.0.7, and the older VS Code ChatGPT extension to
   `~/.agent-toolbox-backups/20261025-phase3/stale-caches/` (private, not committed).
 - Active `superpowers` 7.0.0 and `security-guidance` 2.0.15 remain.
+
+### Phase 3 publication
+
+- Commit `06504dd` on `docs/toolbox-audit`, based on `origin/main` (`d40efaed`).
+- Pushed without force; PR #1 opened against `main`.
+- `main` and the curated catalog were not modified.

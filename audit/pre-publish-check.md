@@ -60,6 +60,9 @@
 | Remote | `https://github.com/<owner>/agent-toolbox.git` |
 | Base | `origin/main` (`d40efaed`) |
 | Working branch | `docs/toolbox-audit` |
+| Commit | `06504dd` |
+| Push | Done (no force) |
+| PR | #1 |
 | Remote history preserved | Yes (feature branch, no merge/rebase/force) |
 | Remote `main` overwritten | No |
 | Curated catalog preserved | Yes (`catalog.json`, `data/`, `recommended/`, `mine/`, `skills/*.md`, `mcps/*.md`, original README body) |

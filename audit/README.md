@@ -155,12 +155,12 @@ change was performed. Integration is **Gate F** and is blocked until private nam
 | Item | Status |
 | --- | --- |
 | Audit snapshot | Complete (2026-10-25) |
-| Repository organization | Phase 1 complete; Phase 2 documentation complete on `docs/toolbox-audit` |
-| Remote integration | **Blocked** — unrelated 6-commit history; see pre-publish check |
-| Commit / push | **Not performed** (requires explicit instruction) |
+| Repository organization | Phase 3 complete on `docs/toolbox-audit` |
+| Remote integration | **Complete** — branch based on `origin/main`; pushed; PR #1 |
+| Commit / push | **Done** — commit `06504dd`; branch `docs/toolbox-audit`; PR #1 |
 | Runtime verification of MCPs/hooks/plugins | **Not performed for safety** |
-| Repository license | **Not specified** — owner decision |
-| Public-release review | **Blocked** — project-specific skill names + license decision |
+| Repository license | Existing MIT `LICENSE` and Apache-2.0 `NOTICE` preserved |
+| Public-release review | **Complete** — private names sanitized; checks passed |
 
 ## Disclaimer
 

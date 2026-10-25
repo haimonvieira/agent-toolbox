@@ -85,6 +85,8 @@ is still recorded as installed.
 | Curated catalog | preserved |
 | Force push | none |
 | `main` modified | no |
+| Commit | `06504dd` |
+| PR | #1 |
 
 ## 7. Remaining human decisions
 
