@@ -1,8 +1,9 @@
 # MCP servers
 
 MCP (Model Context Protocol) servers expose tools and data to an agent. This machine has
-**19 distinct servers** across seven harness configs (plus plugin-injected servers). Five are broken; three depend on local
-services that were not running during the audit.
+**19 distinct servers** across seven harness configs (plus plugin-injected servers). Phase 3 repaired
+three verified entries and disabled two unresolved upstreams; three depend on local services that
+were not running at audit time.
 
 Full metadata: [inventory/mcps.yaml](../inventory/mcps.yaml). Sanitized examples:
 [configs/examples/](../configs/examples/).

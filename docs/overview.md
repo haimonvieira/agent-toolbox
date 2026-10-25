@@ -50,7 +50,7 @@ reading this later, re-run `scripts/audit.sh` before trusting a specific path or
 | Distinct skills (union of all sources) | ~436 | 351 global + 55 OMP managed + 40 plugin-provided + 5 Codex built-in |
 | Global skill directory entries | 351 | `~/.agents/skills`; 1 symlink into an external volume |
 | Claude skill copies | 348 | Byte-identical copies, 269 MB |
-| Distinct MCP servers | 19 | 5 broken executables/paths, 3 local services down |
+| Distinct MCP servers | 19 | 2 unresolved upstreams disabled; 3 repaired; 3 local services down |
 | Installed plugins/extensions | 17 | Plus 3 stale/orphaned caches |
 | Hook sites documented | 17 | Plugin hooks, OMP extensions, 1 orphaned project hooks file |
 | Active Git hooks | 0 | `core.hooksPath` unset |

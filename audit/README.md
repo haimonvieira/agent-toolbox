@@ -84,10 +84,11 @@ Start with [docs/skills.md](../docs/skills.md).
 
 ## MCP servers
 
-19 distinct servers. Five have missing executables or impossible paths (`codegraph`,
-`codebase-memory`, `openagents`, `hostinger-api`, `gemini-notebook-mcp`). Three remote
-endpoints are local services that were not running at audit time (`browseros-neo`,
-`obsidian-mcp-connector`, `starry`). Details in [docs/mcps.md](../docs/mcps.md).
+19 distinct servers. Phase 3 repaired `codebase-memory`, `hostinger-api`, and the
+`gemini-notebook-mcp` path; `codegraph` and `openagents` remain disabled/preserved because their
+upstreams are unverified. Three remote endpoints are local services that were not running at audit
+time (`browseros-neo`, `obsidian-mcp-connector`, `starry`). Details in
+[../docs/mcps.md](../docs/mcps.md).
 
 ## Plugins
 
