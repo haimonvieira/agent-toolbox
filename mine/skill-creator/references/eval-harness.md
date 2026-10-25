@@ -6,7 +6,7 @@ desenvolvedor do skill-creator oficial (Anthropic) e exige o Claude Code CLI.
 
 ---
 
-## Trilha A — Nativa Minis (sempre disponível)
+## Trilha A — determinística (sempre disponível)
 
 Ferramentas determinísticas, sem LLM, sem rede.
 
@@ -20,17 +20,17 @@ Ferramentas determinísticas, sem LLM, sem rede.
 | `mcp/skill-server.py` | Servidor MCP com 7 ferramentas | nenhuma |
 
 ```bash
-# validação completa (spec Minis + avisos da spec Claude)
-python3 scripts/skill-validate.py /var/minis/skills/<nome> --strict --json
+# validação completa (estrutura + avisos da spec Claude)
+python3 scripts/skill-validate.py ~/.agent-skills/<nome> --strict --json
 
 # testes
-python3 scripts/skill-test.py /var/minis/skills/<nome>
+python3 scripts/skill-test.py ~/.agent-skills/<nome>
 
 # conformidade estrita com a spec do Claude
-python3 scripts/quick_validate.py /var/minis/skills/<nome>
+python3 scripts/quick_validate.py ~/.agent-skills/<nome>
 
 # empacotar
-python3 scripts/package_skill.py /var/minis/skills/<nome> ./dist
+python3 scripts/package_skill.py ~/.agent-skills/<nome> ./dist
 ```
 
 **Quando usar**: sempre. É o piso mínimo — nenhuma skill deve ser declarada
@@ -81,7 +81,7 @@ qualidade da descrição.
 which claude      # precisa do Claude Code CLI instalado e autenticado
 ```
 
-**Neste ambiente o `claude` CLI não está instalado** → a Trilha B não roda.
+**A Trilha B exige o `claude` CLI.** Sem ele, ela não roda.
 Use a Trilha A + os 5 casos de teste manuais como substituto.
 
 **Substituto manual**: para cada prompt do conjunto, verifique se a skill
@@ -118,6 +118,6 @@ Enforçados por `quick_validate.py`:
 | `compatibility` | string, ≤ 500 chars |
 | Versão | **não é chave de topo** — use `metadata.version` |
 
-> **Nota Minis**: skills deste ambiente podem usar `version:` no topo (convenção
+> **Nota**: algumas skills usam `version:` no topo (convenção
 > herdada). Para distribuição no Claude, mova para `metadata.version`. O
 > `skill-validate.py` aceita ambos e avisa quando a chave extra está presente.

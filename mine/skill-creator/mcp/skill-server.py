@@ -26,9 +26,13 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-SKILLS_ROOT = Path(os.environ.get("SKILLS_ROOT", "/var/minis/skills"))
-SKILL_CREATOR_DIR = SKILLS_ROOT / "skill-creator"
-SCRIPTS_DIR = SKILL_CREATOR_DIR / "scripts"
+# Onde as skills vivem (pode ser sobrescrito pelo ambiente).
+SKILLS_ROOT = Path(os.environ.get("SKILLS_ROOT", Path.home() / ".agent-skills"))
+
+# Onde este pacote vive. Os validadores são procurados ao lado deste arquivo,
+# não sob SKILLS_ROOT — assim o servidor funciona de qualquer diretório.
+SELF_DIR = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = SELF_DIR / "scripts"
 
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "skill-creator-server"
@@ -236,7 +240,7 @@ def read_skill(name: str, max_chars: int = 20000) -> dict:
 
 def get_skill_template() -> dict:
     """Devolve o template anotado de skill."""
-    tpl = SKILL_CREATOR_DIR / "references" / "skill-template.md"
+    tpl = SELF_DIR / "references" / "skill-template.md"
     if tpl.exists():
         return {"ok": True, "source": str(tpl), "content": tpl.read_text(encoding="utf-8")}
 

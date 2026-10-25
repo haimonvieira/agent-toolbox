@@ -45,7 +45,7 @@ Esta skill tem três camadas de ferramenta. Use a mais direta para cada caso.
 
 ### 1. Servidor MCP `skill-creator` (stdio)
 
-Registrado em `minis-mcp-cli`. Expõe 7 ferramentas:
+Servidor MCP via stdio. Expõe 7 ferramentas:
 
 | Ferramenta | O que faz |
 |---|---|
@@ -57,22 +57,25 @@ Registrado em `minis-mcp-cli`. Expõe 7 ferramentas:
 | `get_skill_template` | Devolve o template anotado |
 | `update_skill` | Atualiza version/description sem tocar no corpo |
 
-```
-minis-mcp-cli call skill-creator create_skill name=minha-skill description="..."
-minis-mcp-cli call skill-creator validate_skill name=minha-skill
+Registre o servidor no seu agente (veja a seção de configuração do repositório) ou
+chame direto por JSON-RPC:
+
+```bash
+printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"create_skill","arguments":{"name":"minha-skill","description":"..."}}}' \
+  | python3 mcp/skill-server.py
 ```
 
-Se o servidor não estiver disponível, use os scripts abaixo — fazem o mesmo.
+Se preferir não registrar o servidor, use os scripts abaixo — fazem o mesmo.
 
 ### 2. Scripts (fallback direto, sempre funcionam)
 
 ```bash
-cd /var/minis/skills/skill-creator/scripts
+cd mine/skill-creator/scripts
 ./skill-scaffold.sh <nome> "descrição"                 # cria estrutura
-python3 skill-validate.py /var/minis/skills/<nome>      # valida (--strict, --json)
-python3 skill-test.py   /var/minis/skills/<nome>       # roda testes
-python3 quick_validate.py /var/minis/skills/<nome>     # só spec do Claude
-python3 package_skill.py  /var/minis/skills/<nome> ./dist  # empacota .skill
+python3 skill-validate.py ~/.agent-skills/<nome>      # valida (--strict, --json)
+python3 skill-test.py   ~/.agent-skills/<nome>       # roda testes
+python3 quick_validate.py ~/.agent-skills/<nome>     # só spec do Claude
+python3 package_skill.py  ~/.agent-skills/<nome> ./dist  # empacota .skill
 sh verify-all.sh                                       # verificação completa (16 checks)
 ```
 
@@ -415,7 +418,7 @@ A spec oficial restringe o frontmatter a `name`, `description`, `license`,
 - `compatibility` tem limite de 500 caracteres.
 
 `scripts/quick_validate.py` aplica estas regras. `skill-validate.py` é mais
-permissivo (aceita `version:` no topo, convenção Minis) e avisa quando há
+permissivo (aceita `version:` no topo, convenção de alguns clientes) e avisa quando há
 divergência — use-o para trabalhar e o `quick_validate.py` antes de distribuir.
 
 ---

@@ -137,7 +137,7 @@ dados de contexto estáveis; prompts quando houver fluxos repetíveis pelo usuá
 
 - **MCP Inspector** — teste tools, resources e prompts interativamente antes de publicar.
 - **Erros tratados** — cada tool devolve `isError` com mensagem acionável.
-- **README mínimo** só se for publicar (no Minis, documente no `SKILL.md` da skill que o usa).
+- **README mínimo** só se for publicar; caso contrário, documente no `SKILL.md` da skill que o usa.
 - **Versão** nos metadados do servidor.
 
 ---

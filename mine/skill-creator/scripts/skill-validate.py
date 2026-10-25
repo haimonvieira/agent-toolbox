@@ -16,7 +16,7 @@ Uso:
   python3 skill-validate.py <caminho-da-skill> [--strict] [--json]
 
 Variáveis de ambiente:
-  SKILLS_ROOT          diretório raiz das skills (padrão: /var/minis/skills)
+  SKILLS_ROOT          diretório raiz das skills (padrão: ~/.agent-skills)
   IGNORE_EXTERNAL_REF  se "true", não verifica referências cruzadas
 
 Exit codes:
@@ -31,7 +31,7 @@ import re
 import sys
 from pathlib import Path
 
-SKILLS_ROOT = Path(os.environ.get("SKILLS_ROOT", "/var/minis/skills"))
+SKILLS_ROOT = Path(os.environ.get("SKILLS_ROOT", Path.home() / ".agent-skills"))
 IGNORE_EXTERNAL_REF = os.environ.get("IGNORE_EXTERNAL_REF", "").lower() in ("1", "true", "yes", "on")
 
 REQUIRED_FRONTMATTER = ["name", "description"]
@@ -160,7 +160,7 @@ def parse_frontmatter(content: str) -> tuple:
 
 
 def get_version(fm: dict) -> str:
-    """Versão pode estar no topo (convenção Minis) ou em metadata.version (spec Claude)."""
+    """Versão pode estar no topo (convenção de alguns clientes) ou em metadata.version (spec Claude)."""
     if fm.get("version"):
         return str(fm["version"])
     meta = fm.get("metadata")
@@ -216,7 +216,7 @@ def check_frontmatter(fm: dict, r: ValidationResult):
     if compat and isinstance(compat, str) and len(compat) > 500:
         r.add_warning(f"'compatibility' com {len(compat)} caracteres (máx spec: 500).")
 
-    # Chaves fora da spec do Claude (avisos, pois o Minis aceita extensões)
+    # Chaves fora da spec do Claude (avisos, pois alguns clientes aceitam extensões)
     extras = set(fm.keys()) - CLAUDE_ALLOWED_KEYS
     for extra in sorted(extras):
         r.add_warning(
@@ -227,7 +227,7 @@ def check_frontmatter(fm: dict, r: ValidationResult):
 
     if not get_version(fm):
         r.add_info("Versão não declarada. Use 'metadata: {version: \"x.y.z\"}' (spec Claude) "
-                   "ou 'version:' no topo (convenção Minis).")
+                   "ou 'version:' no topo (convenção de alguns clientes).")
 
     for field in OPTIONAL_FRONTMATTER:
         if field not in fm:

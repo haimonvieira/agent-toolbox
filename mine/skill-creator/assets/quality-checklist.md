@@ -72,23 +72,22 @@ Use antes de considerar uma skill concluída. Cada item deve ser verificável.
 
 ```bash
 # Validação estrutural completa (0 erros = aprovado)
-python3 /var/minis/skills/skill-creator/scripts/skill-validate.py /var/minis/skills/<nome>
+python3 mine/skill-creator/scripts/skill-validate.py ~/.agent-skills/<nome>
 
 # Validação estrita (avisos viram erros)
-python3 /var/minis/skills/skill-creator/scripts/skill-validate.py /var/minis/skills/<nome> --strict
+python3 mine/skill-creator/scripts/skill-validate.py ~/.agent-skills/<nome> --strict
 
 # Testes automatizados (se houver tests/test-cases.json)
-python3 /var/minis/skills/skill-creator/scripts/skill-test.py /var/minis/skills/<nome>
+python3 mine/skill-creator/scripts/skill-test.py ~/.agent-skills/<nome>
 
 # Conformidade estrita com a spec do Claude (frontmatter)
-python3 /var/minis/skills/skill-creator/scripts/quick_validate.py /var/minis/skills/<nome>
+python3 mine/skill-creator/scripts/quick_validate.py ~/.agent-skills/<nome>
 
 # Empacotar para distribuição
-python3 /var/minis/skills/skill-creator/scripts/package_skill.py /var/minis/skills/<nome> ./dist
+python3 mine/skill-creator/scripts/package_skill.py ~/.agent-skills/<nome> ./dist
 
-# Via servidor MCP
-minis-mcp-cli call skill-creator validate_skill name=<nome>
-minis-mcp-cli call skill-creator test_skill name=<nome>
+# Verificação completa do próprio skill-creator
+sh mine/skill-creator/scripts/verify-all.sh
 ```
 
 ---

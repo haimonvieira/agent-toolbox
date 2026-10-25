@@ -5,12 +5,13 @@
 
 set -e
 
-SKILLS_DIR="${SKILLS_DIR:-/var/minis/skills}"
-TEMPLATE_REF="${SKILL_TEMPLATE:-/var/minis/skills/skill-creator/references/skill-template.md}"
+SKILLS_DIR="${SKILLS_DIR:-.}"
+SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+TEMPLATE_REF="${SKILL_TEMPLATE:-$SELF_DIR/../references/skill-template.md}"
 
 if [ $# -lt 1 ]; then
     echo "Uso: $0 <nome-da-skill> [descricao]"
-    echo "Variaveis de ambiente: SKILLS_DIR (padrao: /var/minis/skills), SKILL_TEMPLATE"
+    echo "Variaveis de ambiente: SKILLS_DIR (padrao: diretorio atual), SKILL_TEMPLATE"
     exit 64
 fi
 

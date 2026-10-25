@@ -1,12 +1,12 @@
 # Agent Toolbox
 
-Setup do meu agente de IA: **41 skills** e **10 servidores MCP** em uso,
+Setup do meu agente de IA: **36 skills** e **10 servidores MCP** em uso,
 cada um com origem, licença e comando de instalação. Atualizado em 25/10/2026.
 
 O repositório tem duas partes:
 
 - **[Recomendações](#recomendações)** — 11 skills que eu uso e indico para quem está começando.
-- **[Inventário](#inventário)** — as 41 skills e os 10 MCPs que eu tenho instalados.
+- **[Inventário](#inventário)** — as 36 skills e os 10 MCPs que eu tenho instalados.
 
 As skills recomendadas são referenciadas por **commit**, não copiadas. Dois motivos: os
 repositórios de origem recebem push semanal, então uma cópia ficaria defasada; e uma das
@@ -413,11 +413,12 @@ Cobre Cloudflare, Docker, GCP, Kubernetes e GitOps. Consta aqui apenas como refe
 
 ## Inventário
 
-Skills instaladas no meu ambiente. 7 têm origem confirmada, 34 não. As
+Skills instaladas no meu ambiente. 7 têm origem confirmada, 29 não. As
 sem origem aparecem marcadas como não documentadas, e não com uma origem suposta.
 
-As marcadas com † (5) dependem do ambiente iSH/Minis e não funcionam em omp,
-Claude Code ou OpenCode. Ficam registradas porque fazem parte do inventário real.
+5 skills do ambiente original não são publicadas aqui por dependerem de
+CLIs e caminhos daquele sistema (config de app, serviços de fundo, pacotes Alpine).
+Continuam em `data/skills.json`; ficam fora do README, das fichas e do catalog.json.
 
 | Categoria | Skills |
 |---|---|
@@ -425,8 +426,7 @@ Claude Code ou OpenCode. Ficam registradas porque fazem parte do inventário rea
 | Memória | 7 |
 | Engenharia de código | 9 |
 | GitHub | 3 |
-| Web e busca | 8 |
-| Ambiente Minis / iSH | 3 |
+| Web e busca | 6 |
 | APIs e dados | 2 |
 
 ### Criar e orquestrar skills
@@ -481,22 +481,12 @@ Claude Code ou OpenCode. Ficam registradas porque fazem parte do inventário rea
 
 | Skill | O que faz | Origem |
 |---|---|---|
-| [`appstoreprice-hub`](skills/appstoreprice-hub.md)† | 查询 App Store 全球各地区应用价格的技能，通过 appstoreprice.org 获取数据。 使用 Minis 内置浏览器（minis-browser-use CLI）在页面上下文中直接调… | não documentada |
 | [`browser-automation`](skills/browser-automation.md) | Browser automation powers web testing, scraping, and AI agent | não documentada |
-| [`browser-batch`](skills/browser-batch.md)† | Accelerate browser automation in the iSH/Minis environment by batching multiple browser actions into… | não documentada |
 | [`exa-search`](skills/exa-search.md) | Search the web, read webpages as markdown, and run filtered web retrieval with Exa MCP. Use this ski… | não documentada |
 | [`firecrawl`](skills/firecrawl.md) | Firecrawl gives AI agents and apps fast, reliable web context with strong search, scraping, and inte… | não documentada |
 | [`free-tts`](skills/free-tts.md) | 免费语音合成（edge-tts），无需 API Key 无需注册。将文本转为 mp3 音频文件。 当用户说"朗读""语音合成""文字转语音""TTS""生成音频""读一下" "读出来""念一下""听一… | não documentada |
 | [`web-content-extractor`](skills/web-content-extractor.md) | Clean and extract the main body content from a webpage URL. Use this skill whenever the user asks to… | não documentada |
 | [`web-search`](skills/web-search.md) | General web search skill that uses browser automation with multiple search engines and selects the p… | não documentada |
-
-### Ambiente Minis / iSH
-
-| Skill | O que faz | Origem |
-|---|---|---|
-| [`instalar-packages-python-no-ish`](skills/instalar-packages-python-no-ish.md)† | Instala packages Python no iSH/Alpine Linux via apk add, evitando o problema de wheels musllinux_aar… | não documentada |
-| [`ish-background-services`](skills/ish-background-services.md)† | Start, inspect, stop and restart long-running background services on iSH (Alpine aarch64) — node ser… | não documentada |
-| [`minis-config-ops`](skills/minis-config-ops.md)† | Read, bulk-edit, verify and revert Minis app settings from the shell with the `minis-config` CLI — s… | não documentada |
 
 ### APIs e dados
 

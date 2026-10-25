@@ -25,7 +25,7 @@ CATEGORIES = {
     "dev":         ("Engenharia de código", 3),
     "github":      ("GitHub", 4),
     "web":         ("Web e busca", 5),
-    "environment": ("Ambiente Minis / iSH", 6),
+    "environment": ("Ambiente local", 6),
     "data":        ("APIs e dados", 7),
     "other":       ("Sem categoria", 8),
 }
@@ -52,8 +52,9 @@ SKILL_CATEGORY = {
 
 VERSION = "1.0.0"
 
-# Skills que só funcionam no ambiente iSH/Minis (usam CLIs ou caminhos desse sistema).
-ENV_SPECIFIC = {
+# Skills que só funcionam no ambiente iSH/Minis: ficam em data/skills.json mas
+# não são publicadas, porque não servem a quem usa omp, Claude Code ou OpenCode.
+EXCLUDED = {
     "minis-config-ops",
     "ish-background-services",
     "instalar-packages-python-no-ish",
@@ -100,14 +101,15 @@ def load():
             e.pop("slug_source", None)
         rec.append(e)
 
+    excluidas = [x for x in skills if x["dir"] in EXCLUDED]
+    skills = [x for x in skills if x["dir"] not in EXCLUDED]
     for s in skills:
         s["category"] = SKILL_CATEGORY.get(s["dir"], "other")
         s["origin"] = prov.get("known", {}).get(s["dir"])
-        s["env_specific"] = s["dir"] in ENV_SPECIFIC
 
     discovery = j("discovery.json") or {"intro": "", "entries": []}
     tools = (j("tools.json") or {}).get("tools", [])
-    return skills, mcps, prov, rec, curated.get("categories", {}), discovery, tools
+    return skills, mcps, prov, rec, curated.get("categories", {}), discovery, tools, len(excluidas)
 
 
 def install_cmd(e):
@@ -116,6 +118,15 @@ def install_cmd(e):
     if e["license"] is None:
         return None
     return f'npx skills add {e["repo_slug"]}@{e["skill"]}'
+
+
+def portable(arg):
+    """Troca o caminho absoluto da maquina de origem por um relativo ao clone."""
+    if not isinstance(arg, str):
+        return arg
+    return (arg.replace("/var/minis/skills/skill-creator", "$HOME/agent-toolbox/mine/skill-creator")
+               .replace("/var/minis/shared", "$HOME/agent-toolbox")
+               .replace("/var/minis", "$HOME"))
 
 
 def build_catalog(skills, mcps, rec):
@@ -137,7 +148,8 @@ def build_catalog(skills, mcps, rec):
         } for s in skills],
         "mcps": [{
             "name": m["name"], "transport": m["transport"], "enabled": m["enabled"],
-            "url": m["url"], "command": m["command"], "args": m["args"],
+            "url": m["url"], "command": portable(m["command"]),
+            "args": [portable(a) for a in m["args"]],
             "env_vars": m["env_vars"], "header_names": m["header_names"],
             "page": f"mcps/{m['name']}.md",
         } for m in mcps],
@@ -151,7 +163,7 @@ def build_catalog(skills, mcps, rec):
     }
 
 
-def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools):
+def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools, n_excluidas):
     by_cat = defaultdict(list)
     for s in skills:
         by_cat[s["category"]].append(s)
@@ -301,11 +313,11 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools):
     A("")
     A(f"Skills instaladas no meu ambiente. {known} têm origem confirmada, {unknown_n} não. As")
     A("sem origem aparecem marcadas como não documentadas, e não com uma origem suposta.")
-    env_n = sum(1 for x in skills if x.get("env_specific"))
-    if env_n:
+    if n_excluidas:
         A("")
-        A(f"As marcadas com † ({env_n}) dependem do ambiente iSH/Minis e não funcionam em omp,")
-        A("Claude Code ou OpenCode. Ficam registradas porque fazem parte do inventário real.")
+        A(f"{n_excluidas} skills do ambiente original não são publicadas aqui por dependerem de")
+        A("CLIs e caminhos daquele sistema (config de app, serviços de fundo, pacotes Alpine).")
+        A("Continuam em `data/skills.json`; ficam fora do README, das fichas e do catalog.json.")
     A("")
 
     A("| Categoria | Skills |")
@@ -327,8 +339,7 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools):
                 o = f"[{r.replace('https://github.com/', '')}]({r})" if r.startswith("http") else r
             else:
                 o = "não documentada"
-            marca = "†" if s.get("env_specific") else ""
-            A(f"| [`{s['dir']}`](skills/{s['dir']}.md){marca} | {d} | {o} |")
+            A(f"| [`{s['dir']}`](skills/{s['dir']}.md) | {d} | {o} |")
         A("")
 
     A("---")
@@ -471,15 +482,6 @@ def claude_code_command(m):
     return " ".join(shlex.quote(a) for a in args)
 
 
-def portable(arg):
-    """Troca o caminho absoluto da máquina de origem por um relativo ao clone."""
-    if not isinstance(arg, str):
-        return arg
-    return (arg.replace("/var/minis/skills/skill-creator", "$HOME/agent-toolbox/mine/skill-creator")
-               .replace("/var/minis/shared", "$HOME/agent-toolbox")
-               .replace("/var/minis", "$HOME"))
-
-
 def build_mcp_pages(mcps, tools):
     out = []
     for m in mcps:
@@ -561,7 +563,7 @@ def build_recommended_pages(rec, cur_cats):
 
 
 def main():
-    skills, mcps, prov, rec, cur_cats, discovery, tools = load()
+    skills, mcps, prov, rec, cur_cats, discovery, tools, n_excluidas = load()
     if not skills:
         print("ERRO: rode scripts/gather.py primeiro.", file=sys.stderr)
         return 1
@@ -569,7 +571,7 @@ def main():
     (ROOT / "catalog.json").write_text(
         json.dumps(build_catalog(skills, mcps, rec), indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8")
-    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools), encoding="utf-8")
+    (ROOT / "README.md").write_text(build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools, n_excluidas), encoding="utf-8")
     sp = build_skill_pages(skills)
     ep = build_mcp_pages(mcps, tools)
     rp = build_recommended_pages(rec, cur_cats)

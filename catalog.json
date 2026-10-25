@@ -3,27 +3,14 @@
   "version": "1.0.0",
   "description": "Setup de agente de IA documentado: skills instaladas, servidores MCP e recomendações.",
   "repository": "https://github.com/haimonvieira/agent-toolbox",
-  "generated_at": "2026-10-25T10:54:48Z",
+  "generated_at": "2026-10-25T11:03:54Z",
   "counts": {
-    "skills": 41,
+    "skills": 36,
     "mcps": 10,
     "recommended": 12,
     "origins_known": 7
   },
   "skills": [
-    {
-      "dir": "appstoreprice-hub",
-      "name": "appstoreprice-hub",
-      "category": "web",
-      "description": "查询 App Store 全球各地区应用价格的技能，通过 appstoreprice.org 获取数据。 使用 Minis 内置浏览器（minis-browser-use CLI）在页面上下文中直接调用网站原生签名函数， 无需 API Key、无需自行实现签名算法。支持：按名称搜索应用、查询单个 App 所有地区价格、 获取最便宜地区排行、分页浏览应用列表。 当用户提到\"App Store 价格\"、\"哪个区最便宜\"、\"土耳其区价格\"、\"appstoreprice\"、 \"app 比价\"、\"App Store 低价区\"、\"订阅哪个区划算\"，或任何需要查询 iOS/macOS App 跨地区价格对比的场景，必须触发本技能。",
-      "resources": {
-        "scripts": true
-      },
-      "origin": {
-        "confidence": "nao_declarada"
-      },
-      "page": "skills/appstoreprice-hub.md"
-    },
     {
       "dir": "asaas-mcp",
       "name": "asaas-mcp",
@@ -45,17 +32,6 @@
         "confidence": "nao_declarada"
       },
       "page": "skills/browser-automation.md"
-    },
-    {
-      "dir": "browser-batch",
-      "name": "browser-batch",
-      "category": "web",
-      "description": "Accelerate browser automation in the iSH/Minis environment by batching multiple browser actions into a single shell round-trip via the minis-browser-use CLI, instead of one browser_use tool call per action. Covers the performance trade-off, error handling, session-wedge prevention, and recovery. Trigger when browser automation feels slow, when the user complains about response time, or when writing multi-step web flows.",
-      "resources": {},
-      "origin": {
-        "confidence": "nao_declarada"
-      },
-      "page": "skills/browser-batch.md"
     },
     {
       "dir": "context-map",
@@ -219,28 +195,6 @@
       "page": "skills/incident-response.md"
     },
     {
-      "dir": "instalar-packages-python-no-ish",
-      "name": "instalar-packages-python-no-ish",
-      "category": "environment",
-      "description": "Instala packages Python no iSH/Alpine Linux via apk add, evitando o problema de wheels musllinux_aarch64 missing no PyPI. Gatilhos: \"instalar Python\", \"pip install falhou\", \"numpy no iSH\", \"package Python Alpine\", \"apk add Python\", \"instalar package\", \"install package\", \"como instalo\", \"instalacao Python\". Golden path verificada: /var/minis/shared/tools/check_install.py.",
-      "resources": {},
-      "origin": {
-        "confidence": "nao_declarada"
-      },
-      "page": "skills/instalar-packages-python-no-ish.md"
-    },
-    {
-      "dir": "ish-background-services",
-      "name": "ish-background-services",
-      "category": "environment",
-      "description": "Start, inspect, stop and restart long-running background services on iSH (Alpine aarch64) — node servers, python http.server, watchers — and diagnose the \"port already in use\" / \"my server won't stop\" / \"the change didn't take effect because the old process is still running\" class of problems. Use this skill whenever you launch a local dev/preview server on this device, when a port is occupied, when a restart seems ignored, or when `pkill` appears to do nothing. Trigger even if the user only says \"restart the app\" or \"the page still shows the old version\".",
-      "resources": {},
-      "origin": {
-        "confidence": "nao_declarada"
-      },
-      "page": "skills/ish-background-services.md"
-    },
-    {
       "dir": "mcp-connector",
       "name": "mcp-connector",
       "category": "meta",
@@ -332,19 +286,6 @@
         "confidence": "nao_declarada"
       },
       "page": "skills/memory-tasks.md"
-    },
-    {
-      "dir": "minis-config-ops",
-      "name": "minis-config-ops",
-      "category": "environment",
-      "description": "Read, bulk-edit, verify and revert Minis app settings from the shell with the `minis-config` CLI — sub agent instructions, providers, models, defaults, environment-adjacent fields, soul body. Use this skill whenever a task means \"change Minis settings\", \"edit the sub agent instructions\", \"add a provider\", \"apply this to all N agents/entries\", \"make the same change across every model\", \"revert that config change\", or whenever you would otherwise tell the user to tap through Settings. Also use it before ANY bulk config write, because the write payload is JSON-encoded-inside-JSON and the naive version fails.",
-      "resources": {
-        "scripts": true
-      },
-      "origin": {
-        "confidence": "nao_declarada"
-      },
-      "page": "skills/minis-config-ops.md"
     },
     {
       "dir": "openrouter-rate-limits",
@@ -605,7 +546,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/var/minis/shared"
+        "$HOME/agent-toolbox"
       ],
       "env_vars": [],
       "header_names": [],
@@ -675,7 +616,7 @@
       "url": null,
       "command": "python3",
       "args": [
-        "/var/minis/skills/skill-creator/mcp/skill-server.py"
+        "$HOME/agent-toolbox/mine/skill-creator/mcp/skill-server.py"
       ],
       "env_vars": [],
       "header_names": [],
