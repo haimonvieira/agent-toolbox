@@ -1,0 +1,10 @@
+// Sanitized Zed settings fragment (JSONC).
+{
+  "context_servers": {
+    "example-remote": {
+      "url": "http://127.0.0.1:9010/mcp",
+      "source": "custom",
+      "enabled": true
+    }
+  }
+}

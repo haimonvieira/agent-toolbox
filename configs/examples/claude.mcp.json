@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "example-stdio": {
+      "type": "stdio",
+      "command": "/absolute/path/to/server",
+      "args": ["--app", "desktop"]
+    },
+    "example-http": {
+      "type": "http",
+      "url": "http://127.0.0.1:9010/mcp"
+    }
+  }
+}

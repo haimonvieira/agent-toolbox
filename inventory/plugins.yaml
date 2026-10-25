@@ -1,0 +1,525 @@
+# Plugin inventory — Phase 3. Stale caches moved to private backup.
+plugins:
+- name: ponytail
+  version: 5.3.2
+  status: Installed (enabled)
+  harnesses:
+  - claude
+  - codex
+  - omp
+  scope: user
+  install_method: marketplace install (GitHub DietrichGebert/ponytail)
+  local_paths:
+  - ~/.claude/plugins/cache/ponytail/ponytail/5.3.2
+  - ~/.omp/plugins/cache/plugins/ponytail___ponytail___5.3.2
+  - ~/.codex/plugins/cache/ponytail/ponytail/5.3.2
+  config_paths:
+  - ~/.claude/settings.json (enabledPlugins)
+  - ~/.codex/config.toml ([plugins."ponytail@ponytail"])
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/DietrichGebert/ponytail
+  license: MIT
+  provides:
+  - skills
+  - commands
+  - hooks
+  - statusline
+  enabled: true
+  health: appears healthy; static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall per harness
+  notes: Same version installed in three harnesses; cross-harness hooks manifest.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: superpowers
+  version: 7.0.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (superpowers-marketplace)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/superpowers-marketplace___superpowers___7.0.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/obra/superpowers
+  license: MIT
+  provides:
+  - skills
+  - hooks
+  enabled: true
+  health: appears healthy; static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  duplicate_of: standalone superpowers skills in ~/.agents/skills
+  notes: 14 skills also installed standalone via the skills CLI; 6.3.0 cache also present.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: sonarqube
+  version: 2.6.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___sonarqube___2.6.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: SONAR Source-Available License v1.0 (not OSI open source)
+  provides:
+  - skills
+  - hooks
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: Redistribution is restricted; do not vendor this plugin into the repository.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: 42crunch-api-security-testing
+  version: 1.5.5
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___42crunch-api-security-testing___1.5.5
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: unknown (no LICENSE file at plugin root)
+  provides:
+  - skills
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  evidence_level: Locally detected, upstream not verified
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: coderabbit
+  version: 1.1.1
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___coderabbit___1.1.1
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/coderabbitai/skills
+  license: MIT
+  provides:
+  - skills
+  - commands
+  - agents
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: Provides code-review and autofix skills that overlap standalone copies.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: feature-dev
+  version: 0.0.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___feature-dev___0.0.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: see plugin LICENSE
+  provides:
+  - commands
+  - agents
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: Version 0.0.0 suggests the marketplace does not version this plugin.
+  evidence_level: Locally detected, upstream not verified
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: context7
+  version: 0.0.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___context7___0.0.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: unknown
+  provides:
+  - MCP server definition
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: The plugin cache contains only a README; the MCP itself is provided remotely.
+  evidence_level: Locally detected, upstream not verified
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: github
+  version: 0.0.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___github___0.0.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: unknown
+  provides:
+  - MCP server definition
+  enabled: true
+  health: plugin directory is empty at audit time
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: Empty install directory suggests an incomplete install or a stub plugin.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: security-guidance
+  version: 2.0.15
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (claude-plugins-official)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/claude-plugins-official___security-guidance___2.0.15
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/anthropics/claude-plugins-official
+  license: unknown (see plugin LICENSE)
+  provides:
+  - hooks
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: SessionStart hook can create a Python venv and pip-install claude_agent_sdk (network + filesystem mutation).
+    Not executed during the audit.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: lethe
+  version: 0.19.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (teimurjan)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/teimurjan___lethe___0.19.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/teimurjan/lethe
+  license: unknown (no LICENSE file found)
+  provides:
+  - hooks
+  - memory tools
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  notes: Adds a `pre` hook and refresh-index.sh script.
+  evidence_level: Locally detected, upstream not verified
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: best-of
+  version: 0.2.0
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: OMP marketplace (omp-best-of)
+  local_paths:
+  - ~/.omp/plugins/cache/plugins/omp-best-of___best-of___0.2.0
+  config_paths:
+  - ~/.omp/plugins/installed_plugins.json
+  source: https://github.com/wolfiesch/omp-best-of
+  license: MIT
+  provides:
+  - commands
+  enabled: true
+  health: static inspection only
+  update_method: marketplace update
+  remove_method: plugin uninstall
+  evidence_level: Locally detected, upstream not verified
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: oh-my-opencode-slim
+  version: 3.0.6
+  status: Installed (added during audit)
+  harnesses:
+  - opencode
+  scope: user
+  install_method: OpenCode plugin via npm cache (~/.cache/opencode/npm)
+  local_paths:
+  - ~/.cache/opencode/npm/oh-my-opencode-slim@latest/<hash>/node_modules/oh-my-opencode-slim
+  config_paths:
+  - ~/.config/opencode/opencode.json (plugin array)
+  - ~/.config/opencode/oh-my-opencode-slim.json
+  source: https://github.com/alvinunreal/oh-my-opencode-slim
+  license: MIT
+  provides:
+  - agents
+  - skills
+  - MCP injection
+  - orchestration
+  enabled: true
+  health: active in the running session
+  update_method: OpenCode plugin resolution (@latest)
+  remove_method: remove from the plugin array and clear the npm cache entry
+  notes: Added to config at 2026-10-25 11:07 while the audit was running; injected context7 and gh_grep MCPs and
+    12 skills into the session.
+  evidence_level: Verified locally
+  source_type: npm-plugin
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: true
+  last_verified: '2026-10-25'
+  injected_mcps:
+  - context7
+  - gh_grep
+  - omgskills
+- name: orca-agent-status
+  version: null
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: dropped into ~/.omp/agent/extensions (Orca-managed)
+  local_paths:
+  - ~/.omp/agent/extensions/orca-agent-status.ts
+  config_paths:
+  - ~/.omp/agent/extensions
+  source: Orca app (inferred)
+  license: unknown
+  provides:
+  - lifecycle hook
+  enabled: true
+  health: static inspection only
+  update_method: managed by Orca (inferred)
+  remove_method: remove the extension file
+  notes: Posts agent status to a local Orca receiver with a 1s timeout.
+  evidence_level: Inferred
+  source_type: local-extension
+  managed_by: OMP extension loader
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: orca-prefill
+  version: null
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: dropped into ~/.omp/agent/extensions (Orca-managed)
+  local_paths:
+  - ~/.omp/agent/extensions/orca-prefill.ts
+  config_paths:
+  - ~/.omp/agent/extensions
+  source: Orca app (inferred)
+  license: unknown
+  provides:
+  - lifecycle hook
+  enabled: true
+  health: static inspection only
+  update_method: managed by Orca (inferred)
+  remove_method: remove the extension file
+  evidence_level: Inferred
+  source_type: local-extension
+  managed_by: OMP extension loader
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: orca-titlebar-spinner
+  version: null
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: dropped into ~/.omp/agent/extensions (Orca-managed)
+  local_paths:
+  - ~/.omp/agent/extensions/orca-titlebar-spinner.ts
+  config_paths:
+  - ~/.omp/agent/extensions
+  source: Orca app (inferred)
+  license: unknown
+  provides:
+  - UI extension
+  enabled: true
+  health: static inspection only
+  update_method: managed by Orca (inferred)
+  remove_method: remove the extension file
+  evidence_level: Inferred
+  source_type: local-extension
+  managed_by: OMP extension loader
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: pr-template-guard
+  version: null
+  status: Installed
+  harnesses:
+  - omp
+  scope: user
+  install_method: locally authored extension
+  local_paths:
+  - ~/.omp/agent/extensions/pr-template-guard.ts
+  config_paths:
+  - ~/.omp/agent/extensions
+  source: locally authored
+  license: unknown (not specified)
+  provides:
+  - tool guard
+  enabled: true
+  health: static inspection only
+  update_method: manual edit
+  remove_method: remove the extension file
+  notes: Blocks `gh pr create` until a PR template and a private coordination skill are read. Contains a private
+    organization reference.
+  evidence_level: Verified locally
+  source_type: local-extension
+  managed_by: OMP extension loader
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+- name: openai.chatgpt (VS Code extension)
+  version: 26.1021.22027
+  status: Installed (duplicate version)
+  harnesses:
+  - vscode
+  scope: user
+  install_method: VS Code extension marketplace
+  local_paths:
+  - ~/.vscode/extensions/openai.chatgpt-26.1021.22027-linux-x64
+  - ~/.vscode/extensions/openai.chatgpt-26.1007.21434-linux-x64
+  config_paths: []
+  source: openai.chatgpt (marketplace)
+  license: unknown
+  provides:
+  - ChatGPT/Codex integration
+  enabled: true
+  health: static inspection only
+  update_method: VS Code auto-update
+  remove_method: VS Code uninstall
+  notes: Older 26.1007.21434 moved to private backup on 2026-10-25.
+  evidence_level: Verified locally
+  source_type: marketplace
+  managed_by: plugin manager
+  directly_configured: true
+  generated: false
+  dynamic: false
+  last_verified: '2026-10-25'
+orphaned_or_stale:
+- name: superpowers (old cache)
+  version: 6.3.0
+  local_path: <private-backup>/stale-caches/superpowers-6.3.0
+  reason: Superseded by 7.0.0 in installed_plugins.json; old directory retained.
+  recommended_action: Remove only after confirming no rollback need; not done during audit.
+  evidence_level: Verified locally
+  status: Moved to private backup 2026-10-25
+- name: security-guidance (old cache)
+  version: 2.0.7
+  local_path: <private-backup>/stale-caches/security-guidance-2.0.7
+  reason: Superseded by 2.0.15; old directory retained.
+  recommended_action: Remove after review; not done during audit.
+  evidence_level: Verified locally
+  status: Moved to private backup 2026-10-25
+- name: openai-curated-remote cache
+  version: unknown
+  local_path: ~/.codex/plugins/cache/openai-curated-remote
+  reason: Marketplace cache with ~30 plugin directories; none enabled in config.toml.
+  recommended_action: Treat as cache, not installed plugins; safe to clear via Codex tooling.
+  evidence_level: Verified locally
+- name: claude-plugins-official marketplace
+  version: unknown
+  local_path: ~/.claude/plugins/marketplaces/claude-plugins-official
+  reason: Marketplace catalog only; no plugins from it are installed in Claude Code.
+  recommended_action: None.
+  evidence_level: Verified locally
+phase2_notes:
+  security_guidance:
+    installed: 2.0.15
+    catalog: 2.0.16
+    license: Apache-2.0
+    activation: inferred (installed, no enabled flag)
+    startup_install: mitigated (healthy venv); fallback remains unpinned
+    gate_c1: 'Completed: claude-agent-sdk 0.2.174 pre-installed; NOOP_VENV expected; failure path remains'
+  superpowers:
+    installed: 7.0.0
+    stale_cache: 6.3.0
+    classification: stale cache candidate
+  context: OMP installed_plugins.json has no enabled flag; enabled=True is inferred from installation plus hook
+    manifests.

@@ -561,3 +561,20 @@ python3 scripts/verify_pins.py   # confere se os commits ainda existem
 MIT ([LICENSE](LICENSE)) para a documentação e os scripts deste repositório. As skills e
 servidores MCP referenciados são de terceiros e mantêm suas licenças, indicadas em cada
 ficha. Nada de terceiros é redistribuído. Ver [NOTICE](NOTICE) para as atribuições.
+
+---
+
+## Environment audit (Phase 1–3)
+
+This repository also contains a sanitized, reproducible audit of the machine where the agent setup
+runs. It is additive to the curated catalog above and does not replace it.
+
+- [Audit overview](audit/README.md)
+- [Audit findings](audit/AUDIT-REPORT.md)
+- [Remediation gates and status](audit/approval-gates.md)
+- [Pre-publication checks](audit/pre-publish-check.md)
+- [Machine-readable inventories](inventory/)
+- [Architecture and ownership graph](docs/architecture.md)
+- [Harness notes](docs/harnesses.md) · [Skills](docs/skills.md) · [MCPs](docs/mcps.md) · [Plugins](docs/plugins.md) · [Hooks](docs/hooks.md)
+
+No secrets, private project names, or local absolute paths are included.

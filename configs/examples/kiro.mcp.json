@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "example-remote": {
+      "url": "http://127.0.0.1:7600/mcp",
+      "headers": {
+        "Authorization": "Bearer <REDACTED>"
+      }
+    },
+    "example-stdio": {
+      "command": "/absolute/path/to/server",
+      "args": ["--app", "desktop", "--agent", "kiroCLI"],
+      "env": {}
+    }
+  }
+}
