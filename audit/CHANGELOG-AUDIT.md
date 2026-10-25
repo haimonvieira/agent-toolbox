@@ -164,3 +164,24 @@ documents. See `docs/updating.md`.
 
 - Profiles are declarative only: no install, removal, config change, symlink change, or execution.
 - No secret values, private names, or private URLs in profiles; environment variables are names only.
+
+## 2026-10-25 — Phase 6: openagents removed, OpenCode plugins pinned
+
+### Machine changes (approved)
+
+- Removed the `openagents` MCP entry from `~/.config/opencode/opencode.json` and
+  `~/.omp/agent/mcp.json`. Upstream was never identified and npm `agn` is unrelated. The
+  `codegraph` entry was deliberately preserved and stays disabled.
+- Pinned the two floating OpenCode plugins in `~/.config/opencode/opencode.json`:
+  `envsitter-guard@0.1.0` and `opencode-mem@2.34.0`. Upstream OpenCode parses npm specifiers and
+  treats an exact version as immutable (`packages/util/src/npm.ts`, `mutable: type !== "version"`).
+- Private backups of both configs: `~/.agent-toolbox-backups/20261025-phase5/` (mode 600).
+- No package was installed or removed, no credential was rotated, no file mode was changed.
+
+### Repository changes
+
+- `inventory/mcps.yaml`: `openagents` moved to a `removed` record.
+- `inventory/plugins.yaml`: the two plugins now record pinned versions.
+- `profiles/`: `openagents` references removed, `floating_versions` emptied, pins documented.
+- `config/backlog.yaml`: the openagents item is closed and removed.
+- `docs/mcps.md`, `docs/plugins.md`, `docs/troubleshooting.md`: status updated.

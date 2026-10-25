@@ -4,10 +4,6 @@ items:
   severity: high
   status: open
   detail: npm codegraph@1.0.0 is unrelated; entry is disabled and preserved.
-- title: Identify the intended upstream for the openagents MCP
-  severity: high
-  status: open
-  detail: npm agn@0.1.2 is unrelated; entry is disabled and preserved.
 - title: Review code-review skill variants
   severity: medium
   status: open

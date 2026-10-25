@@ -2,13 +2,13 @@
 
 - Baseline: `local-state/baseline.yaml`
 - Current: `local-state/current.yaml`
-- Findings: 11
+- Findings: 10
 
 | Severity | Count |
 | --- | ---: |
 | Critical | 0 |
 | High | 0 |
-| Medium | 2 |
+| Medium | 1 |
 | Low | 0 |
 | Info / expected dynamic | 9 |
 
@@ -18,8 +18,7 @@
 
 | Type | Item | Detail |
 | --- | --- | --- |
-| UNKNOWN | `opencode:envsitter-guard@latest` | floating plugin version |
-| UNKNOWN | `opencode:opencode-mem@latest` | floating plugin version |
+| UNKNOWN | `opencode:oh-my-opencode-slim` | floating plugin version |
 
 ### Info / expected dynamic
 

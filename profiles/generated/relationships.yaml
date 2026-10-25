@@ -79,7 +79,6 @@ profiles:
     - mcp-gh-grep
     - mcp-omgskills
     - mcp-codegraph
-    - mcp-openagents
     - mcp-doop
     - mcp-starry
     skill:
@@ -151,7 +150,6 @@ profiles:
     - mcp-obsidian-mcp-connector
     - mcp-graphify
     - mcp-codegraph
-    - mcp-openagents
     - mcp-doop
     skill:
     - skill-code-review-plugin
@@ -188,7 +186,6 @@ profiles:
     - mcp-gh-grep
     - mcp-omgskills
     - mcp-codegraph
-    - mcp-openagents
     skill:
     - skill-code-review
     external_dependencies: []

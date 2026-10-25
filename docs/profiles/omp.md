@@ -56,7 +56,7 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
 ## Environment variables (names only)
 
 - **Required:** _none_
-- **Optional:** `HOSTINGER_API_TOKEN`, `OA_WORKSPACE_TOKEN`, `CONTEXT7_API_KEY`
+- **Optional:** `HOSTINGER_API_TOKEN`, `CONTEXT7_API_KEY`
 
 ## Requirements
 

@@ -56,7 +56,7 @@ Declarative only. Loading a profile installs nothing, changes no configuration a
 ## Environment variables (names only)
 
 - **Required:** _none_
-- **Optional:** `CONTEXT7_API_KEY`, `HOSTINGER_API_TOKEN`, `OA_WORKSPACE_TOKEN`
+- **Optional:** `CONTEXT7_API_KEY`, `HOSTINGER_API_TOKEN`
 
 ## Requirements
 
@@ -82,7 +82,7 @@ _none_
   - mcp-figma: upstream not verified
   - mcp-insomnia: needs an installed binary
   - mcp-teams-mcp: needs an installed binary
-  - 2 floating version(s)
+  - 1 floating version(s)
 
 ## Notes
 
