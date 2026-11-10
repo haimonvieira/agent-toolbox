@@ -10,7 +10,7 @@
 | `profiles/` | Declarative environment profiles and generated profile data | `profiles/*.yaml`, `scripts/profile_engine.py` |
 | `docs/`, `audit/`, `recommended/`, `mcps/` | User documentation, audit reports, recommendations, MCP notes | `README.md`, these directories |
 | `scripts/` | Collection, generation, configuration-emission, auditing, and verification tools | `scripts/*.py`, `scripts/*.sh` |
-| `schemas/`, `config/`, `configs/examples/` | Validation schemas, policy/backlog settings, sanitized examples | `scripts/audit.py`, `schemas/*.json`, `config/*.yaml` |
+| `schemas/`, `config/`, `config/examples/` | Validation schemas, policy/backlog settings, sanitized examples | `scripts/audit.py`, `schemas/*.json`, `config/*.yaml` |
 | `tests/` | Python unit tests for audit and profiles | `tests/test_audit.py`, `tests/test_profiles.py` |
 | `skills/` | Generated skill catalog pages | `scripts/build.py`, `README.md` |
 | `.github/workflows/` | CI validation workflow | `.github/workflows/validate-toolbox.yml` |

@@ -363,7 +363,7 @@ def build_readme(skills, mcps, prov, rec, cur_cats, discovery, tools, n_excluida
     A("## Mapear um stack")
     A("")
     A("Este repositório nasceu de um mapeamento do meu ambiente. Para fazer o seu, há um")
-    A("prompt pronto em [`prompts/map-ai-stack.md`](prompts/map-ai-stack.md):")
+    A("prompt pronto em [`docs/prompts/map-ai-stack.md`](docs/prompts/map-ai-stack.md):")
     A("")
     A("Ele separa o que está **instalado** do que é **realmente usado**, exigindo a fonte de")
     A("cada contagem, e termina com um JSON no formato de `data/`. Roda em omp, Claude Code")

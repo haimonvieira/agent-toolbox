@@ -104,7 +104,7 @@ These have configuration on disk but **no executable, desktop entry, snap, or fl
 - **Ponytail** ships integration manifests for Claude Code, Codex, OpenCode, Gemini, Copilot,
   Cursor, and Qoder; only Claude, Codex, and OMP are active here.
 - **MCP JSON shape differs** between harnesses (`mcpServers` vs `mcp.servers`, `type` vs
-  `serverUrl`). See [mcps.md](mcps.md) and `configs/examples/`.
+  `serverUrl`). See [mcps.md](mcps.md) and `config/examples/`.
 - **Windows paths** appear in two configs (`gemini-notebook-mcp`, some marketplace catalog paths).
   They cannot work on this Linux host.
 - **Canonical skill store:** `~/.agents/skills` is read directly by OpenCode, Codex, OMP, and Zed;

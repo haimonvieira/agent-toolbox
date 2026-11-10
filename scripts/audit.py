@@ -1263,7 +1263,7 @@ def validate_syntax() -> list[str]:
             load_yaml(p)
         except Exception as exc:
             errors.append(f"{p.relative_to(ROOT)}: YAML {type(exc).__name__}")
-    for p in sorted((ROOT / "configs" / "examples").glob("*")):
+    for p in sorted((ROOT / "config" / "examples").glob("*")):
         try:
             if p.suffix == ".json":
                 read_json(p)

@@ -2,7 +2,7 @@
 
 - Full inventory: [`inventory/mcps.yaml`](../inventory/mcps.yaml) (19 servers).
 - Guide: [`docs/mcps.md`](../docs/mcps.md).
-- Sanitized examples: [`configs/examples/`](../configs/examples/).
+- Sanitized examples: [`config/examples/`](../config/examples/).
 
 ## Status summary
 

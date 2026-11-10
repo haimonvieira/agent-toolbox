@@ -6,7 +6,7 @@ three verified entries and disabled two unresolved upstreams; three depend on lo
 were not running at audit time.
 
 Full metadata: [inventory/mcps.yaml](../inventory/mcps.yaml). Sanitized examples:
-[configs/examples/](../configs/examples/).
+[config/examples/](../config/examples/).
 
 ## Inventory
 
@@ -250,7 +250,7 @@ executes plugin hooks just to test configuration. The audit did not start any MC
 | --- | --- | --- |
 | Server fails immediately | Command not on `PATH` | `command -v <cmd>` |
 | Server starts then disconnects | Local companion app not running | `ss -ltn | grep <port>` |
-| Server works in one harness, not another | Different config syntax | Compare with `configs/examples/` |
+| Server works in one harness, not another | Different config syntax | Compare with `config/examples/` |
 | Auth loop | OAuth cache/session | Harness auth cache; do not paste tokens into reports |
 | Duplicate tools with different schemas | Same server configured in several harnesses at different versions | Compare versions in `inventory/mcps.yaml` |
 | Windows path error on Linux | `C:\...` entry | Fix to a Linux path; do not run under Wine |

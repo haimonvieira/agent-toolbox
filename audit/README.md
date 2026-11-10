@@ -42,7 +42,7 @@ agent-toolbox/
 ├── .gitignore
 ├── docs/                        # human-readable guides
 ├── inventory/                   # machine-readable YAML inventories
-├── configs/examples/            # sanitized config examples per harness
+├── config/examples/            # sanitized config examples per harness
 ├── scripts/                     # safe read-only audit/verify/link-check scripts
 ├── skills/README.md             # skills-specific guidance
 ├── mcps/README.md               # MCP-specific guidance

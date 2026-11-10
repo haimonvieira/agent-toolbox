@@ -6,7 +6,7 @@
 |---|---|---|---|---|---|
 | GitHub Actions | CI | Repository validation on push/PR and scheduled checks | GitHub Actions permissions specify `contents: read` | Medium | `.github/workflows/validate-toolbox.yml` |
 | GitHub / public registries | External metadata lookup (optional) | Upstream update suggestions and pinned-source checks | Public metadata; no credential handling visible in update routine | Low/medium | `scripts/audit.py`, `scripts/verify_pins.py` |
-| Agent harnesses / MCP servers | Config-output targets; no connections made by this repository's default build | Emit sample MCP configuration for OMP, Claude Code, OpenCode | Placeholder values emitted; actual auth supplied outside repo | Medium | `scripts/emit_config.py`, `configs/examples/`, `docs/mcps.md` |
+| Agent harnesses / MCP servers | Config-output targets; no connections made by this repository's default build | Emit sample MCP configuration for OMP, Claude Code, OpenCode | Placeholder values emitted; actual auth supplied outside repo | Medium | `scripts/emit_config.py`, `config/examples/`, `docs/mcps.md` |
 | Git | Local history and repository validation | Churn/history evidence and version control | Local Git configuration | Medium | scan output, `scripts/audit.py`, `.github/workflows/validate-toolbox.yml` |
 
 ## 2) Data Stores
@@ -45,4 +45,4 @@
 - `.env.example`
 - `.gitignore`
 - `docs/security.md`
-- `configs/examples/`
+- `config/examples/`

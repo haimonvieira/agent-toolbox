@@ -118,7 +118,7 @@ ln -s ~/.agents/skills/<name> ~/.claude/skills/<name>
 
 ## MCP servers
 
-Syntax per harness: [mcps.md](mcps.md). Sanitized examples: `configs/examples/`.
+Syntax per harness: [mcps.md](mcps.md). Sanitized examples: `config/examples/`.
 
 ### Local stdio servers that need a package
 
@@ -209,13 +209,13 @@ The hook checks for an importable SDK first; a pre-built venv avoids the unpinne
 
 Copy and edit, never copy live configs verbatim (they contain tokens):
 
-- `configs/examples/opencode.mcp.json`
-- `configs/examples/claude.mcp.json`
-- `configs/examples/codex.config.toml`
-- `configs/examples/omp.mcp.json`
-- `configs/examples/zed.context_servers.jsonc`
-- `configs/examples/gemini.mcp.json`
-- `configs/examples/kiro.mcp.json`
+- `config/examples/opencode.mcp.json`
+- `config/examples/claude.mcp.json`
+- `config/examples/codex.config.toml`
+- `config/examples/omp.mcp.json`
+- `config/examples/zed.context_servers.jsonc`
+- `config/examples/gemini.mcp.json`
+- `config/examples/kiro.mcp.json`
 
 ## Post-install verification
 
